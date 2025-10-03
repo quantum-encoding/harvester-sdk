@@ -27,8 +27,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, List, Any
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+# Add project root directory to path for imports
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from core.batch_processor import BatchProcessor, BatchJob
 from providers.provider_factory import ProviderFactory
@@ -51,27 +51,30 @@ class Mothership:
     
     def __init__(self):
         # Initialize harvesting engine components
-        config_dir = Path(__file__).parent / 'config'
+        # Use project root config directory
+        project_root = Path(__file__).resolve().parent.parent.parent
+        config_dir = project_root / 'config'
         self.provider_factory = ProviderFactory(config_dir)
         self.output_manager = OutputManager()
         self.converter = UniversalConverter()
-        
+
         # Load model groups
         self.model_groups = self._load_model_groups()
-        
+
         click.echo(f"🚀 Mothership initialized")
         click.echo(f"🤖 Available providers: {', '.join(self.provider_factory.list_providers())}")
-    
+
     def _load_model_groups(self) -> Dict[str, List[str]]:
         """Load model groups from config"""
         try:
             import yaml
-            config_dir = Path(__file__).parent / 'config'
-            providers_path = config_dir / 'providers.yaml'
-            
+            # Use project root config directory
+            project_root = Path(__file__).resolve().parent.parent.parent
+            providers_path = project_root / 'config' / 'providers.yaml'
+
             with open(providers_path, 'r') as f:
                 providers_config = yaml.safe_load(f)
-            
+
             return providers_config.get('groups', {})
         except Exception as e:
             logger.warning(f"Error loading model groups: {e}")
@@ -514,10 +517,13 @@ def mothership(
                 result = await mothership_instance.convert_only(
                     file_path, output, template, strategy, preview
                 )
-                
-                if not preview:
-                    click.echo(f"✅ Conversion complete: {result['output_file']}")
-                    click.echo(f"📊 Converted {result['converted_records']} records")
+
+                if not preview and result:
+                    # Handle successful conversion
+                    output_file = result.get('output_file', output or 'unknown')
+                    records = result.get('converted_records', result.get('rows_created', 0))
+                    click.echo(f"✅ Conversion complete: {output_file}")
+                    click.echo(f"📊 Converted {records} records")
             
             elif operation == 'process':
                 if not file_path.endswith('.csv'):
