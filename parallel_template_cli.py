@@ -329,20 +329,36 @@ def main(source, template, model, output, file_pattern, max_files, template_vars
     
     # Run the async transformation
     click.echo("\n🚀 Initiating parallel transformation...")
-    
+
+    async def run_with_cleanup():
+        """Run transformation and ensure cleanup"""
+        try:
+            result = await transformer.transform_codebase(
+                source_path=source_path,
+                file_pattern=file_pattern,
+                max_files=max_files,
+                output_path=output_path,
+                template_vars=template_variables
+            )
+            return result
+        finally:
+            # Always clean up provider sessions
+            try:
+                # Close all provider sessions from the SDK's provider factory
+                if hasattr(transformer.sdk, 'provider_factory'):
+                    for provider_instance in transformer.sdk.provider_factory.provider_instances.values():
+                        if hasattr(provider_instance, 'close'):
+                            await provider_instance.close()
+            except Exception as e:
+                logger.debug(f"Error during cleanup: {e}")
+
     try:
         # Execute with the Crown Jewel
-        result = asyncio.run(transformer.transform_codebase(
-            source_path=source_path,
-            file_pattern=file_pattern,
-            max_files=max_files,
-            output_path=output_path,
-            template_vars=template_variables
-        ))
-        
+        result = asyncio.run(run_with_cleanup())
+
         # Display final summary
         click.echo(f"\n{'='*60}")
-        
+
         # Check if any files were processed
         if result.get('status') == 'no_files':
             click.echo("❌ NO FILES FOUND!")
@@ -351,7 +367,7 @@ def main(source, template, model, output, file_pattern, max_files, template_vars
             click.echo(f"📁 Directory: {source}")
             click.echo("💡 Try adjusting the --file-pattern parameter")
             return 1
-        
+
         click.echo("✨ THE GREAT UNIFICATION IS COMPLETE!")
         click.echo(f"{'='*60}")
         click.echo(f"📊 Total files: {result['total_operations']}")
@@ -361,7 +377,7 @@ def main(source, template, model, output, file_pattern, max_files, template_vars
         click.echo(f"⚡ Throughput: {result['throughput_per_second']:.1f} files/second")
         click.echo(f"⏱️  Total time: {result['duration_seconds']:.1f} seconds")
         click.echo(f"📂 Results saved to: {output_path}")
-        
+
         return 0 if result['failed_operations'] == 0 else 1
         
     except Exception as e:

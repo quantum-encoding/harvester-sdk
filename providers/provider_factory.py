@@ -115,8 +115,8 @@ class ProviderFactory:
             if provider_name in ['vertex_image', 'vertex_video', 'google', 'vertex']:
                 logger.info(f"No API key found for {provider_name} (using gcloud credentials)")
             # Providers that check env vars themselves (provider will handle)
-            elif provider_name in ['xai_image', 'genai_imagen']:
-                logger.debug(f"No API key in config for {provider_name} (will check environment)")
+            elif provider_name in ['xai', 'xai_image', 'genai_imagen', 'openai', 'anthropic', 'deepseek']:
+                logger.debug(f"No API key in config for {provider_name} (checking environment)")
             else:
                 logger.warning(f"No API key found for {provider_name}")
             # Don't fail here - let the provider handle missing keys

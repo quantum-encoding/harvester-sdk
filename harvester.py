@@ -114,21 +114,23 @@ def process_command(directory, template, model, parallel, pattern, output, max_f
     click.echo(f"🤖 Model: {model}")
     click.echo(f"⚡ Parallel workers: {parallel}")
     
-    # Route to conductor (processing orchestrator)
+    # Route to parallel_template_cli (Crown Jewel processor)
+    template_with_ext = f'{template}.j2' if not template.endswith('.j2') else template
+
     cmd = [
         sys.executable,
-        'cli/processing/conductor.py',
+        'parallel_template_cli.py',
         '--source', directory,
-        '--template', f'{template}.j2' if not template.endswith('.j2') else template,
+        '--template', template_with_ext,
         '--model', model,
         '--workers', str(parallel),
         '--file-pattern', pattern,
         '--max-files', str(max_files)
     ]
-    
+
     if output:
         cmd.extend(['--output', output])
-    
+
     subprocess.run(cmd)
 
 @cli.command('image')

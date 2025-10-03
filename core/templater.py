@@ -268,33 +268,16 @@ class Templater:
     def _get_default_context(self) -> Dict[str, Any]:
         """
         Get default context variables available to all templates
-        
+
         Returns:
             Dictionary of default context variables
         """
-        # Load Universal Schema from the schema directory
-        schema_path = Path(__file__).parent.parent / 'schema' / 'universal_adapter.py'
-        universal_schema = ""
-        
-        try:
-            if schema_path.exists():
-                with open(schema_path, 'r', encoding='utf-8') as f:
-                    universal_schema = f.read()
-                logger.debug(f"Loaded Universal Schema from {schema_path} ({len(universal_schema)} characters)")
-            else:
-                logger.warning(f"Universal Schema not found at {schema_path}")
-                universal_schema = "# Universal Schema not found - using fallback"
-        except Exception as e:
-            logger.error(f"Error loading Universal Schema from {schema_path}: {e}")
-            universal_schema = f"# Error loading Universal Schema: {e}"
-        
         return {
             'timestamp': datetime.now().isoformat(),
             'timestamp_readable': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'engine_version': '1.1.0',
+            'engine_version': '2.0.0',  # Updated to v2.0.0
             'max_tokens': 4000,  # Default max tokens for safety
             'template_globals_available': ['datetime', 'uuid', 'random'],
-            'universal_schema': universal_schema,  # ← Universal Schema loaded as raw text
         }
     
     def _truncate_code(self, code: str, max_lines: int = 1000) -> str:
