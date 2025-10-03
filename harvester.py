@@ -1128,5 +1128,135 @@ def config_command(show, set_key, test):
         # Could implement provider test here
         click.echo("Provider test functionality coming soon!")
 
+@cli.command('grok-code')
+@click.argument('task', required=True)
+@click.option('--files', '-f', multiple=True, help='Files to include as context')
+@click.option('--project-structure', '-p', help='Project structure description or file')
+@click.option('--task-type', '-t', default='general',
+              type=click.Choice(['general', 'debugging', 'refactoring', 'feature']),
+              help='Type of coding task')
+@click.option('--max-iterations', '-i', default=10, help='Maximum iterations for agentic workflow')
+@click.option('--show-reasoning', is_flag=True, help='Display reasoning traces')
+@click.option('--output', '-o', help='Save result to file')
+def grok_code_command(task, files, project_structure, task_type, max_iterations, show_reasoning, output):
+    """
+    🤖 Grok Code Agent - Agentic coding assistant
+
+    Powered by grok-code-fast-1 with:
+    - Streaming reasoning traces
+    - Native tool calling (file ops, search, execution)
+    - Context-aware prompting with XML/Markdown
+    - Cache optimization for fast iterations
+
+    Examples:
+        # Simple task
+        harvester grok-code "Add error handling to sql.ts"
+
+        # With context files
+        harvester grok-code "Refactor authentication" -f auth.ts -f db.ts
+
+        # Debugging with project structure
+        harvester grok-code "Fix memory leak" -p structure.txt -t debugging
+
+        # Feature development with reasoning display
+        harvester grok-code "Add rate limiting" -t feature --show-reasoning
+    """
+    from agents.grok_code_agent import GrokCodeAgent
+
+    click.echo("🤖 Grok Code Agent")
+    click.echo(f"📋 Task: {task}")
+    click.echo(f"🎯 Type: {task_type}")
+    click.echo()
+
+    # Build context
+    context = {}
+
+    # Add files to context
+    if files:
+        context['files'] = {}
+        for file_path in files:
+            try:
+                with open(file_path, 'r') as f:
+                    context['files'][file_path] = f.read()
+                click.echo(f"📄 Loaded: {file_path}")
+            except Exception as e:
+                click.echo(f"⚠️  Could not load {file_path}: {e}")
+
+    # Add project structure
+    if project_structure:
+        try:
+            if os.path.isfile(project_structure):
+                with open(project_structure, 'r') as f:
+                    context['project_structure'] = f.read()
+            else:
+                context['project_structure'] = project_structure
+        except Exception as e:
+            click.echo(f"⚠️  Could not load project structure: {e}")
+
+    async def run_agent():
+        agent = GrokCodeAgent(max_iterations=max_iterations)
+
+        click.echo("🚀 Starting agentic workflow...")
+        click.echo()
+
+        # Execute task
+        result = await agent.execute_task(
+            description=task,
+            context=context if context else None,
+            task_type=task_type
+        )
+
+        # Display results
+        click.echo(f"📊 Status: {result.status}")
+        click.echo(f"🔄 Iterations: {result.iterations}")
+        click.echo()
+
+        # Show reasoning traces
+        if show_reasoning and result.reasoning_traces:
+            click.echo("💭 Reasoning Traces:")
+            for i, trace in enumerate(result.reasoning_traces, 1):
+                click.echo(f"\n--- Step {i} ---")
+                click.echo(trace.content[:500] + "..." if len(trace.content) > 500 else trace.content)
+            click.echo()
+
+        # Show tool calls
+        if result.tool_calls:
+            click.echo(f"🔧 Tool Calls: {len(result.tool_calls)}")
+            for tool_call in result.tool_calls:
+                click.echo(f"  - {tool_call.name}({', '.join(f'{k}={v}' for k, v in tool_call.arguments.items())})")
+            click.echo()
+
+        # Show result
+        click.echo("✅ Result:")
+        click.echo(result.result)
+
+        # Save to file if requested
+        if output:
+            with open(output, 'w') as f:
+                output_data = {
+                    'task': task,
+                    'task_type': task_type,
+                    'status': result.status,
+                    'iterations': result.iterations,
+                    'result': result.result,
+                    'reasoning_traces': [
+                        {'step': i, 'content': t.content}
+                        for i, t in enumerate(result.reasoning_traces, 1)
+                    ] if show_reasoning else [],
+                    'tool_calls': [
+                        {
+                            'name': tc.name,
+                            'arguments': tc.arguments,
+                            'result': tc.result
+                        }
+                        for tc in result.tool_calls
+                    ]
+                }
+                json.dump(output_data, f, indent=2)
+            click.echo(f"\n💾 Saved to: {output}")
+
+    # Run async agent
+    asyncio.run(run_agent())
+
 if __name__ == '__main__':
     cli()
