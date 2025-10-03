@@ -181,7 +181,7 @@ class GrokCodeAgent:
     def __init__(self,
                  api_key: str = None,
                  model: str = "grok-code-fast-1",
-                 max_iterations: int = 10,
+                 max_iterations: int = 100,
                  temperature: float = 0.7):
         """
         Initialize Grok Code Agent
@@ -546,7 +546,9 @@ You have access to file operations, code search, command execution, and more. Us
         for iteration in range(self.max_iterations):
             task.iterations = iteration + 1
 
-            logger.info(f"🔄 Iteration {iteration + 1}/{self.max_iterations}")
+            print(f"\n{'='*60}")
+            print(f"🔄 Iteration {iteration + 1}/{self.max_iterations}")
+            print(f"{'='*60}")
 
             # Stream completion with reasoning
             response = await self.stream_completion(
@@ -565,12 +567,28 @@ You have access to file operations, code search, command execution, and more. Us
                 task.reasoning_traces.append(trace)
 
             # Handle tool calls
-            if response.get("tool_calls"):
+            if response.get("tool_calls") and len(response["tool_calls"]) > 0:
+                print(f"\n🔧 Tool Calls ({len(response['tool_calls'])})")
+
                 for tool_call in response["tool_calls"]:
+                    print(f"  → {tool_call['name']}({tool_call['arguments']})", flush=True)
+
                     result = await self.execute_tool(
                         tool_call["name"],
                         tool_call["arguments"]
                     )
+
+                    # Show brief result
+                    if result.get("success"):
+                        if "content" in result:
+                            content_preview = result["content"][:100] + "..." if len(result.get("content", "")) > 100 else result.get("content", "")
+                            print(f"    ✓ {content_preview}")
+                        elif "message" in result:
+                            print(f"    ✓ {result['message']}")
+                        else:
+                            print(f"    ✓ Success")
+                    else:
+                        print(f"    ✗ Error: {result.get('error', 'Unknown error')}")
 
                     task.tool_calls.append(ToolCall(
                         id=tool_call["id"],
@@ -580,10 +598,20 @@ You have access to file operations, code search, command execution, and more. Us
                     ))
 
                     # Add tool result to messages (preserve cache prefix)
+                    # Format tool_call in OpenAI/xAI expected format
+                    formatted_tool_call = {
+                        "id": tool_call["id"],
+                        "type": "function",
+                        "function": {
+                            "name": tool_call["name"],
+                            "arguments": json.dumps(tool_call["arguments"])
+                        }
+                    }
+
                     messages.append({
                         "role": "assistant",
-                        "content": response["content"],
-                        "tool_calls": [tool_call]
+                        "content": response["content"] or "",
+                        "tool_calls": [formatted_tool_call]
                     })
                     messages.append({
                         "role": "tool",
@@ -592,8 +620,10 @@ You have access to file operations, code search, command execution, and more. Us
                     })
             else:
                 # No more tool calls, task complete
+                logger.info(f"✅ Task completed - no tool calls in response")
+                logger.info(f"📝 Final content: {response['content'][:200]}..." if response['content'] else "📝 No content")
                 task.status = "completed"
-                task.result = response["content"]
+                task.result = response["content"] or "No response content"
                 break
 
         if task.status != "completed":

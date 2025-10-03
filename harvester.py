@@ -1135,7 +1135,7 @@ def config_command(show, set_key, test):
 @click.option('--task-type', '-t', default='general',
               type=click.Choice(['general', 'debugging', 'refactoring', 'feature']),
               help='Type of coding task')
-@click.option('--max-iterations', '-i', default=10, help='Maximum iterations for agentic workflow')
+@click.option('--max-iterations', '-i', default=100, help='Maximum iterations for agentic workflow')
 @click.option('--show-reasoning', is_flag=True, help='Display reasoning traces')
 @click.option('--output', '-o', help='Save result to file')
 def grok_code_command(task, files, project_structure, task_type, max_iterations, show_reasoning, output):
@@ -1198,6 +1198,10 @@ def grok_code_command(task, files, project_structure, task_type, max_iterations,
 
         click.echo("🚀 Starting agentic workflow...")
         click.echo()
+
+        # Track tool calls in real-time
+        def on_tool_call(tool_name: str, args: dict):
+            click.echo(f"🔧 {tool_name}({', '.join(f'{k}={v}' for k, v in args.items())})")
 
         # Execute task
         result = await agent.execute_task(
