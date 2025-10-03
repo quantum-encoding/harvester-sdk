@@ -2,32 +2,32 @@
 groups:
   # Fast, cost-effective models for quick analysis
   grp-fast:
-    - goo-2  # Gemini 2.5 Flash (65k output)
-    - goo-3  # Gemini 2.5 Flash-Lite (32k output)
-    - gpt-5-nano  # GPT-5 Nano (128k output)
-    - grok-fast  # Grok 3 Mini (32k output)
-    - ds-1   # DeepSeek Chat (8k output)
-    
-  # High-quality reasoning models (excluding slow ones)
+    - gemini-flash-2-5     # Gemini 2.5 Flash (fast, 65k output)
+    - gemini-flash-lite-2-5  # Gemini 2.5 Flash-Lite (fastest, 32k output)
+    - gpt-5-nano           # GPT-5 Nano (128k output)
+    - grok-3-mini          # Grok 3 Mini (32k output)
+    - deepseek-chat        # DeepSeek Chat (8k output)
+
+  # High-quality reasoning models
   grp-quality:
-    - vtx-1  # Claude 4 Opus via Vertex (32k output)
-    - goo-1  # Gemini 2.5 Pro (64k output)
-    - gpt-5  # GPT-5 (128k output)
-    - grok-4  # Grok 4 (128k output)
-    - ds-2   # DeepSeek Reasoner (64k output)
-    
+    - opus-4-1             # Claude 4 Opus (best)
+    - gemini-pro-2-5       # Gemini 2.5 Pro (64k output)
+    - gpt-5                # GPT-5 (128k output)
+    - grok-4               # Grok 4 (128k output)
+    - deepseek-reasoner    # DeepSeek R1 Reasoner (64k output)
+
   # Code-specialized models
   grp-code:
-    - vtx-2  # Claude 4 Sonnet via Vertex (64k output)
-    - ds-1   # DeepSeek Chat (8k output)
-    - gpt-5  # GPT-5 (128k output)
-    - grok-3  # Grok 3 (64k output)
-    
+    - sonnet-4-5           # Claude 4.5 Sonnet (best for code)
+    - deepseek-chat        # DeepSeek Chat (code-focused)
+    - gpt-5                # GPT-5 (128k output)
+    - grok-3               # Grok 3 (64k output)
+
   # Budget-friendly options
   grp-budget:
-    - goo-3  # Gemini 2.5 Flash-Lite (lowest cost)
-    - goo-2  # Gemini 2.5 Flash
-    - gpt-5-nano  # GPT-5 Nano (lowest GPT-5 cost)
+    - gemini-flash-lite-2-5  # Gemini 2.5 Flash-Lite (lowest cost)
+    - gemini-flash-2-5       # Gemini 2.5 Flash
+    - gpt-5-nano             # GPT-5 Nano (lowest GPT-5 cost)
     
   # Image generation model groups (organized by provider)
   grp-img-all:
@@ -67,17 +67,16 @@ providers:
   anthropic:
     # Direct Anthropic API (requires credits)
     aliases:
-      # Latest Claude 4 models (actual API model IDs)
+      # User-friendly names
+      opus-4-1: claude-opus-4-1-20250805
+      sonnet-4-5: claude-sonnet-4-5-20250929
+      sonnet-4: claude-sonnet-4-20250514
+      haiku-3-5: claude-3-5-haiku-20241022
+      # Full model IDs (for compatibility)
       claude-opus-4-1-20250805: claude-opus-4-1-20250805
       claude-sonnet-4-5-20250929: claude-sonnet-4-5-20250929
       claude-sonnet-4-20250514: claude-sonnet-4-20250514
       claude-3-5-haiku-20241022: claude-3-5-haiku-20241022
-
-      # Legacy aliases for backward compatibility
-      ant-1: claude-opus-4-1-20250805
-      ant-2: claude-sonnet-4-5-20250929
-      ant-3: claude-sonnet-4-20250514
-      ant-4: claude-3-5-haiku-20241022
     endpoint: https://api.anthropic.com/v1/messages
     headers:
       anthropic-version: "2023-06-01"
@@ -87,17 +86,16 @@ providers:
   genai:
     # Using google-genai SDK with simple API key authentication
     aliases:
-      # Direct model names for Google AI Studio
+      # User-friendly names
+      gemini-pro-2-5: gemini-2.5-pro
+      gemini-flash-2-5: gemini-2.5-flash
+      gemini-flash-lite-2-5: gemini-2.5-flash-lite
+      # Full model names
       gemini-2.5-pro: gemini-2.5-pro
       gemini-2.5-flash: gemini-2.5-flash
-      gemini-2.5-flash-image: gemini-2.5-flash-image
       gemini-2.5-flash-lite: gemini-2.5-flash-lite
       gemini-1.5-pro: gemini-1.5-pro
       gemini-1.5-flash: gemini-1.5-flash
-      # Convenience aliases
-      goo-1: gemini-2.5-pro            # Gemini 2.5 Pro (GenAI API)
-      goo-2: gemini-2.5-flash          # Gemini 2.5 Flash (GenAI API)
-      goo-3: gemini-2.5-flash-lite     # Gemini 2.5 Flash-Lite (GenAI API)
     authentication_method: api_key  # Just needs GEMINI_API_KEY env var
     provider_class: genai_provider
     enabled: true
@@ -114,25 +112,16 @@ providers:
   google:
     # Google Vertex AI - Service account authentication (for enterprise/GCP users)
     aliases:
-      # Vertex AI Gemini models with vtx- prefix for clarity
-      vtx-gemini-2.5-pro: vtx-gemini-2.5-pro           # Gemini 2.5 Pro via Vertex AI
-      vtx-gemini-2.5-flash: vtx-gemini-2.5-flash       # Gemini 2.5 Flash via Vertex AI
-      vtx-gemini-2.5-flash-lite: vtx-gemini-2.5-flash-lite  # Gemini 2.5 Flash-Lite via Vertex AI
-      vtx-gemini-1.5-pro: vtx-gemini-1.5-pro           # Gemini 1.5 Pro via Vertex AI
-      vtx-gemini-1.5-flash: vtx-gemini-1.5-flash       # Gemini 1.5 Flash via Vertex AI
-      # Legacy aliases (these now conflict with genai provider, should migrate)
-      # goo-1: vtx-gemini-2.5-pro        # DEPRECATED: Use genai provider instead
-      # goo-2: vtx-gemini-2.5-flash      # DEPRECATED: Use genai provider instead
-      # goo-3: vtx-gemini-2.5-flash-lite # DEPRECATED: Use genai provider instead
-      # Image generation models (Imagen 4 only - 3.0 deprecated)
-      imagen-4: imagen-4.0-generate-001           # Standard Imagen 4.0
-      imagen-4-ultra: imagen-4.0-ultra-generate-001  # Ultra Imagen 4.0  
-      imagen-4-fast: imagen-4.0-fast-generate-001    # Fast Imagen 4.0
-      goo-1-vid: veo-3                    # First video generation model
-      goo-2-vid: veo-2                    # Second (newer) video generation
-      goo-1-music: lyria                  # First music generation model
-      goo-1-tts: google-tts-pro           # First Google TTS
-      goo-2-tts: google-tts-fast          # Second Google TTS
+      # User-friendly Vertex names
+      vtx-gemini-pro: vtx-gemini-2.5-pro
+      vtx-gemini-flash: vtx-gemini-2.5-flash
+      vtx-gemini-flash-lite: vtx-gemini-2.5-flash-lite
+      # Full Vertex model names
+      vtx-gemini-2.5-pro: vtx-gemini-2.5-pro
+      vtx-gemini-2.5-flash: vtx-gemini-2.5-flash
+      vtx-gemini-2.5-flash-lite: vtx-gemini-2.5-flash-lite
+      vtx-gemini-1.5-pro: vtx-gemini-1.5-pro
+      vtx-gemini-1.5-flash: vtx-gemini-1.5-flash
     # project_id: YOUR_PROJECT_ID  # Set GOOGLE_CLOUD_PROJECT env var or use google_cloud_setup.yaml
     location: global
     authentication_method: service_account  # Uses service account credentials
@@ -150,10 +139,14 @@ providers:
   vertex:
     # Claude models via Vertex AI (using your exact working model names)
     aliases:
-      vtx-1: claude-opus-4              # Claude 4 Opus via Vertex (32k output)
-      vtx-2: claude-sonnet-4            # Claude 4 Sonnet via Vertex (64k output)
-      vtx-3: claude-3-5-haiku           # Claude 3.5 Haiku (fast/budget)
-      vtx-4: llama-3.1-405b-instruct-maas  # Meta Llama via Vertex
+      # User-friendly Vertex Claude names
+      vtx-opus: claude-opus-4
+      vtx-sonnet: claude-sonnet-4
+      vtx-haiku: claude-3-5-haiku
+      # Full model names
+      vtx-claude-opus-4: claude-opus-4
+      vtx-claude-sonnet-4: claude-sonnet-4
+      vtx-claude-haiku-3-5: claude-3-5-haiku
     # project_id: YOUR_PROJECT_ID  # Set in environment or override in config
     location: us-east5
     authentication_method: gcloud_cli
@@ -163,33 +156,21 @@ providers:
 
   deepseek:
     aliases:
-      # V3.2-Exp models (default - 50% cheaper!)
-      deepseek-chat: deepseek-chat          # DeepSeek V3.2-Exp (with DSA)
-      deepseek-reasoner: deepseek-reasoner  # DeepSeek R1 Reasoner
-      ds-1: deepseek-chat                   # Alias for V3.2-Exp
-      ds-2: deepseek-reasoner               # Alias for Reasoner
-      # V3.1-Terminus (comparison testing until Oct 15, 2025)
-      deepseek-v3.1-terminus: deepseek-chat  # V3.1-Terminus via special endpoint
-      ds-1-legacy: deepseek-chat             # Alias for V3.1-Terminus
+      # User-friendly names
+      deepseek-chat: deepseek-chat
+      deepseek-reasoner: deepseek-reasoner
     endpoint: https://api.deepseek.com/v1/chat/completions
-    # V3.1-Terminus endpoint (expires Oct 15, 2025 15:59 UTC)
-    terminus_endpoint: https://api.deepseek.com/v3.1_terminus_expires_on_20251015/chat/completions
     requests_per_minute: 60
     tokens_per_minute: 200000
-    notes: |
-      V3.2-Exp is 50%+ cheaper with DeepSeek Sparse Attention (DSA)
-      To use V3.1-Terminus for comparison: set endpoint to terminus_endpoint
-      Feedback: https://feedback.deepseek.com/dsa
 
   xai:
     aliases:
-      # Direct model IDs from XAI API (ONLY THESE 4 EXIST)
-      grok-4-0709: grok-4-0709         # Grok 4 reasoning model
-      grok-3: grok-3                   # Grok 3 standard
-      grok-3-mini: grok-3-mini         # Grok 3 mini (lightweight)
-      # Aliases for convenience
+      # User-friendly names
       grok-4: grok-4-0709
-      grok-mini: grok-3-mini
+      grok-3: grok-3
+      grok-3-mini: grok-3-mini
+      # Full model IDs
+      grok-4-0709: grok-4-0709
     endpoint: https://api.x.ai/v1/chat/completions
     rate_limits:
       requests_per_minute: 100
