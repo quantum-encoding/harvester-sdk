@@ -151,17 +151,8 @@ class HarvesterSDK:
     
     def _get_processor_for_operation(self, models: Union[str, List[str]]):
         """
-        Get the appropriate processor based on license tier and operation type
-        Uses the Divine Arbiter to enforce stratification of power
+        Get the appropriate processor for the models specified (open-source version)
         """
-        # Initialize Divine Arbiter if not already done
-        if not hasattr(self, 'divine_arbiter'):
-            from core.divine_arbiter import get_divine_arbiter
-            self.divine_arbiter = get_divine_arbiter()
-            # Ensure tier alignment
-            if self.license.tier != self.divine_arbiter.current_tier:
-                self.divine_arbiter.upgrade_tier(self.license.tier)
-        
         # Determine operation mode
         if isinstance(models, str):
             if models.lower() == 'all':
@@ -176,9 +167,14 @@ class HarvesterSDK:
         else:
             models_list = models
             operation_mode = 'multi' if len(models_list) > 1 else 'single'
-        
-        # Summon the appropriate processor through the Divine Arbiter
-        return self.divine_arbiter.summon_processor(operation_mode, models_list)
+
+        # Return appropriate processor (simplified - no tier restrictions)
+        from processors.parallel import CodeRefactoringProcessor
+        worker_count = len(models_list) if models_list and operation_mode == 'multi' else 1
+        return CodeRefactoringProcessor(
+            max_workers=worker_count,
+            rate_limit_per_minute=60
+        )
     
     async def process_batch(
         self,
@@ -357,17 +353,9 @@ class HarvesterSDK:
             StructuredResponse with validated data
             
         Raises:
-            StructuredOutputError: If tier doesn't support structured output
+            StructuredOutputError: If structured output is not available
         """
-        # Check Divine Arbiter permission
-        if not hasattr(self, 'divine_arbiter'):
-            from core.divine_arbiter import get_divine_arbiter
-            self.divine_arbiter = get_divine_arbiter()
-            if self.license.tier != self.divine_arbiter.current_tier:
-                self.divine_arbiter.upgrade_tier(self.license.tier)
-        
-        if not self.divine_arbiter.check_structured_output_permission():
-            raise StructuredOutputError("Structured outputs require Premium tier or higher")
+        # Structured output is available in open-source (no tier restrictions)
         
         # Check if structured output processor is available
         if not self.structured_processor:
@@ -420,38 +408,26 @@ class HarvesterSDK:
             FunctionResult with execution outcome
             
         Raises:
-            ValueError: If tier doesn't support function calling or function not found
+            ValueError: If function not found or not available
         """
-        # Check Divine Arbiter permission
-        if not hasattr(self, 'divine_arbiter'):
-            from core.divine_arbiter import get_divine_arbiter
-            self.divine_arbiter = get_divine_arbiter()
-            if self.license.tier != self.divine_arbiter.current_tier:
-                self.divine_arbiter.upgrade_tier(self.license.tier)
-        
-        if not self.divine_arbiter.check_function_calling_permission():
-            tier = self.divine_arbiter.current_tier
-            raise ValueError(f"Function calling requires Professional tier or higher (current: {tier})")
-        
         # Check if function registry is available
         if not self.function_registry:
             raise ValueError(
                 "Function calling not available. Install dependencies: pip install requests aiohttp"
             )
-        
-        # Get current tier and available tools
-        tier = self.divine_arbiter.current_tier
-        available_tools = self.function_registry.get_tools_for_tier(tier)
-        
-        # Check if function is available for current tier
-        if function_name not in available_tools:
-            available_names = list(available_tools.keys())
+
+        # Get available tools (all tools - using premium tier for open-source)
+        available_tools = self.function_registry.get_tools_for_tier('premium')
+
+        # Check if function is available
+        if function_name not in [tool.name for tool in available_tools]:
+            available_names = [tool.name for tool in available_tools]
             raise ValueError(
-                f"Function '{function_name}' not available for {tier} tier. "
+                f"Function '{function_name}' not available. "
                 f"Available functions: {available_names}"
             )
-        
-        logger.info(f"🔧 Executing function '{function_name}' with {tier} tier access")
+
+        logger.info(f"🔧 Executing function '{function_name}'")
         
         # Create function call object
         function_call = FunctionCall(
@@ -471,23 +447,16 @@ class HarvesterSDK:
     
     def list_available_functions(self) -> Dict[str, Dict[str, Any]]:
         """
-        List all functions available for the current tier
-        
+        List all available functions
+
         Returns:
             Dictionary mapping function names to their definitions
         """
-        if not hasattr(self, 'divine_arbiter'):
-            from core.divine_arbiter import get_divine_arbiter
-            self.divine_arbiter = get_divine_arbiter()
-            if self.license.tier != self.divine_arbiter.current_tier:
-                self.divine_arbiter.upgrade_tier(self.license.tier)
-        
         if not self.function_registry:
             return {}
-        
-        # Get tier and available functions
-        tier = self.divine_arbiter.current_tier
-        available_tools = self.function_registry.get_tools_for_tier(tier)
+
+        # Get all available functions (all tools - using premium tier for open-source)
+        available_tools = self.function_registry.get_tools_for_tier('premium')
         
         # Format function info
         function_info = {}
@@ -496,9 +465,9 @@ class HarvesterSDK:
                 'description': tool.description,
                 'category': tool.category,
                 'security_level': tool.security_level,
-                'parameters': tool.parameters
+                'parameters_schema': tool.parameters_schema
             }
-        
+
         return function_info
     
     async def process_council(
@@ -540,57 +509,50 @@ class HarvesterSDK:
         return self.provider_factory.list_models()
     
     def get_license_info(self) -> Dict[str, Any]:
-        """Get current license information with Divine Arbiter capabilities"""
+        """Get current license information (open-source version)"""
         # Get base license info
         base_info = {
             "tier": self.license.tier,
             "max_concurrent": self.max_concurrent,
             "valid": self.license.is_valid,
-            "key_set": bool(self.license.license_key)
+            "key_set": bool(self.license.license_key),
+            # Open-source: all features enabled
+            "sovereignty": "republic",
+            "parallel_providers": True,
+            "model_all_enabled": True,
+            "structured_output": True,
+            "function_calling": "full",
+            "max_providers": 999,
+            "total_workers": self.max_concurrent,
+            "description": "Open Source - All Features Enabled"
         }
-        
-        # Get Divine Arbiter capabilities
-        if hasattr(self, 'divine_arbiter'):
-            capabilities = self.divine_arbiter.get_tier_capabilities()
-            base_info.update({
-                "sovereignty": capabilities['sovereignty'],
-                "parallel_providers": capabilities['parallel_providers'],
-                "model_all_enabled": capabilities['model_all'],
-                "structured_output": capabilities.get('structured_output', False),
-                "function_calling": capabilities.get('function_calling', 'none'),
-                "max_providers": capabilities['max_providers'],
-                "total_workers": capabilities['max_workers'],
-                "description": capabilities['description']
-            })
-        
+
         return base_info
     
     def display_tier_status(self):
         """Display current tier status and capabilities"""
         info = self.get_license_info()
-        
+
         print("\n" + "="*60)
-        print(f"🎫 HARVESTER SDK LICENSE STATUS")
+        print(f"🎫 HARVESTER SDK STATUS")
         print("="*60)
-        print(f"📊 Tier: {info['tier'].upper()}")
-        print(f"⚖️ Sovereignty: {info.get('sovereignty', 'monarchy').upper()}")
+        print(f"📊 Version: 2.0.0")
+        print(f"⚖️ License: MIT Open Source")
         print(f"👷 Max Workers: {info.get('total_workers', self.max_concurrent)}")
-        print(f"🌐 Multi-Provider: {'✅ ENABLED' if info.get('parallel_providers') else '❌ DISABLED'}")
-        print(f"🎯 --model all: {'✅ ENABLED' if info.get('model_all_enabled') else '❌ DISABLED'}")
-        print(f"🎯 Structured Output: {'✅ ENABLED' if info.get('structured_output') else '❌ DISABLED'}")
-        print(f"🔧 Function Calling: {info.get('function_calling', 'none').upper()}")
+        print(f"🌐 Multi-Provider: ✅ ENABLED")
+        print(f"🎯 --model all: ✅ ENABLED")
+        print(f"🎯 Structured Output: ✅ ENABLED")
+        print(f"🔧 Function Calling: ✅ FULL")
         print("="*60)
-        
-        if info['tier'] in ['freemium', 'professional']:
-            print("\n💎 UPGRADE TO PREMIUM FOR:")
-            print("  • Galactic Federation access (75+ workers)")
-            print("  • Multi-provider parallel execution")
-            print("  • --model all flag support")
-            print("  • 🎯 Structured Output with schema validation")
-            print("  • 🔧 Function Calling & Tool Use (web, code, data)")
-            print("  • 10x throughput on batch operations")
-            print("\n🌟 Visit: https://quantumencoding.io/premium")
-        
+
+        print("\n🚀 OPEN SOURCE FEATURES:")
+        print("  • Unlimited parallel execution")
+        print("  • All AI providers supported")
+        print("  • Full structured output support")
+        print("  • Complete function calling & tool use")
+        print("  • No tier restrictions")
+
+        print("\n🌟 GitHub: https://github.com/quantum-encoding/harvester-sdk")
         print()
     
     async def cleanup(self):

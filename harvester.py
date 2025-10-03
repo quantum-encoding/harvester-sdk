@@ -863,38 +863,30 @@ def functions_command(function_name, list_functions, args, file):
                 return
             
             if not functions:
-                click.echo("ℹ️  Function calling is available at Professional tier and above")
-                click.echo("📋 Basic functions available at Professional tier:")
-                click.echo("  • read_file - Read contents of a file")
-                click.echo("  • list_files - List files in a directory")
-                click.echo("  • get_weather - Get current weather (mock)")
-                click.echo()
-                click.echo("🎯 Premium tier unlocks:")
-                click.echo("  • write_file - Write content to files")
-                click.echo("  • web_search - Search the web")
-                click.echo("  • execute_code - Run code in sandbox")
-                click.echo("  • analyze_image - Computer vision")
-                click.echo("  • database_query - Query databases")
-                click.echo()
-                click.echo("🌟 Upgrade to Premium: https://quantumencoding.io/premium")
+                click.echo("ℹ️  No functions available. Install dependencies:")
+                click.echo("     pip install requests aiohttp")
                 return
-            
-            click.echo(f"📋 Available Functions ({arbiter.current_tier.upper()} tier):")
+
+            click.echo(f"📋 Available Functions (Open Source - All Enabled):")
             click.echo()
-            
+
             for name, info in functions.items():
                 click.echo(f"🔧 {name}")
                 click.echo(f"   📝 {info['description']}")
                 click.echo(f"   📂 Category: {info['category']}")
                 click.echo(f"   🔒 Security: {info['security_level']}")
-                
-                if info['parameters']:
-                    click.echo("   📋 Parameters:")
-                    for param_name, param_info in info['parameters'].items():
-                        required = " (required)" if param_info.get('required', False) else ""
-                        click.echo(f"     • {param_name}: {param_info.get('type', 'any')}{required}")
-                        if param_info.get('description'):
-                            click.echo(f"       └─ {param_info['description']}")
+
+                if info.get('parameters_schema'):
+                    params = info['parameters_schema'].get('properties', {})
+                    required_params = info['parameters_schema'].get('required', [])
+                    if params:
+                        click.echo("   📋 Parameters:")
+                        for param_name, param_info in params.items():
+                            req_marker = " (required)" if param_name in required_params else ""
+                            param_type = param_info.get('type', 'any')
+                            click.echo(f"     • {param_name}: {param_type}{req_marker}")
+                            if param_info.get('description'):
+                                click.echo(f"       └─ {param_info['description']}")
                 click.echo()
             
             return
