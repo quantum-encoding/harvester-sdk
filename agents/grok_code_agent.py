@@ -281,18 +281,25 @@ class GrokCodeAgent:
 **Available Tools:**
 You have access to file operations, code search, command execution, and more. Use them strategically to solve problems.
 
-**Best Practices:**
-1. Break complex tasks into smaller steps
-2. Use tools to gather necessary context before making changes
-3. Show your reasoning process
-4. Verify changes work correctly
-5. Handle edge cases and errors properly
+**IMPORTANT - Task Execution Strategy:**
+1. **Plan First**: Break the task into clear sequential steps
+2. **Execute Decisively**: Don't just explore - write files, create structure
+3. **Be Productive**: Each iteration should make concrete progress
+4. **Minimize Checks**: Only verify what's necessary, then move forward
+5. **Complete Fully**: Don't stop until the entire task is done
+
+**Avoid These Mistakes:**
+- ❌ Repeatedly checking versions or environments
+- ❌ Listing files without a specific purpose
+- ❌ Exploring without creating
+- ✅ Make concrete progress with each tool call
+- ✅ Write files, create structure, build features
 
 **Output Format:**
 - Use Markdown for code blocks with proper syntax highlighting
 - Explain your reasoning clearly
 - Provide detailed error handling
-- Suggest improvements when relevant
+- When task is complete, provide summary WITHOUT calling more tools
 """
 
         task_specific = {
@@ -542,6 +549,10 @@ You have access to file operations, code search, command execution, and more. Us
         # Store for cache optimization (don't modify prefix)
         self.message_history = messages.copy()
 
+        # Track recent tool calls to detect loops
+        recent_tools = []
+        loop_threshold = 3  # If same tool called 3+ times in row, warn
+
         # Execute with tool calling loop
         for iteration in range(self.max_iterations):
             task.iterations = iteration + 1
@@ -569,6 +580,18 @@ You have access to file operations, code search, command execution, and more. Us
             # Handle tool calls
             if response.get("tool_calls") and len(response["tool_calls"]) > 0:
                 print(f"\n🔧 Tool Calls ({len(response['tool_calls'])})")
+
+                # Check for loops
+                tool_names = [tc["name"] for tc in response["tool_calls"]]
+                recent_tools.extend(tool_names)
+                recent_tools = recent_tools[-10:]  # Keep last 10 tool calls
+
+                # Detect if stuck in loop
+                if len(recent_tools) >= loop_threshold:
+                    last_tools = recent_tools[-loop_threshold:]
+                    if len(set(last_tools)) == 1:  # Same tool 3+ times
+                        print(f"⚠️  Warning: Detected loop - '{last_tools[0]}' called {loop_threshold} times in a row!")
+                        print(f"   Agent may be stuck. Consider adding context or breaking down the task.")
 
                 for tool_call in response["tool_calls"]:
                     print(f"  → {tool_call['name']}({tool_call['arguments']})", flush=True)

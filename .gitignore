@@ -107,3 +107,12 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+
+# Tauri
+**/src-tauri/target/
+**/src-tauri/Cargo.lock
