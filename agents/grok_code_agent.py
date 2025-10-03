@@ -424,7 +424,7 @@ You have access to file operations, code search, command execution, and more. Us
 
         reasoning_parts = []
         content_parts = []
-        tool_calls = []
+        tool_calls_dict = {}  # Accumulate tool calls by index
 
         async with aiohttp.ClientSession() as session:
             async with session.post(url, headers=headers, json=payload) as response:
@@ -454,13 +454,45 @@ You have access to file operations, code search, command execution, and more. Us
                                     if on_chunk:
                                         on_chunk(content)
 
-                                # Extract tool calls
+                                # Extract tool calls (streamed incrementally)
                                 if "tool_calls" in delta:
-                                    # Handle tool calls
-                                    pass
+                                    for tc_delta in delta["tool_calls"]:
+                                        idx = tc_delta.get("index", 0)
+
+                                        if idx not in tool_calls_dict:
+                                            tool_calls_dict[idx] = {
+                                                "id": "",
+                                                "type": "function",
+                                                "function": {
+                                                    "name": "",
+                                                    "arguments": ""
+                                                }
+                                            }
+
+                                        # Accumulate tool call data
+                                        if "id" in tc_delta:
+                                            tool_calls_dict[idx]["id"] = tc_delta["id"]
+                                        if "function" in tc_delta:
+                                            if "name" in tc_delta["function"]:
+                                                tool_calls_dict[idx]["function"]["name"] += tc_delta["function"]["name"]
+                                            if "arguments" in tc_delta["function"]:
+                                                tool_calls_dict[idx]["function"]["arguments"] += tc_delta["function"]["arguments"]
 
                             except json.JSONDecodeError:
                                 continue
+
+        # Convert accumulated tool calls to final format
+        tool_calls = []
+        for idx in sorted(tool_calls_dict.keys()):
+            tc = tool_calls_dict[idx]
+            try:
+                tool_calls.append({
+                    "id": tc["id"],
+                    "name": tc["function"]["name"],
+                    "arguments": json.loads(tc["function"]["arguments"]) if tc["function"]["arguments"] else {}
+                })
+            except json.JSONDecodeError:
+                logger.warning(f"Failed to parse tool arguments: {tc['function']['arguments']}")
 
         return {
             "reasoning": "".join(reasoning_parts),
