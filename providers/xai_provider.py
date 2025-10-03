@@ -32,84 +32,90 @@ class XAIProvider(BaseProvider):
         self.base_url = config.get('endpoint', 'https://api.x.ai/v1/chat/completions')
         self.beta_url = 'https://api.x.ai/v1/beta/chat/completions'  # For structured outputs
         
-        # Grok model settings
+        # Grok model settings (from xAI pricing table)
         self.model_settings = {
             # Grok 4 - Latest flagship model (July 2024)
             'grok-4-0709': {
-                'max_tokens': 128000,  # 128K output
+                'max_tokens': 2000000,  # 2M output
                 'temperature': 0.7,
                 'cost_per_million_input': 5.00,
                 'cost_per_million_output': 15.00,
-                'context_window': 131072  # 128K context
+                'context_window': 256000,  # 256K context
+                'rate_limit': 480  # TPM
             },
             # Grok 4 Fast Reasoning - 2M context, 4M output
             'grok-4-fast-reasoning': {
-                'max_tokens': 4000000,  # 4M output (480 max tokens default)
+                'max_tokens': 4000000,  # 4M output
                 'temperature': 0.7,
                 'cost_per_million_input': 5.00,
                 'cost_per_million_output': 15.00,
-                'context_window': 2000000  # 2M context
+                'context_window': 2000000,  # 2M context
+                'rate_limit': 480  # TPM
             },
             # Grok 4 Fast Non-Reasoning - 2M context, 4M output
             'grok-4-fast-non-reasoning': {
-                'max_tokens': 4000000,  # 4M output (480 max tokens default)
+                'max_tokens': 4000000,  # 4M output
                 'temperature': 0.7,
                 'cost_per_million_input': 5.00,
                 'cost_per_million_output': 15.00,
-                'context_window': 2000000  # 2M context
+                'context_window': 2000000,  # 2M context
+                'rate_limit': 480  # TPM
             },
-            # Grok Code Fast - 256k context, 2M output
+            # Grok Code Fast - 256K context, 2M output
             'grok-code-fast-1': {
                 'max_tokens': 2000000,  # 2M output
                 'temperature': 0.7,
                 'cost_per_million_input': 2.00,
                 'cost_per_million_output': 10.00,
-                'context_window': 256000  # 256K context
+                'context_window': 256000,  # 256K context
+                'rate_limit': 480  # TPM
             },
             # Grok 3 - Previous generation
             'grok-3': {
-                'max_tokens': 65536,   # 64K output
+                'max_tokens': 131072,  # 131K output
                 'temperature': 0.7,
                 'cost_per_million_input': 2.00,
                 'cost_per_million_output': 10.00,
-                'context_window': 65536  # 64K context
+                'context_window': 131072,  # 131K context
+                'rate_limit': 600  # TPM
             },
             # Grok 3 Mini - Fast, lightweight
             'grok-3-mini': {
-                'max_tokens': 32768,   # 32K output
+                'max_tokens': 131072,  # 131K output
                 'temperature': 0.7,
                 'cost_per_million_input': 0.50,
                 'cost_per_million_output': 2.00,
-                'context_window': 32768  # 32K context
+                'context_window': 131072,  # 131K context
+                'rate_limit': 480  # TPM
             },
-            # Grok 2 (December 2023) - First model with structured output support
-            'grok-2-1212': {
-                'max_tokens': 8192,    # 8K output
+            # Grok 2 Vision EU (December 2023) - Vision model with structured output
+            'grok-2-vision-1212-eu-west-1': {
+                'max_tokens': 32768,   # Output matches context
                 'temperature': 0.7,
                 'cost_per_million_input': 1.00,
                 'cost_per_million_output': 3.00,
                 'context_window': 32768,  # 32K context
-                'supports_structured': True  # Minimum version for structured outputs
+                'supports_vision': True,
+                'supports_structured': True,  # Supports structured outputs
+                'rate_limit': 50  # TPM (EU region)
             },
-            # Grok 2 Image - Multimodal vision model (December 2023)
+            # Grok 2 Vision US (December 2023) - Vision model with structured output
+            'grok-2-vision-1212-us-east-1': {
+                'max_tokens': 32768,   # Output matches context
+                'temperature': 0.7,
+                'cost_per_million_input': 1.00,
+                'cost_per_million_output': 3.00,
+                'context_window': 32768,  # 32K context
+                'supports_vision': True,
+                'supports_structured': True,  # Supports structured outputs
+                'rate_limit': 600  # TPM (US region - higher limit)
+            },
+            # Grok 2 Image - Image generation model (December 2023)
             'grok-2-image-1212': {
-                'max_tokens': 8192,    # 8K output
-                'temperature': 0.7,
-                'cost_per_million_input': 1.00,
-                'cost_per_million_output': 3.00,
-                'context_window': 32768,  # 32K context
-                'supports_vision': True,
-                'supports_structured': True
-            },
-            # Grok 2 Vision (December 2023)
-            'grok-2-vision-1212': {
-                'max_tokens': 8192,    # 8K output
-                'temperature': 0.7,
-                'cost_per_million_input': 1.00,
-                'cost_per_million_output': 3.00,
-                'context_window': 32768,  # 32K context
-                'supports_vision': True,
-                'supports_structured': True
+                'type': 'image_generation',  # Not a language model
+                'cost_per_image': 1.00,  # Per image pricing
+                'rate_limit': 300  # images per month
+                # Note: This is an image generation model, not text completion
             }
         }
     
