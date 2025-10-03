@@ -41,6 +41,30 @@ class XAIProvider(BaseProvider):
                 'cost_per_million_output': 15.00,
                 'context_window': 131072  # 128K context
             },
+            # Grok 4 Fast Reasoning - 2M context, 4M output
+            'grok-4-fast-reasoning': {
+                'max_tokens': 4000000,  # 4M output (480 max tokens default)
+                'temperature': 0.7,
+                'cost_per_million_input': 5.00,
+                'cost_per_million_output': 15.00,
+                'context_window': 2000000  # 2M context
+            },
+            # Grok 4 Fast Non-Reasoning - 2M context, 4M output
+            'grok-4-fast-non-reasoning': {
+                'max_tokens': 4000000,  # 4M output (480 max tokens default)
+                'temperature': 0.7,
+                'cost_per_million_input': 5.00,
+                'cost_per_million_output': 15.00,
+                'context_window': 2000000  # 2M context
+            },
+            # Grok Code Fast - 256k context, 2M output
+            'grok-code-fast-1': {
+                'max_tokens': 2000000,  # 2M output
+                'temperature': 0.7,
+                'cost_per_million_input': 2.00,
+                'cost_per_million_output': 10.00,
+                'context_window': 256000  # 256K context
+            },
             # Grok 3 - Previous generation
             'grok-3': {
                 'max_tokens': 65536,   # 64K output

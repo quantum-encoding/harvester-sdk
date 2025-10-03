@@ -167,10 +167,16 @@ providers:
     aliases:
       # User-friendly names
       grok-4: grok-4-0709
+      grok-4-fast-r: grok-4-fast-reasoning        # 2M context, 4M output
+      grok-4-fast: grok-4-fast-non-reasoning      # 2M context, 4M output
+      grok-code: grok-code-fast-1                 # 256k context, 2M output
       grok-3: grok-3
       grok-3-mini: grok-3-mini
       # Full model IDs
       grok-4-0709: grok-4-0709
+      grok-4-fast-reasoning: grok-4-fast-reasoning
+      grok-4-fast-non-reasoning: grok-4-fast-non-reasoning
+      grok-code-fast-1: grok-code-fast-1
     endpoint: https://api.x.ai/v1/chat/completions
     rate_limits:
       requests_per_minute: 100

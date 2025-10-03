@@ -558,9 +558,23 @@ def mothership(
             if verbose:
                 logger.exception("Detailed error:")
             sys.exit(1)
-    
-    # Run the operation
-    asyncio.run(execute())
+
+    # Run the operation with cleanup
+    async def run_with_cleanup():
+        """Run operation and ensure cleanup"""
+        try:
+            await execute()
+        finally:
+            # Always clean up provider sessions
+            try:
+                if hasattr(mothership_instance, 'provider_factory'):
+                    for provider_instance in mothership_instance.provider_factory.provider_instances.values():
+                        if hasattr(provider_instance, 'close'):
+                            await provider_instance.close()
+            except Exception as e:
+                logger.debug(f"Error during cleanup: {e}")
+
+    asyncio.run(run_with_cleanup())
 
 if __name__ == '__main__':
     mothership()
