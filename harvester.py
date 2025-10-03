@@ -698,7 +698,40 @@ def message_command(model, system, temperature, save, max_tokens):
     
     except KeyboardInterrupt:
         pass
-    
+
+    # Cleanup provider sessions
+    async def cleanup_sessions():
+        """Close all provider sessions to prevent warnings"""
+        try:
+            # Close the current provider
+            if hasattr(provider, 'close'):
+                await provider.close()
+            elif hasattr(provider, 'session') and provider.session:
+                await provider.session.close()
+            elif hasattr(provider, '_session') and provider._session:
+                await provider._session.close()
+
+            # Close all provider factory instances
+            if hasattr(provider_factory, 'provider_instances'):
+                for instance in provider_factory.provider_instances.values():
+                    try:
+                        if hasattr(instance, 'close'):
+                            await instance.close()
+                        elif hasattr(instance, 'session') and instance.session:
+                            await instance.session.close()
+                        elif hasattr(instance, '_session') and instance._session:
+                            await instance._session.close()
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+    # Run cleanup
+    try:
+        asyncio.run(cleanup_sessions())
+    except Exception:
+        pass
+
     # Final save if requested
     if save and conversation_count > 0:
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -713,7 +746,7 @@ def message_command(model, system, temperature, save, max_tokens):
                 "conversation": conversation_history
             }, f, indent=2)
         click.echo(f"\n💾 Final conversation saved to {conv_file}")
-    
+
     click.echo(f"\n👋 Conversation ended. Total exchanges: {conversation_count}")
     click.echo("Thank you for using Harvester SDK!")
 
