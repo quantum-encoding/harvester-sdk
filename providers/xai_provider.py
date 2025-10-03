@@ -82,6 +82,15 @@ class XAIProvider(BaseProvider):
                 'cost_per_million_output': 2.00,
                 'context_window': 32768  # 32K context
             },
+            # Grok 2 (December 2023) - First model with structured output support
+            'grok-2-1212': {
+                'max_tokens': 8192,    # 8K output
+                'temperature': 0.7,
+                'cost_per_million_input': 1.00,
+                'cost_per_million_output': 3.00,
+                'context_window': 32768,  # 32K context
+                'supports_structured': True  # Minimum version for structured outputs
+            },
             # Grok 2 Image - Multimodal vision model (December 2023)
             'grok-2-image-1212': {
                 'max_tokens': 8192,    # 8K output
@@ -89,7 +98,18 @@ class XAIProvider(BaseProvider):
                 'cost_per_million_input': 1.00,
                 'cost_per_million_output': 3.00,
                 'context_window': 32768,  # 32K context
-                'supports_vision': True
+                'supports_vision': True,
+                'supports_structured': True
+            },
+            # Grok 2 Vision (December 2023)
+            'grok-2-vision-1212': {
+                'max_tokens': 8192,    # 8K output
+                'temperature': 0.7,
+                'cost_per_million_input': 1.00,
+                'cost_per_million_output': 3.00,
+                'context_window': 32768,  # 32K context
+                'supports_vision': True,
+                'supports_structured': True
             }
         }
     
