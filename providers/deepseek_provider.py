@@ -58,7 +58,7 @@ class DeepseekProvider(BaseProvider):
             }
         }
     
-    async def complete(self, prompt: str, model: str, api_format: Optional[str] = None) -> str:
+    async def complete(self, prompt: str, model: str, api_format: Optional[str] = None, **kwargs) -> str:
         """Send completion request to DeepSeek (supports OpenAI and Anthropic formats)"""
         # Resolve model alias
         actual_model = self.resolve_model_alias(model)
@@ -81,17 +81,18 @@ class DeepseekProvider(BaseProvider):
         format_to_use = api_format or self.api_format
 
         if format_to_use == 'anthropic':
-            return await self._complete_anthropic(prompt, actual_model, settings)
+            return await self._complete_anthropic(prompt, actual_model, settings, **kwargs)
         else:
-            return await self._complete_openai(prompt, actual_model, settings, endpoint)
+            return await self._complete_openai(prompt, actual_model, settings, endpoint, **kwargs)
 
-    async def _complete_openai(self, prompt: str, model: str, settings: Dict, endpoint: str) -> str:
+    async def _complete_openai(self, prompt: str, model: str, settings: Dict, endpoint: str, **kwargs) -> str:
         """Complete using OpenAI-compatible API format"""
         headers = {
             'Authorization': f'Bearer {self.api_key}',
             'Content-Type': 'application/json'
         }
 
+        # Base payload
         payload = {
             'model': model,
             'messages': [{
@@ -99,9 +100,30 @@ class DeepseekProvider(BaseProvider):
                 'content': prompt
             }],
             'max_tokens': settings['max_tokens'],
-            'temperature': settings['temperature'],
+            'temperature': settings.get('temperature', 0.7),
             'stream': False
         }
+
+        # Handle structured output via JSON mode (DeepSeek uses response_format)
+        if 'json_schema' in kwargs:
+            import json
+            schema = kwargs['json_schema']
+
+            # Add response_format for JSON output
+            payload['response_format'] = {'type': 'json_object'}
+
+            # Enhance prompt with schema instructions (DeepSeek requirement)
+            schema_str = json.dumps(schema.get('schema', schema), indent=2)
+            enhanced_prompt = f"""{prompt}
+
+Please respond with ONLY a valid JSON object matching this exact schema:
+
+{schema_str}
+
+Output valid JSON only, no additional text."""
+
+            # Update the message content
+            payload['messages'][0]['content'] = enhanced_prompt
 
         if not self.session:
             self.session = aiohttp.ClientSession()
@@ -120,16 +142,20 @@ class DeepseekProvider(BaseProvider):
                     logger.info(f"✓ Using DeepSeek V3.1-Terminus (comparison mode)")
 
                 if 'choices' in data and data['choices']:
-                    return data['choices'][0]['message']['content']
+                    content = data['choices'][0]['message']['content']
+                    if not content:
+                        logger.warning(f"Empty content from DeepSeek. Full response: {data}")
+                    return content
 
+                logger.error(f"Unexpected DeepSeek response structure: {data}")
                 raise Exception("No response content from DeepSeek")
 
         except Exception as e:
             logger.error(f"DeepSeek OpenAI API error: {e}")
             raise
 
-    async def _complete_anthropic(self, prompt: str, model: str, settings: Dict) -> str:
-        """Complete using Anthropic-compatible API format"""
+    async def _complete_anthropic(self, prompt: str, model: str, settings: Dict, **kwargs) -> str:
+        """Complete using Anthropic-compatible API format (no native structured output)"""
         headers = {
             'x-api-key': self.api_key,
             'anthropic-version': '2023-06-01',

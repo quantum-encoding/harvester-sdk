@@ -156,12 +156,6 @@ class OpenaiProvider(BaseProvider):
                     }
                 ],
                 "max_output_tokens": max_tokens,
-                "text": {
-                    "format": {
-                        "type": "text"
-                    },
-                    "verbosity": kwargs.get("verbosity", "medium")
-                },
                 "reasoning": {
                     "effort": kwargs.get("reasoning_effort", "medium"),
                     "summary": "auto"
@@ -169,6 +163,27 @@ class OpenaiProvider(BaseProvider):
                 "tools": [],
                 "store": True
             }
+
+            # Handle structured output (native JSON schema support)
+            if "json_schema" in kwargs:
+                schema = kwargs["json_schema"]
+                request_params["text"] = {
+                    "format": {
+                        "type": "json_schema",
+                        "name": schema.get("name", "response"),
+                        "strict": True,
+                        "schema": schema.get("schema", schema)
+                    },
+                    "verbosity": kwargs.get("verbosity", "medium")
+                }
+            else:
+                # Regular text output
+                request_params["text"] = {
+                    "format": {
+                        "type": "text"
+                    },
+                    "verbosity": kwargs.get("verbosity", "medium")
+                }
             
             response = await self.client.responses.create(**request_params)
             

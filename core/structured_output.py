@@ -114,9 +114,9 @@ class StructuredOutputProcessor:
             'max_retries': 3
         },
         'deepseek': {
-            'native_structured': False,
+            'native_structured': True,  # Has JSON mode via response_format
             'models': ['deepseek-chat', 'deepseek-reasoner'],
-            'max_retries': 5
+            'max_retries': 3  # JSON mode is more reliable
         },
         'xai': {
             'native_structured': False,
@@ -423,14 +423,18 @@ Your response:"""
                                          **kwargs) -> str:
         """
         Call provider with native structured output support
-        
+
         This method handles provider-specific implementations
         for native structured output APIs.
         """
-        # For now, use enhanced prompting even for "native" providers
-        # Individual providers can override this behavior
-        enhanced_prompt = self.build_structured_prompt(prompt, schema, "openai")
-        return await provider_handler(prompt=enhanced_prompt, model=model, **kwargs)
+        # Pass JSON schema to provider via kwargs for native support
+        # Provider will detect json_schema and use appropriate API format
+        return await provider_handler(
+            prompt=prompt,
+            model=model,
+            json_schema=schema,
+            **kwargs
+        )
     
     def get_stats(self) -> Dict[str, Any]:
         """Get processing statistics"""

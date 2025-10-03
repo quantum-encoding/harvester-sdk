@@ -827,104 +827,82 @@ def structured_command(prompt, schema, model, output):
     click.echo(f"🤖 Model: {model}")
     click.echo()
 
-    # Import SDK
+    # Import SDK and Pydantic
     from harvester_sdk.sdk import HarvesterSDK
     import asyncio
     import json
+    from typing import List, Optional
+    from pydantic import BaseModel, Field
 
-    # Define schemas
-    schemas = {
-        'person': {
-            'type': 'object',
-            'properties': {
-                'name': {'type': 'string'},
-                'age': {'type': 'integer'},
-                'email': {'type': 'string'}
-            },
-            'required': ['name']
-        },
-        'review': {
-            'type': 'object',
-            'properties': {
-                'rating': {'type': 'integer', 'minimum': 1, 'maximum': 5},
-                'summary': {'type': 'string'},
-                'pros': {'type': 'array', 'items': {'type': 'string'}},
-                'cons': {'type': 'array', 'items': {'type': 'string'}}
-            },
-            'required': ['rating', 'summary']
-        },
-        'meeting': {
-            'type': 'object',
-            'properties': {
-                'title': {'type': 'string'},
-                'date': {'type': 'string'},
-                'attendees': {'type': 'array', 'items': {'type': 'string'}},
-                'action_items': {'type': 'array', 'items': {'type': 'string'}}
-            },
-            'required': ['title']
-        },
-        'code': {
-            'type': 'object',
-            'properties': {
-                'language': {'type': 'string'},
-                'description': {'type': 'string'},
-                'key_features': {'type': 'array', 'items': {'type': 'string'}},
-                'use_cases': {'type': 'array', 'items': {'type': 'string'}}
-            },
-            'required': ['language', 'description']
-        },
-        'analysis': {
-            'type': 'object',
-            'properties': {
-                'summary': {'type': 'string'},
-                'key_points': {'type': 'array', 'items': {'type': 'string'}},
-                'recommendations': {'type': 'array', 'items': {'type': 'string'}}
-            },
-            'required': ['summary', 'key_points']
-        }
+    # Define Pydantic schemas for provider-aware structured output
+    class PersonSchema(BaseModel):
+        name: str
+        age: Optional[int] = None
+        email: Optional[str] = None
+
+    class ReviewSchema(BaseModel):
+        rating: int = Field(..., ge=1, le=5)
+        summary: str
+        pros: Optional[List[str]] = []
+        cons: Optional[List[str]] = []
+
+    class MeetingSchema(BaseModel):
+        title: str
+        date: Optional[str] = None
+        attendees: Optional[List[str]] = []
+        action_items: Optional[List[str]] = []
+
+    class CodeSchema(BaseModel):
+        language: str
+        description: str
+        key_features: Optional[List[str]] = []
+        use_cases: Optional[List[str]] = []
+
+    class AnalysisSchema(BaseModel):
+        summary: str
+        key_points: List[str]
+        recommendations: Optional[List[str]] = []
+
+    # Map schema names to Pydantic classes
+    pydantic_schemas = {
+        'person': PersonSchema,
+        'review': ReviewSchema,
+        'meeting': MeetingSchema,
+        'code': CodeSchema,
+        'analysis': AnalysisSchema
     }
 
     async def generate():
         try:
-            # Get schema
-            json_schema = schemas.get(schema, schemas['analysis'])
+            # Get Pydantic schema class
+            schema_class = pydantic_schemas.get(schema, AnalysisSchema)
 
-            # Build prompt requesting JSON output
-            structured_prompt = f"{prompt}\n\nPlease respond with ONLY a valid JSON object matching this schema:\n{json.dumps(json_schema, indent=2)}"
-
-            # Use SDK for simple text generation
+            # Use SDK's provider-aware structured output
             sdk = HarvesterSDK()
-            click.echo("🔄 Generating structured output...")
+            click.echo("🔄 Generating provider-aware structured output...")
+            click.echo(f"📦 Provider: {sdk.provider_factory.get_provider(model).__class__.__name__}")
 
-            response = await sdk.async_generate_text(
-                prompt=structured_prompt,
+            # Use the SDK's generate_structured method (provider-aware!)
+            result = await sdk.generate_structured(
+                prompt=prompt,
+                schema_class=schema_class,
                 model=model,
                 max_tokens=2000
             )
 
-            # Try to parse JSON from response
-            # Handle cases where model wraps JSON in markdown code blocks
-            response_clean = response.strip()
-            if response_clean.startswith('```json'):
-                response_clean = response_clean.split('```json')[1].split('```')[0].strip()
-            elif response_clean.startswith('```'):
-                response_clean = response_clean.split('```')[1].split('```')[0].strip()
-
-            result_data = json.loads(response_clean)
-
-            click.echo("✅ Success!")
+            click.echo(f"✅ Success! (validated in {result.validation_attempts} attempt(s))")
             click.echo()
             click.echo("📄 Structured Output:")
-            click.echo(json.dumps(result_data, indent=2))
+
+            # Convert Pydantic model to dict for display
+            result_dict = result.parsed_data.model_dump()
+            click.echo(json.dumps(result_dict, indent=2))
 
             if output:
                 with open(output, 'w') as f:
-                    json.dump(result_data, f, indent=2)
+                    json.dump(result_dict, f, indent=2)
                 click.echo(f"\n💾 Saved to: {output}")
 
-        except json.JSONDecodeError as e:
-            click.echo(f"❌ JSON Parsing Error: {e}")
-            click.echo(f"Raw response:\n{response[:500]}")
         except Exception as e:
             click.echo(f"❌ Error: {e}")
 
