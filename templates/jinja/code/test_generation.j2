@@ -1,0 +1,100 @@
+# Test Generation Template
+# Version: 2.0
+# Compatible Models: gpt-5, claude-4, deepseek-reasoner
+# Purpose: Generate comprehensive test suites
+# Tier: Premium
+
+## File Information
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Test Framework**: {{ params.test_framework | default('jest/pytest/junit') }}
+- **Coverage Target**: {{ params.coverage | default('80%') }}
+
+## Test Generation Requirements
+
+Generate a comprehensive test suite for the code below:
+
+### 1. Unit Tests
+- Test each function/method independently
+- Cover all code paths
+- Test edge cases and boundaries
+- Mock external dependencies
+
+### 2. Test Categories
+#### Happy Path Tests
+- Normal operation with valid inputs
+- Expected successful outcomes
+
+#### Edge Cases
+- Boundary values
+- Empty inputs
+- Maximum/minimum values
+- Special characters
+
+#### Error Cases
+- Invalid inputs
+- Null/undefined handling
+- Exception scenarios
+- Network/IO failures
+
+#### Performance Tests
+- Load testing scenarios
+- Timeout handling
+- Memory usage tests
+
+### 3. Test Structure
+- Arrange: Set up test data and mocks
+- Act: Execute the function
+- Assert: Verify the outcome
+- Cleanup: Reset state if needed
+
+### 4. Mocking Strategy
+- Mock external services
+- Mock database calls
+- Mock file system operations
+- Mock time-dependent operations
+
+### 5. Test Data
+- Use realistic test data
+- Create fixtures for reuse
+- Generate parameterized tests
+- Include internationalization tests
+
+## Code to Test
+```{{ language }}
+{{ code }}
+```
+
+## Output Format
+
+### Test Suite Structure
+```{{ params.test_framework | default('jest') }}
+describe('Component/Module Name', () => {
+  beforeEach(() => {
+    // Setup
+  });
+
+  describe('Function Name', () => {
+    it('should handle normal case', () => {
+      // Test implementation
+    });
+
+    it('should handle edge case', () => {
+      // Test implementation
+    });
+
+    it('should throw error for invalid input', () => {
+      // Test implementation
+    });
+  });
+});
+```
+
+### Requirements:
+1. **Complete Test Suite**: All functions covered
+2. **Test Documentation**: Clear test descriptions
+3. **Assertions**: Meaningful assertions with good messages
+4. **Coverage**: Aim for {{ params.coverage | default('80%') }} code coverage
+5. **Maintainability**: Easy to update when code changes
+
+**Note**: Tests should be independent and run in any order.

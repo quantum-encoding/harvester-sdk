@@ -1,0 +1,11 @@
+prompt,model,api_type,quality,size,filename,notes
+"A majestic mountain at sunset",dall-e-3,image_api,standard,1024x1024,mountain_cheap.png,"Cheapest option at $0.04"
+"Professional product photo of headphones",gpt-image-1,image_api,high,1024x1024,headphones_pro.png,"High quality product shot"
+"Abstract art with vibrant colors",gpt-5,responses_api,medium,1024x1024,abstract_art.png,"Use Responses API for refinement"
+"Logo design with transparent background",gpt-image-1,image_api,medium,1024x1024,logo_transparent.png,"Set background=transparent"
+"Character sprite sheet for game",gpt-image-1,image_api,high,1024x1024,sprites.png,"Use transparent background"
+"Blog header image - technology theme",dall-e-3,image_api,hd,1792x1024,tech_header.png,"Wide format HD at $0.12"
+"Portrait of business professional",gpt-5,responses_api,high,1024x1792,portrait.png,"Multi-turn for refinement"
+"Quick thumbnail image",gpt-image-1,image_api,low,1024x1024,thumbnail.jpg,"Fast generation with JPEG"
+"Architectural visualization",imagen,vertex_api,high,16:9,architecture.png,"Use Imagen for photorealistic"
+"Food photography for menu",gpt-image-1,image_api,high,1:1,food_photo.png,"High input fidelity option"

@@ -1,0 +1,153 @@
+{
+  "name": "content_similarity",
+  "description": "Find and analyze similar content using embeddings",
+  "provider": "genai_embeddings",
+  "model": "gemini-embedding-001",
+  "version": "1.0",
+  "parameters": {
+    "embedding_config": {
+      "task_type": "SEMANTIC_SIMILARITY",
+      "output_dimensionality": 768,
+      "normalize": true
+    },
+    "similarity_config": {
+      "metric": "cosine",
+      "threshold": 0.8,
+      "min_similarity": 0.5
+    },
+    "analysis_config": {
+      "find_duplicates": true,
+      "cluster_similar": true,
+      "anomaly_detection": true
+    }
+  },
+  "use_cases": {
+    "duplicate_detection": {
+      "description": "Find duplicate or near-duplicate content",
+      "threshold": 0.95,
+      "applications": [
+        "Remove duplicate articles",
+        "Detect plagiarism",
+        "Find redundant documentation"
+      ]
+    },
+    "content_recommendation": {
+      "description": "Recommend similar content to users",
+      "threshold": 0.75,
+      "applications": [
+        "Related articles",
+        "Similar products",
+        "Content discovery"
+      ]
+    },
+    "clustering": {
+      "description": "Group similar content together",
+      "method": "k-means",
+      "applications": [
+        "Topic modeling",
+        "Content organization",
+        "Trend analysis"
+      ]
+    },
+    "anomaly_detection": {
+      "description": "Find content that doesn't fit patterns",
+      "threshold": 0.3,
+      "applications": [
+        "Spam detection",
+        "Quality control",
+        "Outlier identification"
+      ]
+    }
+  },
+  "similarity_interpretation": {
+    "ranges": [
+      {
+        "range": [0.95, 1.0],
+        "interpretation": "Nearly identical",
+        "action": "Check for duplicates"
+      },
+      {
+        "range": [0.8, 0.95],
+        "interpretation": "Very similar",
+        "action": "Consider as related"
+      },
+      {
+        "range": [0.6, 0.8],
+        "interpretation": "Moderately similar",
+        "action": "Same topic/category"
+      },
+      {
+        "range": [0.3, 0.6],
+        "interpretation": "Somewhat related",
+        "action": "Loose connection"
+      },
+      {
+        "range": [-1.0, 0.3],
+        "interpretation": "Unrelated or opposite",
+        "action": "Different topics"
+      }
+    ]
+  },
+  "example_comparisons": [
+    {
+      "text1": "The quick brown fox jumps over the lazy dog",
+      "text2": "A fast brown fox leaps over a sleepy dog",
+      "expected_similarity": "~0.92",
+      "interpretation": "Very similar (paraphrase)"
+    },
+    {
+      "text1": "Machine learning is a subset of artificial intelligence",
+      "text2": "AI includes various techniques like machine learning",
+      "expected_similarity": "~0.85",
+      "interpretation": "Very similar (same topic)"
+    },
+    {
+      "text1": "The weather is sunny today",
+      "text2": "I enjoy programming in Python",
+      "expected_similarity": "~0.2",
+      "interpretation": "Unrelated topics"
+    }
+  ],
+  "batch_processing": {
+    "description": "Process multiple documents efficiently",
+    "steps": [
+      "Batch embed all documents",
+      "Create similarity matrix",
+      "Apply threshold filtering",
+      "Extract similarity pairs",
+      "Generate similarity report"
+    ],
+    "optimization": "Use numpy for matrix operations"
+  },
+  "visualization": {
+    "methods": [
+      {
+        "name": "Similarity heatmap",
+        "library": "seaborn",
+        "use_case": "Visualize pairwise similarities"
+      },
+      {
+        "name": "t-SNE plot",
+        "library": "scikit-learn",
+        "use_case": "2D visualization of high-dim embeddings"
+      },
+      {
+        "name": "Dendrogram",
+        "library": "scipy",
+        "use_case": "Hierarchical clustering visualization"
+      },
+      {
+        "name": "Network graph",
+        "library": "networkx",
+        "use_case": "Show content relationships"
+      }
+    ]
+  },
+  "notes": [
+    "Cosine similarity ranges from -1 (opposite) to 1 (identical)",
+    "Use SEMANTIC_SIMILARITY task for best results",
+    "Normalize embeddings for accurate cosine similarity",
+    "Consider context when interpreting similarity scores",
+    "Batch processing is more efficient than individual comparisons"
+  ]
+}

@@ -1,0 +1,32 @@
+# Harvester SDK - Core Requirements
+# Essential dependencies for the complete AI processing platform
+
+# Core framework dependencies
+aiohttp>=3.8.0
+aiofiles>=23.0.0
+jinja2>=3.0.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+tqdm>=4.65.0
+click>=8.0.0
+pandas>=2.0.0
+pillow>=10.0.0
+prompt_toolkit>=3.0.0
+
+# AI Provider SDKs - Essential for full functionality
+# Core providers included by default for best user experience
+
+# OpenAI (GPT-5, GPT-4o, DALL-E) - Primary provider
+openai>=1.0.0
+
+# Anthropic (Claude models) - Popular alternative
+anthropic>=0.65.0
+
+# Google AI Studio (Gemini models) - Simple API key auth
+google-generativeai>=0.8.0
+google-genai>=1.0.0  # New GenAI SDK for latest Gemini models
+
+# Optional providers (uncomment if needed):
+# google-cloud-aiplatform>=1.38.0  # Vertex AI (service account auth)
+
+# Note: XAI and DeepSeek use OpenAI-compatible APIs (no additional SDK needed)

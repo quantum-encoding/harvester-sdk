@@ -1,0 +1,74 @@
+{
+  "tech_harmonious_templates": {
+    "utopian_futures": {
+      "tech_harmonious": {
+        "prefix": "TECH HARMONIOUS UTOPIA:",
+        "suffix": "Technology and nature integrated, bio-luminescent cities, clean energy, sustainable architecture, human-AI collaboration, peaceful coexistence",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🌿 Harmonious tech-nature fusion",
+        "category": "utopian_futures",
+        "cost_tier": "premium"
+      },
+      "solarpunk_city": {
+        "prefix": "SOLARPUNK CIVILIZATION:",
+        "suffix": "Green buildings, solar panels, vertical gardens, wind turbines, eco-friendly technology, sustainable future, hopeful tomorrow",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "☀️ Solarpunk sustainable future",
+        "category": "utopian_futures",
+        "cost_tier": "premium"
+      },
+      "bio_integration": {
+        "prefix": "BIO-TECH INTEGRATION:",
+        "suffix": "Living buildings, organic computers, tree networks, symbiotic technology, biomimetic design, Avatar-style bio-connection",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🌳 Bio-technology symbiosis",
+        "category": "utopian_futures",
+        "cost_tier": "premium"
+      },
+      "crystal_tech": {
+        "prefix": "CRYSTAL TECHNOLOGY PARADISE:",
+        "suffix": "Crystal-powered cities, prismatic energy, geometric harmony, sacred tech geometry, crystalline architecture, peaceful energy flow",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "💎 Crystal-powered paradise",
+        "category": "utopian_futures",
+        "cost_tier": "premium"
+      }
+    },
+    "peaceful_ai": {
+      "ai_companion": {
+        "prefix": "AI COMPANION HARMONY:",
+        "suffix": "Friendly robots, human-AI friendship, collaborative work, gentle assistance, caring machines, Wall-E aesthetic, heartwarming technology",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🤖 Friendly AI companions",
+        "category": "peaceful_ai",
+        "cost_tier": "standard"
+      },
+      "digital_meditation": {
+        "prefix": "DIGITAL MEDITATION SPACE:",
+        "suffix": "Virtual reality zen gardens, digital mindfulness, holographic mantras, tech-assisted enlightenment, peaceful interfaces",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🧘 Digital meditation and peace",
+        "category": "peaceful_ai",
+        "cost_tier": "standard"
+      }
+    }
+  }
+}

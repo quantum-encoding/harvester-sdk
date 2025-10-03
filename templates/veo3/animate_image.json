@@ -1,0 +1,66 @@
+{
+  "name": "animate_image",
+  "description": "Animate static images into videos using Veo 2 or Veo 3",
+  "provider": "genai_veo3",
+  "model": "veo-2.0-generate-001",
+  "version": "1.0",
+  "parameters": {
+    "animation_template": "{camera_movement} while {subject_action}, {style_modifier}",
+    "generation_config": {
+      "aspect_ratio": "16:9",
+      "person_generation": "allow_adult",
+      "poll_interval": 10
+    },
+    "variables": {
+      "camera_movement": [
+        "Camera slowly zooms in",
+        "Camera pans from left to right",
+        "Camera pulls back revealing more of the scene",
+        "Camera rotates around the subject",
+        "Camera tilts upward",
+        "Steady shot holds"
+      ],
+      "subject_action": [
+        "the subject turns their head",
+        "subtle movement brings the scene to life",
+        "elements begin to move naturally",
+        "the scene transitions from day to night",
+        "wind creates gentle motion",
+        "light changes dramatically"
+      ],
+      "style_modifier": [
+        "creating a cinematic feel",
+        "with smooth professional motion",
+        "in dramatic slow motion",
+        "with dynamic energy",
+        "maintaining photorealistic quality",
+        "with artistic flair"
+      ]
+    },
+    "image_requirements": {
+      "max_size_mb": 20,
+      "supported_formats": ["jpg", "jpeg", "png", "webp"],
+      "resolution": "Any resolution and aspect ratio supported",
+      "recommendation": "Use high-quality images for best results"
+    }
+  },
+  "examples": [
+    {
+      "image": "portrait.jpg",
+      "prompt": "Camera slowly zooms in while the subject turns their head, creating a cinematic feel",
+      "expected_output": "5-8 second animated portrait video"
+    },
+    {
+      "image": "landscape.png",
+      "prompt": "Camera pans from left to right while wind creates gentle motion, with smooth professional motion",
+      "expected_output": "5-8 second landscape animation"
+    }
+  ],
+  "notes": [
+    "Veo 2 generates 5-8 second silent videos",
+    "Supports images up to 20MB in size",
+    "Can generate up to 2 videos per request",
+    "Image is used as the first frame of the video",
+    "For audio, upgrade to Veo 3 model"
+  ]
+}

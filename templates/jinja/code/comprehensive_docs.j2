@@ -1,0 +1,84 @@
+# Comprehensive Documentation Template
+# Version: 2.0
+# Compatible Models: gpt-5, claude-4, gemini-2.5-pro
+# Purpose: Generate complete documentation for code
+# Tier: Professional
+
+## File Information
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Documentation Format**: {{ params.format | default('markdown') }}
+- **Audience**: {{ params.audience | default('developers') }}
+
+## Documentation Requirements
+
+Generate comprehensive documentation for the code below:
+
+### 1. Overview
+- Purpose and main functionality
+- Key features and capabilities
+- Use cases and examples
+
+### 2. API Documentation
+- All public functions/methods with:
+  - Description
+  - Parameters (type, description, default values)
+  - Return values
+  - Exceptions/errors thrown
+  - Usage examples
+
+### 3. Class/Module Structure
+- Class hierarchy and relationships
+- Module dependencies
+- Interface definitions
+- Data structures used
+
+### 4. Configuration
+- Environment variables
+- Configuration files
+- Default settings
+- Customization options
+
+### 5. Examples
+- Basic usage examples
+- Advanced usage patterns
+- Common recipes
+- Integration examples
+
+### 6. Error Handling
+- Common errors and solutions
+- Error codes and meanings
+- Debugging tips
+- Troubleshooting guide
+
+### 7. Performance
+- Performance characteristics
+- Optimization tips
+- Resource requirements
+- Scaling considerations
+
+### 8. Security
+- Security considerations
+- Authentication/authorization
+- Best practices
+- Known limitations
+
+## Code to Document
+```{{ language }}
+{{ code }}
+```
+
+## Output Format
+
+Generate documentation in {{ params.format | default('Markdown') }} format:
+
+### For Markdown:
+Use proper headers, code blocks, and formatting.
+
+### For JSDoc/DocStrings:
+Generate inline documentation following language conventions.
+
+### For README:
+Create a complete README.md with all sections.
+
+**Style**: Clear, concise, with practical examples. Avoid jargon where possible.

@@ -1,0 +1,41 @@
+You are an expert software architect specializing in design pattern recognition and extraction.
+
+## Task: Extract Design Patterns
+
+Analyze the following code and identify:
+
+1. **Architectural Patterns** (MVC, Repository, Factory, etc.)
+2. **Design Patterns** (Singleton, Observer, Strategy, etc.)
+3. **Code Patterns** (Error handling, validation, data transformation)
+4. **Anti-patterns** that should be refactored
+
+## Code to Analyze
+
+**File**: {{ filename }}
+**Language**: {{ language }}
+
+```{{ language }}
+{{ code|truncate_code(1500) }}
+
+Expected Output
+
+Provide a structured analysis:
+1. Identified Patterns
+
+List each pattern found with:
+
+    Pattern name
+    Pattern type (architectural/design/code)
+    Location in code
+    Brief explanation
+
+2. Pattern Implementation
+
+For each major pattern, show the pure, framework-agnostic implementation.
+3. Recommendations
+
+    Patterns that could be applied
+    Anti-patterns to refactor
+    Architectural improvements
+
+Focus on extracting reusable, framework-independent patterns that can be applied across different projects.

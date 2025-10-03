@@ -1,0 +1,28 @@
+{
+  "cinematic_templates": {
+    "movie_styles": {
+      "cinematic": {
+        "prefix": "CINEMATIC SHOT:",
+        "suffix": "Movie still, dramatic lighting, film grain, anamorphic lens, Hollywood production quality, cinematic composition",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🎬 Hollywood movie quality",
+        "category": "movie_styles",
+        "cost_tier": "premium"
+      },
+      "noir": {
+        "prefix": "FILM NOIR STYLE:",
+        "suffix": "Black and white, high contrast, dramatic shadows, vintage 1940s aesthetic, moody lighting, classic cinematography",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "🕵️ Classic film noir aesthetic",
+        "category": "movie_styles",
+        "cost_tier": "standard"
+      }
+    }
+  }
+}

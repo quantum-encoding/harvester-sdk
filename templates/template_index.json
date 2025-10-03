@@ -1,0 +1,107 @@
+{
+  "template_index": {
+    "categories": {
+      "photography": {
+        "file": "photography_templates.json",
+        "description": "Professional photography styles",
+        "templates": [
+          "hyper_realistic", "portrait", "landscape", "macro",
+          "product", "food", "architecture", "fashion"
+        ]
+      },
+      "cinematic": {
+        "file": "cinematic_templates.json", 
+        "description": "Movie and film styles",
+        "templates": [
+          "cinematic", "noir"
+        ]
+      },
+      "digital_art": {
+        "file": "digital_art_templates.json",
+        "description": "Digital illustration styles", 
+        "templates": [
+          "digital_art", "anime", "comic", "watercolor"
+        ]
+      },
+      "themed": {
+        "file": "themed_templates.json",
+        "description": "Themed artistic styles",
+        "templates": [
+          "cyberpunk", "sci_fi", "steampunk", "fantasy"
+        ]
+      },
+      "consciousness": {
+        "file": "consciousness_templates.json",
+        "description": "Transcendent and cosmic styles",
+        "templates": [
+          "consciousness", "cosmic_duck"
+        ]
+      },
+      "fantasy_expanded": {
+        "file": "fantasy_expanded_templates.json",
+        "description": "Epic fantasy and mythical styles",
+        "templates": [
+          "epic_fantasy", "dark_fantasy", "celestial_fantasy", "elemental_fantasy",
+          "dragon_realm", "unicorn_dreams", "phoenix_rebirth"
+        ]
+      },
+      "tech_dystopian": {
+        "file": "tech_dystopian_templates.json",
+        "description": "Dark technological futures",
+        "templates": [
+          "tech_dystopian", "cyber_wasteland", "ai_uprising", "corporate_hellscape",
+          "digital_prison", "data_harvesting"
+        ]
+      },
+      "tech_harmonious": {
+        "file": "tech_harmonious_templates.json",
+        "description": "Peaceful technological futures",
+        "templates": [
+          "tech_harmonious", "solarpunk_city", "bio_integration", "crystal_tech",
+          "ai_companion", "digital_meditation"
+        ]
+      },
+      "surreal_creative": {
+        "file": "surreal_creative_templates.json",
+        "description": "Surreal and dreamlike art",
+        "templates": [
+          "dream_logic", "psychedelic", "liminal_space",
+          "interdimensional", "quantum_chaos", "cosmic_horror"
+        ]
+      },
+      "retro_nostalgia": {
+        "file": "retro_nostalgia_templates.json",
+        "description": "Vintage and nostalgic styles",
+        "templates": [
+          "retro_80s", "retro_90s", "art_deco", "mid_century",
+          "cassette_culture", "polaroid_memories"
+        ]
+      },
+      "nature_cosmic": {
+        "file": "nature_cosmic_templates.json",
+        "description": "Nature meets cosmos styles",
+        "templates": [
+          "galactic_forest", "ocean_universe", "mountain_portals",
+          "fire_nebula", "ice_crystal_cosmos", "earth_planetoid"
+        ]
+      }
+    },
+    "usage_examples": [
+      "./prophet.py cosmic-duck \"3 ducks and a swan surfing\"",
+      "./prophet.py tech_dystopian \"robots patrolling empty streets\"",
+      "./prophet.py galactic_forest \"ancient tree with glowing leaves\"",
+      "./prophet.py psychedelic \"cat floating through rainbow dimensions\"",
+      "./prophet.py dragon_realm \"warrior riding massive fire dragon\"",
+      "./prophet.py solarpunk_city \"vertical garden skyscrapers\"",
+      "./prophet.py retro_80s \"sports car driving through neon grid\"",
+      "./prophet.py quantum_chaos \"particles dancing in probability space\""
+    ],
+    "metadata": {
+      "total_templates": 45,
+      "total_categories": 11,
+      "created_date": "2024-12-23",
+      "version": "1.0.0",
+      "compatible_with": ["prophet.py", "dalle-3", "midjourney", "stable-diffusion"]
+    }
+  }
+}

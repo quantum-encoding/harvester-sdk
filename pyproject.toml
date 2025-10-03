@@ -1,0 +1,213 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harvester-sdk"
+version = "2.0.0"
+description = "Harvester SDK - The Complete AI Processing Platform. Unified interface for all AI processing paradigms with enterprise-grade reliability."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "LicenseRef-Proprietary"}
+authors = [
+    {name = "Quantum Encoding Ltd", email = "rich@quantumencoding.io"},
+]
+maintainers = [
+    {name = "Rich (The Architect)", email = "rich@quantumencoding.io"},
+]
+keywords = [
+    "ai",
+    "parallel-processing",
+    "batch-processing",
+    "openai",
+    "anthropic",
+    "google-ai",
+    "vertex-ai",
+    "genai",
+    "gemini",
+    "xai",
+    "grok",
+    "deepseek",
+    "multi-provider",
+    "async",
+    "sdk",
+    "harvesting-engine",
+    "automation",
+    "turn-based-chat",
+    "non-streaming",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Framework :: AsyncIO",
+]
+
+dependencies = [
+    "aiohttp>=3.8.0",
+    "aiofiles>=23.0.0",
+    "jinja2>=3.0.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.65.0",
+    "click>=8.0.0",
+    "pandas>=2.0.0",
+    "pillow>=10.0.0",
+    # AI Provider SDKs - Core functionality
+    "openai>=1.0.0",
+    "anthropic>=0.65.0", 
+    "google-generativeai>=0.8.0",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+anthropic = ["anthropic>=0.3.0"]
+genai = ["google-genai>=0.1.0"]  # Google AI Studio (new GenAI SDK)
+google = ["google-generativeai>=0.3.0"]  # Legacy Google AI
+vertex = ["google-cloud-aiplatform>=1.38.0"]
+xai = ["openai>=1.0.0"]  # XAI uses OpenAI-compatible client
+deepseek = ["openai>=1.0.0"]  # DeepSeek uses OpenAI-compatible API
+all = [
+    "openai>=1.0.0",
+    "anthropic>=0.3.0",
+    "google-genai>=0.1.0",
+    "google-generativeai>=0.3.0",
+    "google-cloud-aiplatform>=1.38.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "coverage>=7.0.0",
+]
+docs = [
+    "sphinx>=4.0.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "myst-parser>=0.18.0",
+]
+
+[project.urls]
+Homepage = "https://harvester-sdk.quantumencoding.io"
+Documentation = "https://harvester-sdk.readthedocs.io"
+Repository = "https://github.com/quantum-encoding/harvester-sdk"
+Issues = "https://github.com/quantum-encoding/harvester-sdk/issues"
+"Commercial Licensing" = "https://quantumencoding.io/harvester-sdk"
+
+[project.scripts]
+# Main CLI Entry Point
+harvester = "harvester:cli"                 # Master CLI conductor for all AI operations
+
+# CLI Tools - Protected by License Guardian (Standardized Names)
+# FREEMIUM TIER
+batch-code = "batch_code:main"              # Code transformation engine (was harvest)
+# PROFESSIONAL TIER  
+image-cli = "image_cli:main"                # Image generation CLI (was prophet)
+router-image = "router_image:main"          # Smart image routing
+style-openai = "style_openai_cli:main"      # OpenAI style wrapper
+style-vertex = "style_vertex_cli:main"      # Vertex style wrapper
+# PREMIUM TIER
+batch-image = "batch_image:main"            # Batch image generation (was imagen-batch)
+batch-vertex = "batch_vertex:main"          # Ultra batch processing (was vertex-batch-ultra)
+batch-vertex-pro = "batch_vertex_processor:main"  # Advanced batch processor
+# ENTERPRISE TIER
+ai-assistant = "ai_assistant:main"         # Universal AI orchestrator (was summon)
+batch-submit = "batch_submit:main"         # Submit batch jobs to OpenAI/Anthropic (50% cost savings)
+batch-status = "batch_status:main"         # Check batch status and retrieve results
+# UTILITIES
+license-check = "license_check:main"        # License management
+test-xai-deepseek = "test_xai_deepseek:main"
+
+[tool.setuptools]
+packages = ["harvester_sdk", "providers", "processors", "core", "utils"]
+include-package-data = true
+py-modules = [
+    "harvester",  # Main CLI conductor
+    "batch_code", 
+    "batch_status", 
+    "batch_submit", 
+    "ai_assistant", 
+    "image_cli", 
+    "batch_vertex_processor",
+    "test_xai_deepseek",
+    "test_installation",
+    "license_guardian",
+    "csv_processor",
+    "json_processor",
+    "process_dir"
+]
+
+[tool.setuptools.package-data]
+harvester_sdk = ["*.py"]
+core = ["*.py"]
+providers = ["*.py"]
+processors = ["*.py"] 
+utils = ["*.py"]
+config = ["*.yaml", "*.json"]
+templates = ["*.yaml", "*.json", "*.j2", "**/*.csv"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+asyncio_mode = "auto"
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["core"]
+omit = ["*/tests/*", "*/examples/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]

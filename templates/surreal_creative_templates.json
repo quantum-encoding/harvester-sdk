@@ -1,0 +1,74 @@
+{
+  "surreal_creative_templates": {
+    "dreamscape_art": {
+      "dream_logic": {
+        "prefix": "SURREAL DREAMSCAPE:",
+        "suffix": "Impossible geometries, floating objects, melting clocks, Salvador Dali style, dream logic, subconscious imagery, psychedelic reality",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🌀 Surreal dreamlike imagery",
+        "category": "dreamscape_art",
+        "cost_tier": "premium"
+      },
+      "psychedelic": {
+        "prefix": "PSYCHEDELIC VISION:",
+        "suffix": "Kaleidoscope patterns, fractal spirals, rainbow colors, consciousness expansion, 1960s psychedelic art, mind-bending visuals",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🌈 Psychedelic consciousness art",
+        "category": "dreamscape_art",
+        "cost_tier": "premium"
+      },
+      "liminal_space": {
+        "prefix": "LIMINAL SPACE MYSTERY:",
+        "suffix": "Empty pools, abandoned malls, infinite hallways, yellow fluorescent lighting, nostalgic unease, backrooms aesthetic, transitional spaces",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🚪 Mysterious liminal spaces",
+        "category": "dreamscape_art",
+        "cost_tier": "standard"
+      }
+    },
+    "cosmic_weirdness": {
+      "interdimensional": {
+        "prefix": "INTERDIMENSIONAL PORTAL:",
+        "suffix": "Reality rifts, dimension tears, cosmic portals, multiverse glimpses, space-time distortions, Rick and Morty style weirdness",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🌌 Interdimensional weirdness",
+        "category": "cosmic_weirdness",
+        "cost_tier": "premium"
+      },
+      "quantum_chaos": {
+        "prefix": "QUANTUM CHAOS THEORY:",
+        "suffix": "Particle waves, probability clouds, quantum superposition, Schrödinger's paradox, mathematical beauty, physics visualization",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "⚛️ Quantum physics chaos",
+        "category": "cosmic_weirdness",
+        "cost_tier": "premium"
+      },
+      "cosmic_horror": {
+        "prefix": "COSMIC HORROR LOVECRAFT:",
+        "suffix": "Eldritch abominations, tentacled gods, sanity-breaking geometry, ancient cosmic entities, H.P. Lovecraft aesthetic, incomprehensible beings",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "👁️ Lovecraftian cosmic horror",
+        "category": "cosmic_weirdness",
+        "cost_tier": "premium"
+      }
+    }
+  }
+}

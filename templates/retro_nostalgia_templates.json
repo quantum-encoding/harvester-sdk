@@ -1,0 +1,74 @@
+{
+  "retro_nostalgia_templates": {
+    "vintage_aesthetics": {
+      "retro_80s": {
+        "prefix": "1980S RETRO AESTHETIC:",
+        "suffix": "Neon grids, synthwave colors, VHS static, chrome text, palm trees, sunset gradients, Miami Vice style, nostalgic 80s vibes",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "📼 1980s retro synthwave",
+        "category": "vintage_aesthetics",
+        "cost_tier": "standard"
+      },
+      "retro_90s": {
+        "prefix": "1990S NOSTALGIA:",
+        "suffix": "Pixel art, dial-up internet, geometric patterns, CD-ROM games, early computer graphics, Windows 95 aesthetic, Y2K preparation",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "💽 1990s digital nostalgia",
+        "category": "vintage_aesthetics",
+        "cost_tier": "standard"
+      },
+      "art_deco": {
+        "prefix": "ART DECO ELEGANCE:",
+        "suffix": "Geometric patterns, gold and black, 1920s luxury, Gatsby aesthetic, ornate details, architectural grandeur, jazz age style",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "✨ Art Deco 1920s elegance",
+        "category": "vintage_aesthetics",
+        "cost_tier": "premium"
+      },
+      "mid_century": {
+        "prefix": "MID-CENTURY MODERN:",
+        "suffix": "1950s design, atomic age, space age furniture, boomerang patterns, turquoise and orange, Jetsons aesthetic, retro-futurism",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🚀 Mid-century atomic age",
+        "category": "vintage_aesthetics",
+        "cost_tier": "standard"
+      }
+    },
+    "analog_tech": {
+      "cassette_culture": {
+        "prefix": "CASSETTE TAPE CULTURE:",
+        "suffix": "Boom boxes, mixtapes, analog warmth, magnetic tape, retro music culture, walkman aesthetic, lo-fi nostalgia",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "📻 Cassette tape culture",
+        "category": "analog_tech",
+        "cost_tier": "standard"
+      },
+      "polaroid_memories": {
+        "prefix": "POLAROID INSTANT PHOTOGRAPHY:",
+        "suffix": "Instant photos, white borders, faded colors, vintage camera, nostalgic moments, analog photography, retro memories",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "📸 Polaroid instant memories",
+        "category": "analog_tech",
+        "cost_tier": "standard"
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "music_style_templates": {
+    "ambient_music": {
+      "ambient1": {
+        "prefix": "AMBIENT SOUNDSCAPE:",
+        "suffix": "ethereal ambient music, atmospheric pads, subtle textures, meditative sounds, peaceful ambiance",
+        "genre": "ambient",
+        "mood": "peaceful",
+        "tempo": "slow",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🌌 Ethereal ambient soundscapes",
+        "category": "ambient_music",
+        "cost_tier": "standard"
+      },
+      "ambient2": {
+        "prefix": "COSMIC AMBIENT:",
+        "suffix": "space-like ambient music, cosmic sounds, deep atmospheric textures, otherworldly ambiance",
+        "genre": "ambient",
+        "mood": "mysterious",
+        "tempo": "slow",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🌌 Cosmic ambient atmospheres",
+        "category": "ambient_music",
+        "cost_tier": "standard"
+      },
+      "ambient3": {
+        "prefix": "NATURE AMBIENT:",
+        "suffix": "natural ambient sounds, organic textures, environmental soundscape, calming nature-inspired music",
+        "genre": "ambient",
+        "mood": "calm",
+        "tempo": "slow",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🍃 Nature-inspired ambient",
+        "category": "ambient_music",
+        "cost_tier": "standard"
+      }
+    },
+    "electronic_music": {
+      "electronic1": {
+        "prefix": "ELECTRONIC DANCE:",
+        "suffix": "energetic electronic music, synthesized beats, dance rhythms, modern electronic production",
+        "genre": "electronic",
+        "mood": "energetic",
+        "tempo": "fast",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "⚡ Electronic dance beats",
+        "category": "electronic_music",
+        "cost_tier": "standard"
+      },
+      "electronic2": {
+        "prefix": "SYNTHWAVE:",
+        "suffix": "retro synthwave music, 80s-inspired synthesizers, nostalgic electronic sounds, neon aesthetics",
+        "genre": "synthwave",
+        "mood": "nostalgic",
+        "tempo": "moderate",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🌆 Retro synthwave vibes",
+        "category": "electronic_music",
+        "cost_tier": "standard"
+      },
+      "electronic3": {
+        "prefix": "MINIMAL TECHNO:",
+        "suffix": "minimal techno beats, repetitive electronic patterns, underground club sound, hypnotic rhythms",
+        "genre": "techno",
+        "mood": "hypnotic",
+        "tempo": "fast",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🎧 Minimal techno grooves",
+        "category": "electronic_music",
+        "cost_tier": "standard"
+      }
+    },
+    "orchestral_music": {
+      "orchestral1": {
+        "prefix": "EPIC ORCHESTRAL:",
+        "suffix": "epic orchestral music, dramatic strings, powerful brass, cinematic percussion, heroic themes",
+        "genre": "orchestral",
+        "mood": "epic",
+        "tempo": "moderate",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🎼 Epic orchestral themes",
+        "category": "orchestral_music",
+        "cost_tier": "premium"
+      },
+      "orchestral2": {
+        "prefix": "CLASSICAL SYMPHONY:",
+        "suffix": "classical symphony music, traditional orchestration, elegant string arrangements, refined composition",
+        "genre": "classical",
+        "mood": "elegant",
+        "tempo": "moderate",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🎻 Classical symphony pieces",
+        "category": "orchestral_music",
+        "cost_tier": "premium"
+      },
+      "orchestral3": {
+        "prefix": "DARK ORCHESTRAL:",
+        "suffix": "dark orchestral music, ominous strings, haunting melodies, dramatic tension, cinematic suspense",
+        "genre": "orchestral",
+        "mood": "dark",
+        "tempo": "slow",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🌑 Dark orchestral drama",
+        "category": "orchestral_music",
+        "cost_tier": "premium"
+      }
+    },
+    "acoustic_music": {
+      "acoustic1": {
+        "prefix": "ACOUSTIC FOLK:",
+        "suffix": "gentle acoustic guitar, folk melodies, organic instruments, warm acoustic sound, traditional folk style",
+        "genre": "folk",
+        "mood": "warm",
+        "tempo": "moderate",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🎸 Acoustic folk melodies",
+        "category": "acoustic_music",
+        "cost_tier": "standard"
+      },
+      "acoustic2": {
+        "prefix": "ACOUSTIC PIANO:",
+        "suffix": "solo acoustic piano, melodic composition, emotional piano performance, classical piano style",
+        "genre": "piano",
+        "mood": "emotional",
+        "tempo": "slow",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🎹 Emotional piano pieces",
+        "category": "acoustic_music",
+        "cost_tier": "standard"
+      },
+      "acoustic3": {
+        "prefix": "ACOUSTIC ENSEMBLE:",
+        "suffix": "acoustic ensemble music, multiple acoustic instruments, chamber music style, intimate performance",
+        "genre": "chamber",
+        "mood": "intimate",
+        "tempo": "moderate",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🎭 Acoustic ensemble pieces",
+        "category": "acoustic_music",
+        "cost_tier": "standard"
+      }
+    },
+    "experimental_music": {
+      "experimental1": {
+        "prefix": "EXPERIMENTAL SOUNDSCAPE:",
+        "suffix": "experimental music composition, unconventional sounds, avant-garde techniques, creative audio exploration",
+        "genre": "experimental",
+        "mood": "creative",
+        "tempo": "variable",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "🔬 Experimental soundscapes",
+        "category": "experimental_music",
+        "cost_tier": "premium"
+      },
+      "experimental2": {
+        "prefix": "GLITCH MUSIC:",
+        "suffix": "glitch music composition, digital artifacts, electronic glitches, rhythmic distortions, modern sound design",
+        "genre": "glitch",
+        "mood": "digital",
+        "tempo": "variable",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "💾 Digital glitch compositions",
+        "category": "experimental_music",
+        "cost_tier": "premium"
+      },
+      "experimental3": {
+        "prefix": "DRONE MUSIC:",
+        "suffix": "minimalist drone music, sustained tones, meditative soundscapes, deep listening experience",
+        "genre": "drone",
+        "mood": "meditative",
+        "tempo": "static",
+        "duration": 30,
+        "model_preference": "goo-1-music",
+        "description": "〰️ Minimalist drone pieces",
+        "category": "experimental_music",
+        "cost_tier": "premium"
+      }
+    }
+  },
+  
+  "batch_music_presets": {
+    "meditation_collection": {
+      "description": "Peaceful meditation music collection",
+      "templates": ["ambient1", "ambient3", "acoustic2"],
+      "models": ["goo-1-music"],
+      "quantity_per_template": 3,
+      "cost_estimate": "standard"
+    },
+    "electronic_party_pack": {
+      "description": "High-energy electronic music package",
+      "templates": ["electronic1", "electronic2", "electronic3"],
+      "models": ["goo-1-music"],
+      "quantity_per_template": 2,
+      "cost_estimate": "standard"
+    },
+    "cinematic_score_series": {
+      "description": "Epic cinematic music series",
+      "templates": ["orchestral1", "orchestral3", "experimental1"],
+      "models": ["goo-1-music"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    },
+    "acoustic_cafe_collection": {
+      "description": "Cozy acoustic cafe music",
+      "templates": ["acoustic1", "acoustic2", "acoustic3"],
+      "models": ["goo-1-music"],
+      "quantity_per_template": 3,
+      "cost_estimate": "standard"
+    }
+  }
+}

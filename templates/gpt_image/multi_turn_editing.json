@@ -1,0 +1,123 @@
+{
+  "gpt_image_advanced": {
+    "description": "GPT-Image-1 with advanced features and Responses API",
+    "version": "1.0",
+    "model": "gpt-image-1",
+    "features": {
+      "transparent_backgrounds": true,
+      "high_input_fidelity": true,
+      "streaming_partials": true,
+      "mask_inpainting": true,
+      "multi_turn_editing": true
+    },
+    "token_costs": {
+      "1024x1024": {
+        "low": 272,
+        "medium": 1056,
+        "high": 4160
+      },
+      "1024x1536": {
+        "low": 408,
+        "medium": 1584,
+        "high": 6240
+      },
+      "1536x1024": {
+        "low": 400,
+        "medium": 1568,
+        "high": 6208
+      }
+    },
+    "templates": {
+      "transparent_sprites": {
+        "description": "Game sprites with transparent background",
+        "size": "1024x1024",
+        "quality": "high",
+        "background": "transparent",
+        "prompts": [
+          {
+            "base": "2D sprite sheet of {character}",
+            "modifiers": "pixel art style, clear animations, game ready",
+            "tokens": 4160
+          }
+        ]
+      },
+      "logo_transparent": {
+        "description": "Logo design with transparency",
+        "size": "1024x1024",
+        "quality": "medium",
+        "background": "transparent",
+        "output_format": "png",
+        "prompts": [
+          {
+            "base": "Minimalist logo for {company}",
+            "modifiers": "vector style, clean lines, transparent background",
+            "tokens": 1056
+          }
+        ]
+      },
+      "product_editing": {
+        "description": "Edit product photos with high fidelity",
+        "size": "1024x1024",
+        "quality": "high",
+        "input_fidelity": "high",
+        "prompts": [
+          {
+            "base": "Add {element} to the product",
+            "modifiers": "preserve original product details, professional",
+            "tokens": 4160,
+            "notes": "Use high input_fidelity to preserve product details"
+          }
+        ]
+      },
+      "fast_generation": {
+        "description": "Fastest possible generation",
+        "size": "1024x1024",
+        "quality": "low",
+        "output_format": "jpeg",
+        "output_compression": 70,
+        "prompts": [
+          {
+            "base": "{subject}",
+            "modifiers": "simple, quick render",
+            "tokens": 272,
+            "notes": "JPEG format is faster than PNG"
+          }
+        ]
+      },
+      "multi_turn_workflow": {
+        "description": "Progressive editing workflow",
+        "steps": [
+          {
+            "turn": 1,
+            "prompt": "Generate initial {concept}",
+            "quality": "medium"
+          },
+          {
+            "turn": 2,
+            "prompt": "Now make it more detailed",
+            "quality": "high",
+            "uses_previous": true
+          },
+          {
+            "turn": 3,
+            "prompt": "Add professional lighting",
+            "quality": "high",
+            "uses_previous": true
+          }
+        ]
+      }
+    },
+    "api_examples": {
+      "responses_api": {
+        "description": "Use with GPT-5 for multi-turn editing",
+        "model": "gpt-5",
+        "tools": [{"type": "image_generation"}]
+      },
+      "image_api": {
+        "description": "Direct image generation",
+        "endpoint": "/v1/images/generate",
+        "model": "gpt-image-1"
+      }
+    }
+  }
+}

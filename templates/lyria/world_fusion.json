@@ -1,0 +1,110 @@
+{
+  "name": "world_fusion",
+  "description": "World music fusion with diverse cultural instruments",
+  "provider": "genai_lyria",
+  "model": "models/lyria-realtime-exp",
+  "version": "1.0",
+  "parameters": {
+    "prompts": [
+      {"text": "World Music", "weight": 1.0},
+      {"text": "Sitar", "weight": 0.8},
+      {"text": "Tabla", "weight": 0.7},
+      {"text": "Djembe", "weight": 0.6},
+      {"text": "Kalimba", "weight": 0.5}
+    ],
+    "config": {
+      "bpm": 100,
+      "temperature": 1.3,
+      "guidance": 4.0,
+      "density": 0.7,
+      "brightness": 0.6,
+      "music_generation_mode": "DIVERSITY"
+    },
+    "duration_seconds": 45,
+    "cultural_blends": {
+      "indian_classical": {
+        "prompts": [
+          {"text": "Indian Classical", "weight": 1.5},
+          {"text": "Sitar", "weight": 1.2},
+          {"text": "Tabla", "weight": 1.0},
+          {"text": "Ethereal", "weight": 0.5}
+        ],
+        "scale": "D_MAJOR_B_MINOR"
+      },
+      "african_rhythms": {
+        "prompts": [
+          {"text": "Afrobeat", "weight": 1.3},
+          {"text": "Djembe", "weight": 1.0},
+          {"text": "Kalimba", "weight": 0.8},
+          {"text": "Danceable", "weight": 0.7}
+        ],
+        "bpm": 120
+      },
+      "celtic_fusion": {
+        "prompts": [
+          {"text": "Celtic Folk", "weight": 1.2},
+          {"text": "Irish Folk", "weight": 0.8},
+          {"text": "Bagpipes", "weight": 0.6},
+          {"text": "Fiddle", "weight": 0.9}
+        ],
+        "scale": "G_MAJOR_E_MINOR"
+      },
+      "latin_america": {
+        "prompts": [
+          {"text": "Salsa", "weight": 1.0},
+          {"text": "Cumbia", "weight": 0.8},
+          {"text": "Charango", "weight": 0.7},
+          {"text": "Maracas", "weight": 0.6}
+        ],
+        "bpm": 110
+      },
+      "asian_meditation": {
+        "prompts": [
+          {"text": "Meditation", "weight": 1.0},
+          {"text": "Koto", "weight": 0.9},
+          {"text": "Shamisen", "weight": 0.7},
+          {"text": "Ambient", "weight": 0.8}
+        ],
+        "scale": "E_MAJOR_D_FLAT_MINOR",
+        "density": 0.3
+      }
+    }
+  },
+  "fusion_sequence": {
+    "description": "Progressive world music journey through cultures",
+    "steps": [
+      {
+        "culture": "indian_classical",
+        "duration": 20,
+        "transition": "smooth"
+      },
+      {
+        "culture": "african_rhythms",
+        "duration": 20,
+        "transition": "rhythmic_bridge"
+      },
+      {
+        "culture": "celtic_fusion",
+        "duration": 15,
+        "transition": "melodic_blend"
+      },
+      {
+        "culture": "latin_america",
+        "duration": 20,
+        "transition": "percussion_shift"
+      },
+      {
+        "culture": "asian_meditation",
+        "duration": 15,
+        "transition": "fade_to_peace"
+      }
+    ]
+  },
+  "notes": [
+    "Explores diverse world music traditions",
+    "DIVERSITY mode for varied musical exploration",
+    "Each cultural blend has unique scale and tempo",
+    "Perfect for meditation, yoga, or cultural events",
+    "90-second journey through 5 musical cultures"
+  ]
+}

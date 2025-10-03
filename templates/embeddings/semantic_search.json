@@ -1,0 +1,123 @@
+{
+  "name": "semantic_search",
+  "description": "Semantic search engine for documents and content",
+  "provider": "genai_embeddings",
+  "model": "gemini-embedding-001",
+  "version": "1.0",
+  "parameters": {
+    "embedding_config": {
+      "output_dimensionality": 768,
+      "normalize": true,
+      "document_task": "RETRIEVAL_DOCUMENT",
+      "query_task": "RETRIEVAL_QUERY"
+    },
+    "search_config": {
+      "top_k": 10,
+      "similarity_threshold": 0.7,
+      "rerank": true,
+      "boost_exact_matches": true
+    },
+    "index_config": {
+      "vector_db": "faiss",
+      "index_type": "IVF",
+      "nlist": 100,
+      "nprobe": 10
+    }
+  },
+  "document_types": {
+    "articles": {
+      "task_type": "RETRIEVAL_DOCUMENT",
+      "preprocessing": "Remove HTML, extract text",
+      "chunking": "By paragraph"
+    },
+    "code": {
+      "task_type": "RETRIEVAL_DOCUMENT",
+      "preprocessing": "Extract docstrings and comments",
+      "chunking": "By function/class"
+    },
+    "faqs": {
+      "task_type": "QUESTION_ANSWERING",
+      "preprocessing": "Split Q&A pairs",
+      "chunking": "Keep Q&A together"
+    },
+    "products": {
+      "task_type": "RETRIEVAL_DOCUMENT",
+      "preprocessing": "Combine title, description, specs",
+      "chunking": "By product"
+    }
+  },
+  "query_types": {
+    "natural_language": {
+      "task_type": "RETRIEVAL_QUERY",
+      "preprocessing": "Expand with synonyms",
+      "example": "Find documents about machine learning"
+    },
+    "question": {
+      "task_type": "QUESTION_ANSWERING",
+      "preprocessing": "Extract key terms",
+      "example": "What is deep learning?"
+    },
+    "code_search": {
+      "task_type": "CODE_RETRIEVAL_QUERY",
+      "preprocessing": "Parse intent",
+      "example": "Function to sort an array"
+    },
+    "similarity": {
+      "task_type": "SEMANTIC_SIMILARITY",
+      "preprocessing": "Use as-is",
+      "example": "Documents similar to this one"
+    }
+  },
+  "ranking_strategies": {
+    "cosine_similarity": {
+      "description": "Standard cosine similarity",
+      "range": [-1, 1],
+      "optimal_threshold": 0.7
+    },
+    "hybrid_score": {
+      "description": "Combine semantic and keyword scores",
+      "formula": "0.7 * semantic + 0.3 * keyword",
+      "benefits": "Better for specific terms"
+    },
+    "mmr": {
+      "description": "Maximal Marginal Relevance",
+      "lambda": 0.5,
+      "benefits": "Reduces redundancy in results"
+    }
+  },
+  "performance_optimizations": {
+    "caching": {
+      "query_cache": "Cache frequent queries for 1 hour",
+      "embedding_cache": "Store computed embeddings"
+    },
+    "batching": {
+      "document_batch_size": 100,
+      "query_batch_size": 10
+    },
+    "indexing": {
+      "use_gpu": false,
+      "approximate_search": true,
+      "refresh_interval": "daily"
+    }
+  },
+  "example_queries": [
+    {
+      "query": "climate change effects on agriculture",
+      "expected_topics": ["global warming", "crop yields", "weather patterns"]
+    },
+    {
+      "query": "how to implement binary search in Python",
+      "expected_topics": ["algorithm", "sorted array", "divide and conquer"]
+    },
+    {
+      "query": "benefits of meditation for stress",
+      "expected_topics": ["mindfulness", "relaxation", "mental health"]
+    }
+  ],
+  "notes": [
+    "Use RETRIEVAL_DOCUMENT for indexing, RETRIEVAL_QUERY for searching",
+    "768 dimensions provides good balance of speed and accuracy",
+    "Consider hybrid search for domains with specific terminology",
+    "Reranking can significantly improve relevance"
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "video_style_templates": {
+    "cinematic_videos": {
+      "cine1": {
+        "prefix": "CINEMATIC MASTERPIECE:",
+        "suffix": "dramatic lighting, professional cinematography, film grain, cinematic color grading, 4K quality, smooth camera movements",
+        "style": "cinematic",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🎬 Epic cinematic scenes",
+        "category": "cinematic_videos",
+        "cost_tier": "premium"
+      },
+      "cine2": {
+        "prefix": "HOLLYWOOD STYLE:",
+        "suffix": "dynamic camera angles, professional film techniques, dramatic scenes, high production value, cinematic storytelling",
+        "style": "cinematic",
+        "quality": "hd", 
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🎭 Hollywood-style productions",
+        "category": "cinematic_videos",
+        "cost_tier": "premium"
+      },
+      "cine3": {
+        "prefix": "ARTISTIC FILM:",
+        "suffix": "artistic cinematography, creative camera work, film festival quality, unique visual style, atmospheric lighting",
+        "style": "artistic",
+        "quality": "hd",
+        "aspect_ratio": "16:9", 
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🎨 Artistic film sequences",
+        "category": "cinematic_videos",
+        "cost_tier": "premium"
+      }
+    },
+    "documentary_videos": {
+      "doc1": {
+        "prefix": "DOCUMENTARY FOOTAGE:",
+        "suffix": "realistic documentary style, natural lighting, authentic scenes, informative content, professional documentation",
+        "style": "documentary",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "📺 Documentary-style footage",
+        "category": "documentary_videos",
+        "cost_tier": "standard"
+      },
+      "doc2": {
+        "prefix": "NATURE DOCUMENTARY:",
+        "suffix": "wildlife documentary style, natural environment, educational content, BBC nature documentary quality",
+        "style": "documentary",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🌿 Nature documentary scenes",
+        "category": "documentary_videos",
+        "cost_tier": "standard"
+      },
+      "doc3": {
+        "prefix": "URBAN DOCUMENTARY:",
+        "suffix": "city life documentation, street photography style, urban environments, social documentary approach",
+        "style": "documentary",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🏙️ Urban life documentation",
+        "category": "documentary_videos",
+        "cost_tier": "standard"
+      }
+    },
+    "abstract_videos": {
+      "abstract1": {
+        "prefix": "ABSTRACT VISUAL ART:",
+        "suffix": "flowing abstract patterns, geometric transformations, mesmerizing visual effects, artistic animation, creative motion graphics",
+        "style": "abstract",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🌀 Abstract visual patterns",
+        "category": "abstract_videos",
+        "cost_tier": "premium"
+      },
+      "abstract2": {
+        "prefix": "SACRED GEOMETRY ANIMATION:",
+        "suffix": "sacred geometry patterns, mathematical visualizations, cosmic formations, spiritual geometry, mystical transformations",
+        "style": "abstract",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🔯 Sacred geometry animations",
+        "category": "abstract_videos",
+        "cost_tier": "premium"
+      },
+      "abstract3": {
+        "prefix": "FLUID DYNAMICS:",
+        "suffix": "flowing liquids, particle systems, dynamic fluid simulations, organic movements, natural flow patterns",
+        "style": "abstract",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "💧 Fluid and particle effects",
+        "category": "abstract_videos",
+        "cost_tier": "premium"
+      }
+    },
+    "social_media_videos": {
+      "social1": {
+        "prefix": "VIRAL SOCIAL CONTENT:",
+        "suffix": "engaging social media style, trendy visuals, shareable content, modern aesthetics, attention-grabbing scenes",
+        "style": "modern",
+        "quality": "hd",
+        "aspect_ratio": "9:16",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "📱 Viral social media content",
+        "category": "social_media_videos",
+        "cost_tier": "standard"
+      },
+      "social2": {
+        "prefix": "INSTAGRAM REEL:",
+        "suffix": "Instagram-style vertical video, trendy transitions, modern editing style, social media optimized",
+        "style": "modern",
+        "quality": "hd",
+        "aspect_ratio": "9:16",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "📸 Instagram reel style",
+        "category": "social_media_videos",
+        "cost_tier": "standard"
+      },
+      "social3": {
+        "prefix": "TIKTOK STYLE:",
+        "suffix": "TikTok-style short video, quick cuts, engaging visuals, youth-oriented content, mobile-first design",
+        "style": "modern",
+        "quality": "hd",
+        "aspect_ratio": "9:16",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🎵 TikTok-style videos",
+        "category": "social_media_videos",
+        "cost_tier": "budget"
+      }
+    },
+    "commercial_videos": {
+      "comm1": {
+        "prefix": "PRODUCT SHOWCASE:",
+        "suffix": "professional product photography, commercial lighting, high-end presentation, marketing video style",
+        "style": "commercial",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🛍️ Product showcase videos",
+        "category": "commercial_videos",
+        "cost_tier": "premium"
+      },
+      "comm2": {
+        "prefix": "BRAND COMMERCIAL:",
+        "suffix": "professional brand video, corporate style, polished production, marketing campaign quality",
+        "style": "commercial",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "🏢 Brand commercial style",
+        "category": "commercial_videos",
+        "cost_tier": "premium"
+      },
+      "comm3": {
+        "prefix": "LIFESTYLE COMMERCIAL:",
+        "suffix": "lifestyle brand video, aspirational content, modern living, premium lifestyle presentation",
+        "style": "commercial",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "duration": 8.0,
+        "model_preference": "goo-2-vid",
+        "description": "✨ Lifestyle brand videos",
+        "category": "commercial_videos",
+        "cost_tier": "premium"
+      }
+    }
+  },
+  
+  "batch_video_presets": {
+    "cinematic_collection": {
+      "description": "Epic cinematic video collection",
+      "templates": ["cine1", "cine2", "cine3"],
+      "models": ["goo-2-vid"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    },
+    "social_media_pack": {
+      "description": "Social media video package",
+      "templates": ["social1", "social2", "social3"],
+      "models": ["goo-2-vid"],
+      "quantity_per_template": 3,
+      "cost_estimate": "standard"
+    },
+    "abstract_art_series": {
+      "description": "Abstract visual art series",
+      "templates": ["abstract1", "abstract2", "abstract3"],
+      "models": ["goo-2-vid"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    }
+  }
+}

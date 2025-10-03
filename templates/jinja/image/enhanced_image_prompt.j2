@@ -1,0 +1,31 @@
+{# Enhanced Image Generation Template with Style Enhancement #}
+{% set base_prompt = prompt.strip() %}
+
+{# Style mappings for better results #}
+{% set style_enhancements = {
+    'photorealistic': 'photorealistic, highly detailed, 8K resolution, professional photography',
+    'artistic': 'artistic masterpiece, creative interpretation, expressive style',
+    'fantasy': 'fantasy art, magical atmosphere, ethereal lighting, mystical elements',
+    'cyberpunk': 'cyberpunk aesthetic, neon lighting, futuristic cityscape, digital art',
+    'vintage': 'vintage style, retro aesthetic, nostalgic mood, classic composition',
+    'minimalist': 'minimalist design, clean composition, simple elegance, negative space',
+    'dramatic': 'dramatic lighting, cinematic composition, high contrast, moody atmosphere'
+} %}
+
+{# Quality enhancers based on model capabilities #}
+{% set quality_boost = {
+    'o1': 'masterpiece, best quality, highly detailed, professional grade',
+    'o2': 'high quality, detailed, well-composed',
+    'g1': 'premium quality, ultra-detailed, stunning visual',
+    'g2': 'high-quality rendering, crisp details, vibrant colors'
+} %}
+
+{# Construct enhanced prompt #}
+{{ base_prompt }}{% if style and style in style_enhancements %}, {{ style_enhancements[style] }}{% endif %}{% if model and model in quality_boost %}, {{ quality_boost[model] }}{% endif %}{% if aspect_ratio and aspect_ratio != '1:1' %}, {{ aspect_ratio }} aspect ratio composition{% endif %}{% if quality == 'hd' %}, ultra-high definition, crisp details{% endif %}
+
+{# Add negative prompt enhancements #}
+{% if negative_prompt %}
+NEGATIVE: {{ negative_prompt }}{% if style == 'photorealistic' %}, cartoon, anime, illustration, painting{% elif style == 'artistic' %}, photorealistic, documentary style{% endif %}
+{% else %}
+{% if style == 'photorealistic' %}NEGATIVE: cartoon, anime, illustration, painting, low quality, blurry{% elif style == 'artistic' %}NEGATIVE: photorealistic, documentary, low quality, blurry{% else %}NEGATIVE: low quality, blurry, distorted, malformed{% endif %}
+{% endif %}

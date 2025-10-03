@@ -1,0 +1,143 @@
+{
+  "gpt_image_workflows": {
+    "description": "GPT-Image generation workflows for different use cases",
+    "version": "2.0",
+    "api_options": {
+      "image_api": {
+        "description": "Direct single-image generation",
+        "endpoint": "client.images.generate()",
+        "model": "gpt-image-1",
+        "best_for": "Single images, quick generation, simple edits",
+        "example": {
+          "prompt": "A children's book drawing of a veterinarian",
+          "model": "gpt-image-1",
+          "size": "1024x1024",
+          "quality": "standard"
+        }
+      },
+      "responses_api": {
+        "description": "Multi-turn conversational editing",
+        "endpoint": "client.responses.create()",
+        "model": "gpt-5",
+        "tools": [{"type": "image_generation"}],
+        "best_for": "Iterative refinement, complex editing, conversational flow",
+        "features": [
+          "previous_response_id for context",
+          "image_generation_call.id for referencing",
+          "Progressive refinement"
+        ]
+      }
+    },
+    "workflow_templates": {
+      "quick_single_image": {
+        "api": "image_api",
+        "description": "Fast single image generation",
+        "steps": [
+          {
+            "action": "Generate image",
+            "code": "client.images.generate(model='gpt-image-1', prompt=prompt)",
+            "output": "b64_json"
+          }
+        ]
+      },
+      "iterative_refinement": {
+        "api": "responses_api",
+        "description": "Multi-step image refinement",
+        "steps": [
+          {
+            "turn": 1,
+            "action": "Initial generation",
+            "prompt": "Generate an image of {subject}",
+            "model": "gpt-5",
+            "tools": [{"type": "image_generation"}]
+          },
+          {
+            "turn": 2,
+            "action": "Refine style",
+            "prompt": "Now make it look realistic",
+            "uses_previous": true,
+            "reference_method": "image_generation_call.id"
+          },
+          {
+            "turn": 3,
+            "action": "Add details",
+            "prompt": "Add professional lighting and shadows",
+            "uses_previous": true
+          }
+        ]
+      },
+      "edit_with_reference": {
+        "api": "image_api",
+        "description": "Edit existing images",
+        "steps": [
+          {
+            "action": "Edit with reference images",
+            "code": "client.images.edit(model='gpt-image-1', image=[img1, img2], prompt=prompt)",
+            "features": ["Multiple input images", "Mask support", "High input fidelity"]
+          }
+        ]
+      },
+      "transparent_generation": {
+        "api": "image_api",
+        "description": "Generate with transparency",
+        "steps": [
+          {
+            "action": "Generate transparent PNG",
+            "params": {
+              "model": "gpt-image-1",
+              "background": "transparent",
+              "quality": "high",
+              "output_format": "png"
+            }
+          }
+        ]
+      },
+      "streaming_generation": {
+        "api": "both",
+        "description": "Stream partial images",
+        "steps": [
+          {
+            "action": "Stream with partials",
+            "params": {
+              "stream": true,
+              "partial_images": 2
+            },
+            "cost_note": "Adds 100 tokens per partial image"
+          }
+        ]
+      }
+    },
+    "cost_optimization": {
+      "cheapest": {
+        "api": "image_api",
+        "model": "dall-e-3",
+        "size": "1024x1024",
+        "quality": "standard",
+        "cost": "$0.04"
+      },
+      "fastest": {
+        "api": "image_api",
+        "model": "gpt-image-1",
+        "quality": "low",
+        "output_format": "jpeg",
+        "output_compression": 70,
+        "tokens": 272
+      },
+      "highest_quality": {
+        "api": "responses_api",
+        "model": "gpt-5",
+        "tools": [{"type": "image_generation", "quality": "high"}],
+        "tokens": "4160+"
+      }
+    },
+    "batch_processing": {
+      "description": "Batch image generation patterns",
+      "csv_columns": ["prompt", "model", "api_type", "quality", "size", "filename"],
+      "example_rows": [
+        ["Cat portrait", "gpt-image-1", "image_api", "medium", "1024x1024", "cat.png"],
+        ["Dog playing", "dall-e-3", "image_api", "standard", "1024x1024", "dog.png"],
+        ["Complex scene", "gpt-5", "responses_api", "high", "1536x1024", "scene.png"]
+      ]
+    }
+  }
+}

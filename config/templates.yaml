@@ -1,0 +1,148 @@
+# Template configuration with shortcuts
+# Usage: --t1 (agnostic_purity), ..., --t8 (quantum_ui_upgrade)
+templates:
+  agnostic_purity:
+    name: "Agnostic Pattern Extraction"
+    description: "Extract language-agnostic patterns and abstractions"
+    file: "agnostic_purity.j2"
+    shortcut: "t1"
+    variables:
+      - code
+      - filename
+      - language
+    
+  pattern_extraction:
+    name: "Design Pattern Mining"
+    description: "Identify and extract design patterns and architectural elements"
+    file: "pattern_extraction.j2"
+    shortcut: "t2"
+    variables:
+      - code
+      - context
+      
+  documentation_generation:
+    name: "Documentation Generation"
+    description: "Generate comprehensive documentation from code"
+    file: "documentation.j2"
+    shortcut: "t3"
+    variables:
+      - code
+      - filename
+      - language
+      - context
+
+  lux_transmutation:
+    name: "LUX Universal Transmutation"
+    description: "Convert existing programs into LUX Intelligence adapters"
+    file: "lux_transmutation.j2"
+    shortcut: "t4"
+    variables:
+      - code
+      - filename  
+      - language
+      - universal_schema
+
+  # Future template slots - ready for expansion
+  refactoring_suggestions:
+    name: "Refactoring Suggestions"
+    description: "Analyze code and suggest refactoring opportunities"
+    file: "refactoring.j2"
+    shortcut: "t5"
+    variables:
+      - code
+      - filename
+      - language
+      
+  security_analysis:
+    name: "Security Analysis"
+    description: "Identify potential security vulnerabilities and issues"
+    file: "security.j2"
+    shortcut: "t6"
+    variables:
+      - code
+      - filename
+      - language
+      
+  batch_styling_upgrades:
+    name: "Batch styling upgrades"
+    description: "strategic improvements and optimizations"
+    file: "batch_styling_upgrades.j2"
+    shortcut: "t7"
+    variables:
+      - code
+      - filename
+      - language
+
+  quantum_ui_upgrade:
+    name: "Quantum UI Sci-Fi Upgrade"
+    description: "Transform frontend pages/components to sci-fi glassmorphic, glowing, next-level Quantum Encoding style. Overhaul UI/UX quality with gradients, glass, glow, badge, and CTA clarity. Applies only to visible elements or existing logic—never adds new sections."
+    file: "quantum_ui_upgrade.j2"
+    shortcut: "t8"
+    variables:
+      - code
+      - filename
+      - language
+
+  butcher_the_code:
+    name: "Design Pattern Mining"
+    description: "Identify and extract design patterns and architectural elements"
+    file: "butcher_the_code.j2"
+    shortcut: "t9"
+    variables:
+      - code
+      - context
+      - filename
+      - language
+
+  document_improved:
+    name: "expert documentation"
+    description: "Identify and detail design patterns and architectural elements"
+    file: "document_improved.j2"
+    shortcut: "t10"
+    variables:
+      - code
+      - context
+      - filename
+      - language
+  
+  metatron_guardian:
+      name: "Metatron Guardian Code Remediation"
+      description: "Automated analysis and correction of architectural violations detected by Metatron Guard"
+      file: "metatron_guardian.j2"
+      shortcut: "t11"
+      variables:
+        - code
+        - filename
+        - language
+  
+  architectural_review:
+      name: "architectural_review"
+      description: "Automated analysis and correction of architectural violations detected by Metatron Guard"
+      file: "architectural_review.j2"
+      shortcut: "t12"
+      variables:
+        - code
+        - filename
+        - language
+        - context
+
+  code_forge:
+      name: "Code Forge Elite Upgrade"
+      description: "Analyze code quality and provide elite-level upgrades or complete redesigns with modern patterns"
+      file: "code_forge.j2"
+      shortcut: "t13"
+      variables:
+        - code
+        - filename
+        - language
+
+  code_forge_exact:
+      name: "Code Forge Exact Compatibility"
+      description: "Upgrade code internals while maintaining 100% naming compatibility for drop-in replacement"
+      file: "code_forge_exact.j2"
+      shortcut: "t14"
+      variables:
+        - code
+        - filename
+        - language
+# -- End of templates list --

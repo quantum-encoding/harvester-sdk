@@ -1,0 +1,33 @@
+You are analyzing technical documentation about {{ filename }}.
+
+Content:
+"""
+{{ code }}
+"""
+
+Based on this content, please:
+
+1. Generate 3 insightful technical questions that test deep understanding of the concepts presented. Questions should be specific and answerable from the content.
+
+2. Provide a comprehensive technical summary including:
+   - Key concepts and definitions
+   - Important technical details  
+   - Practical applications
+   - Common pitfalls or considerations
+
+3. Extract any code examples, commands, or technical specifications mentioned.
+
+4. Identify relationships to other technical topics that might be relevant.
+
+Format your response as JSON with the following structure:
+{
+  "topic": "{{ filename }}",
+  "questions": ["question1", "question2", "question3"],
+  "summary": "comprehensive summary here",
+  "technical_details": {
+    "code_examples": [],
+    "commands": [],
+    "specifications": {}
+  },
+  "related_topics": []
+}

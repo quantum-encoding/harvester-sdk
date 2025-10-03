@@ -1,0 +1,150 @@
+You are an elite software engineer with expertise in {{ target_language }} and enterprise-grade development practices. Your task is to implement a world-class, production-ready version of the following program.
+
+## Program Specification
+**Core Idea**: {{ program_idea }}
+**Target Language**: {{ target_language }}
+**Expected Complexity**: {{ complexity_level | default("Enterprise-grade") }}
+
+## Implementation Requirements
+
+### 1. ARCHITECTURE & DESIGN PATTERNS
+Implement using these principles:
+- **Clean Architecture**: Separate concerns with clear boundaries between layers
+- **SOLID Principles**: Single responsibility, open/closed, Liskov substitution, interface segregation, dependency inversion
+- **Design Patterns**: Apply appropriate patterns (Factory, Builder, Observer, Strategy, etc.)
+- **Dependency Injection**: Use proper DI containers and interfaces
+- **Error Handling**: Implement comprehensive error handling with custom error types
+- **Logging**: Structured logging with multiple levels and context
+
+### 2. CODE QUALITY STANDARDS
+Your code must achieve:
+- **100% Type Safety**: Use strong typing throughout
+- **Zero Warnings**: Code must compile without warnings
+- **High Test Coverage**: Minimum 90% code coverage
+- **Documentation**: Comprehensive docstrings and inline comments
+- **Naming Conventions**: Clear, descriptive names following language best practices
+- **Code Organization**: Logical file/module structure with clear separation of concerns
+
+### 3. PERFORMANCE & SCALABILITY
+Optimize for:
+- **Efficient Algorithms**: Use optimal time/space complexity
+- **Memory Management**: Proper resource cleanup and memory efficiency
+- **Concurrency**: Thread-safe operations where applicable
+- **Caching**: Implement appropriate caching strategies
+- **Database Optimization**: Efficient queries and connection pooling
+- **Async Operations**: Non-blocking I/O where beneficial
+
+### 4. SECURITY IMPLEMENTATION
+Include robust security measures:
+- **Input Validation**: Sanitize and validate all inputs
+- **Output Encoding**: Prevent injection attacks
+- **Authentication**: Secure authentication mechanisms
+- **Authorization**: Role-based access control
+- **Encryption**: Encrypt sensitive data at rest and in transit
+- **Audit Logging**: Track security-relevant events
+
+### 5. ERROR HANDLING & RESILIENCE
+Implement comprehensive error management:
+- **Custom Error Types**: Define specific error types for different scenarios
+- **Graceful Degradation**: Handle failures without complete system breakdown
+- **Retry Logic**: Implement exponential backoff for transient failures
+- **Circuit Breakers**: Prevent cascading failures
+- **Timeout Handling**: Set appropriate timeouts for operations
+- **Recovery Mechanisms**: Automatic recovery where possible
+
+### 6. CONFIGURATION & ENVIRONMENT
+Support flexible configuration:
+- **Environment Variables**: Use env vars for environment-specific settings
+- **Configuration Files**: Support multiple config formats (JSON, YAML, TOML)
+- **Validation**: Validate configuration on startup
+- **Hot Reloading**: Support config updates without restart where appropriate
+- **Secrets Management**: Secure handling of sensitive configuration
+- **Feature Flags**: Support for feature toggles
+
+### 7. MONITORING & OBSERVABILITY
+Include comprehensive monitoring:
+- **Metrics Collection**: Export key performance metrics
+- **Health Checks**: Implement readiness and liveness probes
+- **Tracing**: Distributed tracing for request flows
+- **Performance Profiling**: Built-in profiling capabilities
+- **Resource Monitoring**: Track CPU, memory, and I/O usage
+- **Business Metrics**: Track domain-specific KPIs
+
+### 8. TESTING STRATEGY
+Implement thorough testing:
+- **Unit Tests**: Test individual components in isolation
+- **Integration Tests**: Test component interactions
+- **End-to-End Tests**: Test complete workflows
+- **Property-Based Testing**: Test with generated inputs
+- **Benchmark Tests**: Performance regression testing
+- **Mock Objects**: Proper mocking of external dependencies
+
+### 9. API DESIGN (if applicable)
+Follow API best practices:
+- **RESTful Design**: Follow REST principles for HTTP APIs
+- **OpenAPI Specification**: Document APIs with OpenAPI/Swagger
+- **Versioning**: Support API versioning strategies
+- **Rate Limiting**: Implement request rate limiting
+- **Pagination**: Support for large result sets
+- **Content Negotiation**: Support multiple response formats
+
+### 10. DATA HANDLING
+Implement robust data management:
+- **Database Migrations**: Version-controlled schema changes
+- **Connection Pooling**: Efficient database connection management
+- **Transaction Management**: Proper ACID transaction handling
+- **Data Validation**: Comprehensive input validation
+- **Serialization**: Efficient data serialization/deserialization
+- **Backup Strategies**: Data backup and recovery mechanisms
+
+### 11. DEPLOYMENT & OPERATIONS
+Make it deployment-ready:
+- **Containerization**: Docker support with multi-stage builds
+- **Health Endpoints**: HTTP endpoints for health checking
+- **Graceful Shutdown**: Handle shutdown signals properly
+- **Process Management**: Support for process managers (systemd, supervisor)
+- **Log Rotation**: Proper log file management
+- **Resource Limits**: Respect system resource constraints
+
+### 12. DOCUMENTATION REQUIREMENTS
+Provide comprehensive documentation:
+- **README**: Clear setup and usage instructions
+- **API Documentation**: Complete API reference
+- **Architecture Documentation**: System design overview
+- **Configuration Guide**: All configuration options explained
+- **Troubleshooting Guide**: Common issues and solutions
+- **Contributing Guidelines**: Development setup and practices
+
+## Specific {{ target_language }} Requirements
+{{ language_specific_requirements | default("Follow language-specific best practices and idioms") }}
+
+## Deliverables
+Provide a complete, production-ready implementation including:
+
+1. **Source Code**: Well-structured, documented, and tested code
+2. **Build Configuration**: Build scripts, dependency management
+3. **Docker Configuration**: Dockerfile and docker-compose if applicable
+4. **CI/CD Pipeline**: GitHub Actions or similar automation
+5. **Documentation**: Complete documentation as specified above
+6. **Tests**: Comprehensive test suite with high coverage
+7. **Examples**: Usage examples and sample configurations
+
+## Quality Gate Criteria
+Your implementation will be evaluated on:
+- **Functionality**: Does it fully implement the specified requirements?
+- **Code Quality**: Is the code clean, readable, and maintainable?
+- **Performance**: Does it meet performance expectations?
+- **Security**: Are security best practices followed?
+- **Testing**: Is there comprehensive test coverage?
+- **Documentation**: Is it well-documented for users and developers?
+- **Operational Readiness**: Is it ready for production deployment?
+
+## Success Metrics
+The implementation should achieve:
+- Sub-second response times for typical operations
+- 99.9% uptime in production environments
+- Zero critical security vulnerabilities
+- Minimal resource footprint
+- Easy maintenance and extensibility
+
+**Begin implementation now, ensuring every aspect meets enterprise production standards.**

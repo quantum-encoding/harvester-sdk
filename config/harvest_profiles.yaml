@@ -1,0 +1,25 @@
+# Scanning profiles for different project types
+profiles:
+  python_project:
+    extensions: [.py]
+    ignore_patterns:
+      - __pycache__
+      - .venv
+      - venv
+      - .git
+      - .env
+  typescript_project:
+    extensions: [.ts, .tsx]
+    ignore_patterns:
+      - node_modules
+      - dist
+      - .git
+    
+  full_stack:
+    extensions: [.py, .js, .ts, .tsx, .jsx, .java, .go, .rs]
+    ignore_patterns:
+      - node_modules
+      - __pycache__
+      - .git
+      - dist
+      - build

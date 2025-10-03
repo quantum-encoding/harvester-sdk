@@ -1,0 +1,54 @@
+{
+  "themed_templates": {
+    "futuristic_styles": {
+      "cyberpunk": {
+        "prefix": "CYBERPUNK AESTHETIC:",
+        "suffix": "Neon lights, dark atmosphere, futuristic technology, rain-soaked streets, dystopian cityscape, blade runner style",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🌃 Futuristic cyberpunk style",
+        "category": "futuristic_styles",
+        "cost_tier": "premium"
+      },
+      "sci_fi": {
+        "prefix": "SCIENCE FICTION ART:",
+        "suffix": "Futuristic technology, space exploration, alien worlds, concept art quality, sci-fi illustration",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🚀 Futuristic sci-fi art",
+        "category": "futuristic_styles",
+        "cost_tier": "premium"
+      }
+    },
+    "retro_styles": {
+      "steampunk": {
+        "prefix": "STEAMPUNK DESIGN:",
+        "suffix": "Victorian era meets technology, brass and copper, steam-powered machinery, intricate gears, retro-futuristic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "⚙️ Victorian futuristic steampunk",
+        "category": "retro_styles",
+        "cost_tier": "standard"
+      }
+    },
+    "fantasy_styles": {
+      "fantasy": {
+        "prefix": "FANTASY ART:",
+        "suffix": "Magical atmosphere, mystical creatures, enchanted landscape, fantasy illustration, D&D artwork style",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🧙‍♂️ Epic fantasy artwork",
+        "category": "fantasy_styles",
+        "cost_tier": "premium"
+      }
+    }
+  }
+}

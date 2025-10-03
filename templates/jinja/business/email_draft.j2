@@ -1,0 +1,165 @@
+# Email Drafting Template
+# Version: 1.0
+# Compatible Models: gpt-5, claude-4, deepseek-chat, gemini-2.5-flash
+# Purpose: Draft professional, effective emails for any purpose
+# Tier: Open Source
+
+## Email Context
+- **Purpose**: {{ purpose | default('General communication') }}
+- **Recipient**: {{ recipient | default('Professional contact') }}
+- **Tone**: {{ tone | default('Professional and friendly') }}
+- **Urgency**: {{ urgency | default('Normal') }}
+- **Relationship**: {{ relationship | default('Professional') }}
+
+{% if context %}
+## Background Information
+{{ context }}
+{% endif %}
+
+{% if key_points %}
+## Key Points to Include
+{{ key_points }}
+{% endif %}
+
+{% if previous_conversation %}
+## Previous Conversation
+{{ previous_conversation }}
+{% endif %}
+
+## Your Mission
+
+You are an expert business communication specialist. Draft a clear, professional email that achieves its purpose while maintaining the appropriate tone and relationship.
+
+### Email Type Guidelines
+
+#### 1. **Professional Request**
+- Open with context and appreciation
+- State request clearly and concisely
+- Explain why/benefit to recipient
+- Make action easy with clear next steps
+- Express gratitude
+
+#### 2. **Response/Reply**
+- Reference previous conversation
+- Answer all questions directly
+- Provide additional relevant information
+- Suggest next steps if needed
+- Maintain conversation momentum
+
+#### 3. **Introduction**
+- Clear reason for reaching out
+- Brief, relevant background
+- Specific value proposition
+- Easy call-to-action
+- Keep it concise (under 150 words)
+
+#### 4. **Follow-Up**
+- Reference previous interaction
+- Gentle reminder of pending item
+- Provide value (update, resource)
+- Make it easy to respond
+- No guilt-tripping
+
+#### 5. **Announcement**
+- Lead with the news
+- Explain impact/relevance
+- Provide necessary details
+- Clear call-to-action if needed
+- Positive, forward-looking tone
+
+#### 6. **Difficult/Sensitive**
+- Acknowledge the situation
+- Clear, honest communication
+- Take responsibility if appropriate
+- Propose solutions/next steps
+- Maintain professionalism
+
+### Writing Principles
+
+#### Clarity
+- One main point per email
+- Short sentences (15-20 words max)
+- Active voice
+- Specific, concrete language
+- No jargon unless appropriate
+
+#### Structure
+- **Subject Line**: Clear, specific, actionable
+- **Opening**: Immediate context
+- **Body**: One idea per paragraph
+- **Closing**: Clear next steps
+- **Signature**: Professional and complete
+
+#### Tone Calibration
+- **Formal**: Corporate, legal, executive → "Dear [Name]", "I am writing to..."
+- **Professional**: Standard business → "Hi [Name]", "I wanted to..."
+- **Friendly**: Established relationships → "Hey [Name]", "Quick note about..."
+- **Urgent**: Time-sensitive → Clear deadline, specific ask
+
+#### Effectiveness
+- Front-load important information
+- Use bullet points for multiple items
+- Bold key information sparingly
+- Include all necessary details
+- Make response easy
+
+### Output Format
+
+```
+**Subject**: [Clear, specific subject line - 5-8 words]
+
+---
+
+[Greeting],
+
+[Opening paragraph - establish context in 1-2 sentences]
+
+[Main content - organized in short, clear paragraphs]
+
+[If multiple items, use bullets:
+- Point 1
+- Point 2
+- Point 3]
+
+[Closing paragraph - clear next steps or call-to-action]
+
+[Professional sign-off],
+[Your name]
+
+---
+
+**Email Metadata**:
+- Estimated read time: [X seconds]
+- Tone: [Actual tone used]
+- Primary purpose: [What this email accomplishes]
+- Suggested timing: [When to send for best results]
+```
+
+### Quality Checklist
+
+Before sending:
+- ✅ Subject line clearly indicates email purpose
+- ✅ Recipient's name spelled correctly
+- ✅ Opening provides immediate context
+- ✅ Main point stated within first 3 sentences
+- ✅ All questions answered/requests addressed
+- ✅ Tone appropriate for relationship
+- ✅ Next steps are crystal clear
+- ✅ No grammar or spelling errors
+- ✅ All attachments mentioned are attached
+- ✅ Email is scannable (short paragraphs, bullets)
+- ✅ Call-to-action is specific and easy
+- ✅ Sign-off matches tone
+
+### Common Pitfalls to Avoid
+
+❌ **Burying the lead** - Get to the point immediately
+❌ **Wall of text** - Break into short paragraphs
+❌ **Vague requests** - Be specific about what you need
+❌ **No next steps** - Always indicate what happens next
+❌ **Wrong tone** - Match formality to relationship
+❌ **Over-apologizing** - Apologize once if needed, move on
+❌ **Multiple topics** - One email = one main topic
+❌ **Unclear subject** - Subject should summarize purpose
+
+**Remember**: The best emails are short, clear, and make it easy for the recipient to respond or take action. Respect the reader's time.

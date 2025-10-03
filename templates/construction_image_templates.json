@@ -1,0 +1,315 @@
+{
+  "construction_image_templates": {
+    "interior_painting": {
+      "paint1": {
+        "prefix": "INTERIOR HOUSE PAINTING:",
+        "suffix": "Professional interior painting, smooth finish, clean lines, proper coverage, residential quality, well-lit interior space",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "🎨 Interior room painting projects",
+        "category": "interior_painting",
+        "cost_tier": "standard"
+      },
+      "paint2": {
+        "prefix": "ROOM WALL PAINTING:",
+        "suffix": "Fresh paint application, clean brush strokes, uniform color, residential interior, natural lighting, finished room",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏠 Living room and bedroom painting",
+        "category": "interior_painting",
+        "cost_tier": "standard"
+      },
+      "paint3": {
+        "prefix": "CEILING PAINTING PROJECT:",
+        "suffix": "Ceiling paint application, professional finish, uniform coverage, interior renovation, clean work area",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "⬆️ Ceiling painting and refinishing",
+        "category": "interior_painting",
+        "cost_tier": "budget"
+      }
+    },
+    "exterior_painting": {
+      "extpaint1": {
+        "prefix": "EXTERIOR HOUSE PAINTING:",
+        "suffix": "Professional exterior painting, weather-resistant finish, curb appeal improvement, residential exterior, natural daylight",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏡 House exterior painting projects",
+        "category": "exterior_painting",
+        "cost_tier": "premium"
+      },
+      "extpaint2": {
+        "prefix": "BUILDING FACADE PAINTING:",
+        "suffix": "Commercial building painting, professional application, uniform finish, architectural enhancement, outdoor setting",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🏢 Commercial building exterior painting",
+        "category": "exterior_painting",
+        "cost_tier": "premium"
+      },
+      "extpaint3": {
+        "prefix": "FENCE AND TRIM PAINTING:",
+        "suffix": "Fence painting, trim work, detail painting, protective coating, maintenance project, outdoor improvement",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🚧 Fence and trim painting work",
+        "category": "exterior_painting",
+        "cost_tier": "standard"
+      }
+    },
+    "kitchen_renovation": {
+      "kitchen1": {
+        "prefix": "KITCHEN RENOVATION PROJECT:",
+        "suffix": "Modern kitchen remodel, updated appliances, new cabinetry, countertops, contemporary design, functional layout",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "👨‍🍳 Complete kitchen renovation",
+        "category": "kitchen_renovation",
+        "cost_tier": "premium"
+      },
+      "kitchen2": {
+        "prefix": "KITCHEN CABINET INSTALLATION:",
+        "suffix": "New kitchen cabinets, professional installation, modern design, quality craftsmanship, functional storage",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "🗄️ Kitchen cabinet projects",
+        "category": "kitchen_renovation",
+        "cost_tier": "premium"
+      },
+      "kitchen3": {
+        "prefix": "KITCHEN COUNTERTOP INSTALLATION:",
+        "suffix": "Granite countertops, quartz surface, professional installation, kitchen upgrade, modern finish",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🪨 Countertop installation projects",
+        "category": "kitchen_renovation",
+        "cost_tier": "standard"
+      }
+    },
+    "bathroom_renovation": {
+      "bathroom1": {
+        "prefix": "BATHROOM RENOVATION:",
+        "suffix": "Modern bathroom remodel, updated fixtures, new tiling, contemporary design, spa-like atmosphere, quality finishes",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🛁 Complete bathroom renovation",
+        "category": "bathroom_renovation",
+        "cost_tier": "premium"
+      },
+      "bathroom2": {
+        "prefix": "BATHROOM TILE INSTALLATION:",
+        "suffix": "Professional tile work, shower tiling, floor tiles, quality installation, waterproof finish, modern bathroom",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "🔲 Bathroom tiling projects",
+        "category": "bathroom_renovation",
+        "cost_tier": "standard"
+      },
+      "bathroom3": {
+        "prefix": "BATHROOM FIXTURE UPGRADE:",
+        "suffix": "New bathroom fixtures, modern vanity, updated lighting, plumbing upgrade, contemporary style",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🚿 Bathroom fixture installation",
+        "category": "bathroom_renovation",
+        "cost_tier": "standard"
+      }
+    },
+    "flooring": {
+      "floor1": {
+        "prefix": "HARDWOOD FLOOR INSTALLATION:",
+        "suffix": "Professional hardwood flooring, quality installation, natural wood finish, residential improvement, elegant flooring",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🪵 Hardwood flooring installation",
+        "category": "flooring",
+        "cost_tier": "premium"
+      },
+      "floor2": {
+        "prefix": "TILE FLOORING PROJECT:",
+        "suffix": "Ceramic tile installation, professional laying, uniform pattern, quality craftsmanship, durable flooring",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🔳 Ceramic and stone tile flooring",
+        "category": "flooring",
+        "cost_tier": "standard"
+      },
+      "floor3": {
+        "prefix": "LAMINATE FLOORING INSTALLATION:",
+        "suffix": "Modern laminate flooring, cost-effective solution, professional installation, residential upgrade",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "📋 Laminate flooring projects",
+        "category": "flooring",
+        "cost_tier": "budget"
+      }
+    },
+    "outdoor_construction": {
+      "terrace1": {
+        "prefix": "OUTDOOR TERRACE CONSTRUCTION:",
+        "suffix": "Wooden deck terrace, outdoor living space, quality construction, natural materials, landscape integration",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "🌿 Wooden deck and terrace projects",
+        "category": "outdoor_construction",
+        "cost_tier": "premium"
+      },
+      "terrace2": {
+        "prefix": "STONE PATIO CONSTRUCTION:",
+        "suffix": "Natural stone patio, professional masonry, outdoor entertainment area, landscaping integration",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "🪨 Stone patio and hardscaping",
+        "category": "outdoor_construction",
+        "cost_tier": "premium"
+      },
+      "terrace3": {
+        "prefix": "CONCRETE PATIO PROJECT:",
+        "suffix": "Stamped concrete patio, decorative finish, outdoor space, residential improvement, durable construction",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🧱 Concrete patio construction",
+        "category": "outdoor_construction",
+        "cost_tier": "standard"
+      }
+    },
+    "roofing": {
+      "roof1": {
+        "prefix": "ROOF INSTALLATION PROJECT:",
+        "suffix": "Professional roofing, shingle installation, weather protection, residential roofing, quality craftsmanship",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏠 Roof installation and repair",
+        "category": "roofing",
+        "cost_tier": "premium"
+      },
+      "roof2": {
+        "prefix": "METAL ROOFING INSTALLATION:",
+        "suffix": "Metal roof system, modern roofing solution, durable installation, commercial grade, weather resistant",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🔧 Metal roofing systems",
+        "category": "roofing",
+        "cost_tier": "premium"
+      },
+      "roof3": {
+        "prefix": "ROOF REPAIR PROJECT:",
+        "suffix": "Roof maintenance, shingle repair, leak prevention, professional service, home protection",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🔨 Roof repair and maintenance",
+        "category": "roofing",
+        "cost_tier": "standard"
+      }
+    },
+    "electrical_plumbing": {
+      "electrical1": {
+        "prefix": "ELECTRICAL INSTALLATION:",
+        "suffix": "Professional electrical work, wiring installation, circuit upgrades, safety compliance, residential electrical",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "⚡ Electrical installation projects",
+        "category": "electrical_plumbing",
+        "cost_tier": "standard"
+      },
+      "plumb1": {
+        "prefix": "PLUMBING INSTALLATION:",
+        "suffix": "Professional plumbing work, pipe installation, fixture mounting, water system upgrade, quality plumbing",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🔧 Plumbing installation and repair",
+        "category": "electrical_plumbing",
+        "cost_tier": "standard"
+      },
+      "hvac1": {
+        "prefix": "HVAC SYSTEM INSTALLATION:",
+        "suffix": "Heating and cooling system, professional HVAC installation, climate control, energy efficient system",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🌡️ HVAC system installation",
+        "category": "electrical_plumbing",
+        "cost_tier": "premium"
+      }
+    }
+  },
+  
+  "batch_order_presets": {
+    "home_renovation_pack": {
+      "description": "Complete home renovation imagery package",
+      "templates": ["kitchen1", "bathroom1", "paint1", "floor1"],
+      "models": ["o1", "g1"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    },
+    "painting_contractor_bundle": {
+      "description": "Interior and exterior painting portfolio",
+      "templates": ["paint1", "paint2", "extpaint1", "extpaint2"],
+      "models": ["o1", "o2"],
+      "quantity_per_template": 3,
+      "cost_estimate": "standard"
+    },
+    "outdoor_living_package": {
+      "description": "Outdoor construction and landscaping",
+      "templates": ["terrace1", "terrace2", "terrace3"],
+      "models": ["g1", "o1"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    },
+    "contractor_portfolio": {
+      "description": "Comprehensive construction portfolio",
+      "templates": ["kitchen1", "bathroom1", "roof1", "floor1", "terrace1"],
+      "models": ["o1", "g1"],
+      "quantity_per_template": 1,
+      "cost_estimate": "premium"
+    }
+  }
+}

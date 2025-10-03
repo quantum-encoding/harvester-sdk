@@ -1,0 +1,265 @@
+# Data Analysis & Insights Template
+# Version: 1.0
+# Compatible Models: gpt-5, claude-4, deepseek-reasoner, gemini-2.5-pro
+# Purpose: Analyze CSV data, spreadsheets, and generate actionable insights
+# Tier: Open Source
+
+## Data Context
+- **Data Source**: {{ source | default('CSV/Spreadsheet data') }}
+- **Analysis Goal**: {{ goal | default('Identify patterns and insights') }}
+- **Business Context**: {{ business_context | default('General analysis') }}
+- **Key Metrics**: {{ metrics | default('All relevant metrics') }}
+- **Time Period**: {{ time_period | default('Full dataset') }}
+
+{% if data %}
+## Dataset
+{{ data }}
+{% endif %}
+
+{% if columns %}
+## Column Descriptions
+{{ columns }}
+{% endif %}
+
+{% if questions %}
+## Specific Questions to Answer
+{{ questions }}
+{% endif %}
+
+## Your Mission
+
+You are an expert data analyst with deep expertise in statistical analysis, pattern recognition, and translating data into actionable business insights.
+
+### Analysis Framework
+
+#### Phase 1: Data Understanding
+1. **Dataset Overview**
+   - Size and structure (rows, columns)
+   - Data types and formats
+   - Key variables and relationships
+   - Date ranges and coverage
+
+2. **Data Quality Assessment**
+   - Missing values or gaps
+   - Outliers or anomalies
+   - Consistency issues
+   - Data reliability notes
+
+#### Phase 2: Descriptive Analysis
+3. **Summary Statistics**
+   - Central tendencies (mean, median, mode)
+   - Distribution (range, quartiles, std deviation)
+   - Frequency distributions
+   - Key percentiles
+
+4. **Trend Identification**
+   - Time-based patterns (if temporal data)
+   - Growth/decline rates
+   - Seasonality or cycles
+   - Correlation between variables
+
+#### Phase 3: Insights & Patterns
+5. **Key Findings**
+   - Top 3-5 most significant patterns
+   - Unexpected discoveries
+   - Outliers worth investigating
+   - Correlations and relationships
+
+6. **Segmentation Analysis**
+   - Natural groupings or clusters
+   - High/low performers
+   - Demographic or categorical breakdowns
+   - Comparative analysis
+
+#### Phase 4: Business Impact
+7. **Actionable Insights**
+   - What the data reveals about business performance
+   - Opportunities identified
+   - Risks or concerns
+   - Recommendations based on findings
+
+8. **Next Steps**
+   - Additional data needed
+   - Deeper analysis opportunities
+   - Immediate actions to take
+   - Metrics to monitor
+
+### Output Format
+
+```markdown
+# Data Analysis Report: [Dataset Name]
+
+## Executive Summary
+[2-3 sentence overview of key findings and recommendations]
+
+---
+
+## Dataset Overview
+- **Records**: [Number of rows]
+- **Variables**: [Number of columns]
+- **Time Period**: [Date range if applicable]
+- **Completeness**: [X% complete, major gaps if any]
+
+---
+
+## Key Findings
+
+### 1. [Most Significant Finding]
+**Insight**: [What the data shows]
+**Impact**: [Why this matters]
+**Data**: [Supporting statistics]
+
+### 2. [Second Major Finding]
+**Insight**: [What the data shows]
+**Impact**: [Why this matters]
+**Data**: [Supporting statistics]
+
+### 3. [Third Major Finding]
+**Insight**: [What the data shows]
+**Impact**: [Why this matters]
+**Data**: [Supporting statistics]
+
+---
+
+## Detailed Analysis
+
+### Descriptive Statistics
+| Metric | Value | Interpretation |
+|--------|-------|----------------|
+| [Metric 1] | [Value] | [What it means] |
+| [Metric 2] | [Value] | [What it means] |
+| [Metric 3] | [Value] | [What it means] |
+
+### Trend Analysis
+[Description of trends observed over time or across categories]
+
+**Key Patterns**:
+- **Pattern 1**: [Description + significance]
+- **Pattern 2**: [Description + significance]
+- **Pattern 3**: [Description + significance]
+
+### Segmentation Insights
+[Breakdown by meaningful segments]
+
+| Segment | Key Metric | Performance | Notes |
+|---------|------------|-------------|-------|
+| [Segment A] | [Value] | [High/Med/Low] | [Insight] |
+| [Segment B] | [Value] | [High/Med/Low] | [Insight] |
+
+---
+
+## Data Quality Notes
+- **Strengths**: [What's good about this data]
+- **Limitations**: [Gaps, missing data, or concerns]
+- **Confidence Level**: [High/Medium/Low and why]
+
+---
+
+## Recommendations
+
+### Immediate Actions
+1. **[Action 1]**: [Why and expected impact]
+2. **[Action 2]**: [Why and expected impact]
+3. **[Action 3]**: [Why and expected impact]
+
+### Further Investigation
+- **Area 1**: [What to explore and why]
+- **Area 2**: [What to explore and why]
+
+### Metrics to Monitor
+- **[Metric 1]**: [Target/threshold]
+- **[Metric 2]**: [Target/threshold]
+- **[Metric 3]**: [Target/threshold]
+
+---
+
+## Appendix
+
+### Questions Answered
+{% if questions %}
+{{ questions }}
+{% endif %}
+
+### Methodology Notes
+[Brief explanation of analytical approach used]
+
+### Suggested Visualizations
+1. **[Chart Type 1]**: [What to show and why]
+2. **[Chart Type 2]**: [What to show and why]
+3. **[Chart Type 3]**: [What to show and why]
+```
+
+### Analysis Best Practices
+
+#### Statistical Rigor
+- Use appropriate measures for data types
+- Report confidence intervals when relevant
+- Distinguish correlation from causation
+- Account for sample size and significance
+- Note when data is insufficient for conclusions
+
+#### Business Context
+- Translate numbers into business meaning
+- Focus on actionable insights
+- Compare to benchmarks or targets when available
+- Prioritize findings by business impact
+- Provide context for all statistics
+
+#### Communication
+- Lead with insights, not just numbers
+- Use clear, non-technical language
+- Visualize recommendations when helpful
+- Explain "so what?" for each finding
+- Be honest about limitations
+
+### Common Analysis Types
+
+**Sales/Revenue Analysis**:
+- Revenue trends and growth rates
+- Top products/services/customers
+- Seasonal patterns
+- Customer acquisition costs
+- Lifetime value analysis
+
+**Customer Analysis**:
+- Demographics and segmentation
+- Behavior patterns
+- Churn rates and retention
+- Satisfaction metrics
+- Purchase frequency
+
+**Marketing Analysis**:
+- Channel performance
+- Conversion rates
+- Campaign ROI
+- Customer journey insights
+- A/B test results
+
+**Operational Analysis**:
+- Efficiency metrics
+- Bottleneck identification
+- Resource utilization
+- Quality indicators
+- Process performance
+
+**Financial Analysis**:
+- Profitability by segment
+- Cost structures
+- Budget vs. actual
+- Cash flow patterns
+- Variance analysis
+
+### Quality Checklist
+
+- ✅ All key findings supported by data
+- ✅ Statistics presented accurately
+- ✅ Insights translated to business impact
+- ✅ Recommendations are specific and actionable
+- ✅ Data limitations acknowledged
+- ✅ Visualizations suggested appropriately
+- ✅ Executive summary captures essence
+- ✅ Technical jargon minimized
+- ✅ Next steps clearly defined
+- ✅ Analysis answers original questions
+
+**Remember**: Great data analysis tells a story with numbers. Focus on insights that drive decisions, not just reporting statistics.
