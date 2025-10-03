@@ -825,13 +825,110 @@ def structured_command(prompt, schema, model, output):
     click.echo(f"📝 Prompt: {prompt[:100]}{'...' if len(prompt) > 100 else ''}")
     click.echo(f"📋 Schema: {schema}")
     click.echo(f"🤖 Model: {model}")
+    click.echo()
 
-    # For now, show what would happen
-    click.echo("\n🎯 Would generate structured output with schema validation")
-    click.echo("📊 Would include automatic retry on validation failures")
+    # Import SDK
+    from harvester_sdk.sdk import HarvesterSDK
+    import asyncio
+    import json
 
-    if output:
-        click.echo(f"💾 Would save to: {output}")
+    # Define schemas
+    schemas = {
+        'person': {
+            'type': 'object',
+            'properties': {
+                'name': {'type': 'string'},
+                'age': {'type': 'integer'},
+                'email': {'type': 'string'}
+            },
+            'required': ['name']
+        },
+        'review': {
+            'type': 'object',
+            'properties': {
+                'rating': {'type': 'integer', 'minimum': 1, 'maximum': 5},
+                'summary': {'type': 'string'},
+                'pros': {'type': 'array', 'items': {'type': 'string'}},
+                'cons': {'type': 'array', 'items': {'type': 'string'}}
+            },
+            'required': ['rating', 'summary']
+        },
+        'meeting': {
+            'type': 'object',
+            'properties': {
+                'title': {'type': 'string'},
+                'date': {'type': 'string'},
+                'attendees': {'type': 'array', 'items': {'type': 'string'}},
+                'action_items': {'type': 'array', 'items': {'type': 'string'}}
+            },
+            'required': ['title']
+        },
+        'code': {
+            'type': 'object',
+            'properties': {
+                'language': {'type': 'string'},
+                'description': {'type': 'string'},
+                'key_features': {'type': 'array', 'items': {'type': 'string'}},
+                'use_cases': {'type': 'array', 'items': {'type': 'string'}}
+            },
+            'required': ['language', 'description']
+        },
+        'analysis': {
+            'type': 'object',
+            'properties': {
+                'summary': {'type': 'string'},
+                'key_points': {'type': 'array', 'items': {'type': 'string'}},
+                'recommendations': {'type': 'array', 'items': {'type': 'string'}}
+            },
+            'required': ['summary', 'key_points']
+        }
+    }
+
+    async def generate():
+        try:
+            # Get schema
+            json_schema = schemas.get(schema, schemas['analysis'])
+
+            # Build prompt requesting JSON output
+            structured_prompt = f"{prompt}\n\nPlease respond with ONLY a valid JSON object matching this schema:\n{json.dumps(json_schema, indent=2)}"
+
+            # Use SDK for simple text generation
+            sdk = HarvesterSDK()
+            click.echo("🔄 Generating structured output...")
+
+            response = await sdk.async_generate_text(
+                prompt=structured_prompt,
+                model=model,
+                max_tokens=2000
+            )
+
+            # Try to parse JSON from response
+            # Handle cases where model wraps JSON in markdown code blocks
+            response_clean = response.strip()
+            if response_clean.startswith('```json'):
+                response_clean = response_clean.split('```json')[1].split('```')[0].strip()
+            elif response_clean.startswith('```'):
+                response_clean = response_clean.split('```')[1].split('```')[0].strip()
+
+            result_data = json.loads(response_clean)
+
+            click.echo("✅ Success!")
+            click.echo()
+            click.echo("📄 Structured Output:")
+            click.echo(json.dumps(result_data, indent=2))
+
+            if output:
+                with open(output, 'w') as f:
+                    json.dump(result_data, f, indent=2)
+                click.echo(f"\n💾 Saved to: {output}")
+
+        except json.JSONDecodeError as e:
+            click.echo(f"❌ JSON Parsing Error: {e}")
+            click.echo(f"Raw response:\n{response[:500]}")
+        except Exception as e:
+            click.echo(f"❌ Error: {e}")
+
+    asyncio.run(generate())
 
 @cli.command('functions')
 @click.argument('function_name', required=False)

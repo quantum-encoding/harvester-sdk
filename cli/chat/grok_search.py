@@ -289,7 +289,14 @@ Examples:
         sys.exit(1)
     
     finally:
-        await searcher.provider.cleanup()
+        # Close provider session
+        try:
+            if hasattr(searcher.provider, 'close'):
+                await searcher.provider.close()
+            elif hasattr(searcher.provider, 'cleanup'):
+                await searcher.provider.cleanup()
+        except Exception:
+            pass
 
 if __name__ == "__main__":
     asyncio.run(main())
