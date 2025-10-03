@@ -119,9 +119,9 @@ class StructuredOutputProcessor:
             'max_retries': 3  # JSON mode is more reliable
         },
         'xai': {
-            'native_structured': False,
-            'models': ['grok-4', 'grok-3'],
-            'max_retries': 4
+            'native_structured': True,  # OpenAI-compatible response_format with json_schema
+            'models': ['grok-4', 'grok-3', 'grok-2'],
+            'max_retries': 3
         }
     }
     

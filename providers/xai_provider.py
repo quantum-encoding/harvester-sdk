@@ -30,6 +30,7 @@ class XAIProvider(BaseProvider):
             )
         
         self.base_url = config.get('endpoint', 'https://api.x.ai/v1/chat/completions')
+        self.beta_url = 'https://api.x.ai/v1/beta/chat/completions'  # For structured outputs
         
         # Grok model settings
         self.model_settings = {
@@ -92,28 +93,28 @@ class XAIProvider(BaseProvider):
             }
         }
     
-    async def complete(self, prompt: str, model: str) -> str:
+    async def complete(self, prompt: str, model: str, **kwargs) -> str:
         """Send completion request to xAI Grok"""
         # Resolve model alias
         actual_model = self.resolve_model_alias(model)
-        
+
         # Verify model is supported
         if actual_model not in self.model_settings:
             logger.warning(f"Unknown model {actual_model}, defaulting to grok-3")
             actual_model = 'grok-3'
-        
+
         # Apply rate limiting
         estimated_tokens = self.estimate_tokens(prompt, "")
         await self._apply_rate_limit(estimated_tokens)
-        
+
         # Prepare request
         settings = self.model_settings[actual_model]
-        
+
         headers = {
             'Authorization': f'Bearer {self.api_key}',
             'Content-Type': 'application/json'
         }
-        
+
         payload = {
             'model': actual_model,
             'messages': [{
@@ -121,17 +122,35 @@ class XAIProvider(BaseProvider):
                 'content': prompt
             }],
             'max_tokens': settings['max_tokens'],
-            'temperature': settings['temperature'],
+            'temperature': settings.get('temperature', 0.7),
             'stream': False
         }
-        
-        # Make request
+
+        # Handle structured output (OpenAI-compatible response_format)
+        use_beta_endpoint = False
+        if 'json_schema' in kwargs:
+            schema = kwargs['json_schema']
+            # xAI uses OpenAI-compatible structured output via beta endpoint
+            # Convert Pydantic schema to OpenAI's response_format
+            payload['response_format'] = {
+                'type': 'json_schema',
+                'json_schema': {
+                    'name': schema.get('name', 'response'),
+                    'strict': True,
+                    'schema': schema.get('schema', schema)
+                }
+            }
+            use_beta_endpoint = True
+
+        # Make request (use beta endpoint for structured outputs)
+        endpoint = self.beta_url if use_beta_endpoint else self.base_url
+
         if not self.session:
             self.session = aiohttp.ClientSession()
-        
+
         try:
             async with self.session.post(
-                self.base_url,
+                endpoint,
                 headers=headers,
                 json=payload
             ) as response:
@@ -140,11 +159,21 @@ class XAIProvider(BaseProvider):
                     raise Exception(f"xAI API error: {response.status} - {error_text}")
                 
                 data = await response.json()
-                
+
                 # Extract response text
                 if 'choices' in data and data['choices']:
-                    return data['choices'][0]['message']['content']
-                
+                    content = data['choices'][0]['message']['content']
+
+                    # For structured outputs, check for 'parsed' field
+                    if 'parsed' in data['choices'][0]['message']:
+                        import json
+                        return json.dumps(data['choices'][0]['message']['parsed'])
+
+                    if not content:
+                        logger.warning(f"Empty content from xAI. Full response: {data}")
+                    return content
+
+                logger.error(f"Unexpected xAI response structure: {data}")
                 raise Exception("No response content from xAI Grok")
                 
         except Exception as e:
