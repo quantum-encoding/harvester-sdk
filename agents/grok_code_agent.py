@@ -87,28 +87,6 @@ class GrokCodeAgent:
         {
             "type": "function",
             "function": {
-                "name": "write_file",
-                "description": "Write or update a file on the filesystem",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "file_path": {
-                            "type": "string",
-                            "description": "Path to the file to write"
-                        },
-                        "content": {
-                            "type": "string",
-                            "description": "Content to write to the file"
-                        }
-                    },
-                    "required": ["file_path", "content"],
-                    "additionalProperties": False
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
                 "name": "search_code",
                 "description": "Search for code patterns or text in files",
                 "parameters": {
@@ -172,6 +150,132 @@ class GrokCodeAgent:
                         }
                     },
                     "required": ["command"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "json_write",
+                "description": "Write a Python dictionary to a JSON file with proper serialization (prevents corruption)",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Path to the JSON file to write"
+                        },
+                        "data": {
+                            "type": "object",
+                            "description": "Dictionary to serialize as JSON"
+                        }
+                    },
+                    "required": ["file_path", "data"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "json_update",
+                "description": "Read a JSON file, modify it with Python code, and write it back with proper serialization",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Path to the JSON file to update"
+                        },
+                        "update_code": {
+                            "type": "string",
+                            "description": "Python code to modify 'data' dict (e.g., \"data['key'] = 'value'\")"
+                        }
+                    },
+                    "required": ["file_path", "update_code"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "write_text_file",
+                "description": "Write plain text content to a file (use for non-JSON files like .py, .txt, .md, etc.)",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Path to the file to write"
+                        },
+                        "content": {
+                            "type": "string",
+                            "description": "Text content to write"
+                        },
+                        "encoding": {
+                            "type": "string",
+                            "description": "File encoding (default: utf-8)"
+                        }
+                    },
+                    "required": ["file_path", "content"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "edit_file",
+                "description": "Edit a file by replacing specific text (safer than rewriting entire file)",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Path to the file to edit"
+                        },
+                        "old_text": {
+                            "type": "string",
+                            "description": "Exact text to find and replace"
+                        },
+                        "new_text": {
+                            "type": "string",
+                            "description": "Replacement text"
+                        },
+                        "replace_all": {
+                            "type": "boolean",
+                            "description": "Replace all occurrences (default: false, only first)"
+                        }
+                    },
+                    "required": ["file_path", "old_text", "new_text"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "insert_lines",
+                "description": "Insert lines at a specific line number in a file",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Path to the file"
+                        },
+                        "line_number": {
+                            "type": "integer",
+                            "description": "Line number to insert at (1-based)"
+                        },
+                        "content": {
+                            "type": "string",
+                            "description": "Content to insert"
+                        }
+                    },
+                    "required": ["file_path", "line_number", "content"],
                     "additionalProperties": False
                 }
             }
@@ -281,6 +385,13 @@ class GrokCodeAgent:
 **Available Tools:**
 You have access to file operations, code search, command execution, and more. Use them strategically to solve problems.
 
+**Tool Selection Guidelines:**
+- **For JSON files**: ALWAYS use json_write or json_update (never write_text_file)
+- **For editing existing files**: Prefer edit_file (find/replace) over rewriting entire file
+- **For new text files**: Use write_text_file for .py, .txt, .md, etc.
+- **For inserting code**: Use insert_lines when adding to specific line numbers
+- **For reading**: Use read_file to examine existing code
+
 **IMPORTANT - Task Execution Strategy:**
 1. **Plan First**: Break the task into clear sequential steps
 2. **Execute Decisively**: Don't just explore - write files, create structure
@@ -327,17 +438,6 @@ You have access to file operations, code search, command execution, and more. Us
             try:
                 with open(file_path, 'r') as f:
                     return {"success": True, "content": f.read()}
-            except Exception as e:
-                return {"success": False, "error": str(e)}
-
-        elif tool_name == "write_file":
-            file_path = arguments["file_path"]
-            content = arguments["content"]
-            try:
-                Path(file_path).parent.mkdir(parents=True, exist_ok=True)
-                with open(file_path, 'w') as f:
-                    f.write(content)
-                return {"success": True, "message": f"Wrote {len(content)} chars to {file_path}"}
             except Exception as e:
                 return {"success": False, "error": str(e)}
 
@@ -389,6 +489,138 @@ You have access to file operations, code search, command execution, and more. Us
                     "stderr": result.stderr,
                     "returncode": result.returncode
                 }
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "json_write":
+            file_path = arguments["file_path"]
+            data = arguments["data"]
+            try:
+                Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, indent=4, ensure_ascii=False)
+                return {"success": True, "message": f"Wrote JSON to {file_path}"}
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "json_update":
+            file_path = arguments["file_path"]
+            update_code = arguments["update_code"]
+
+            try:
+                # Read existing JSON
+                if not Path(file_path).exists():
+                    return {"success": False, "error": f"File {file_path} does not exist"}
+
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+
+                # Execute update code with restricted environment
+                # Only allow basic Python operations, no imports or dangerous builtins
+                safe_globals = {
+                    '__builtins__': {
+                        'len': len,
+                        'str': str,
+                        'int': int,
+                        'float': float,
+                        'bool': bool,
+                        'list': list,
+                        'dict': dict,
+                        'set': set,
+                        'tuple': tuple,
+                        'range': range,
+                        'enumerate': enumerate,
+                        'zip': zip,
+                        'map': map,
+                        'filter': filter,
+                        'sorted': sorted,
+                        'sum': sum,
+                        'min': min,
+                        'max': max,
+                        'abs': abs,
+                        'round': round,
+                        'any': any,
+                        'all': all,
+                    },
+                    'data': data
+                }
+
+                exec(update_code, safe_globals)
+
+                # Write back with proper serialization
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, indent=4, ensure_ascii=False)
+
+                return {"success": True, "message": f"Updated JSON in {file_path}"}
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "write_text_file":
+            file_path = arguments["file_path"]
+            content = arguments["content"]
+            encoding = arguments.get("encoding", "utf-8")
+            try:
+                Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+                with open(file_path, 'w', encoding=encoding) as f:
+                    f.write(content)
+                return {"success": True, "message": f"Wrote {len(content)} chars to {file_path}"}
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "edit_file":
+            file_path = arguments["file_path"]
+            old_text = arguments["old_text"]
+            new_text = arguments["new_text"]
+            replace_all = arguments.get("replace_all", False)
+
+            try:
+                if not Path(file_path).exists():
+                    return {"success": False, "error": f"File {file_path} does not exist"}
+
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+
+                if old_text not in content:
+                    return {"success": False, "error": f"Text not found in {file_path}"}
+
+                if replace_all:
+                    new_content = content.replace(old_text, new_text)
+                    count = content.count(old_text)
+                else:
+                    new_content = content.replace(old_text, new_text, 1)
+                    count = 1
+
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(new_content)
+
+                return {"success": True, "message": f"Replaced {count} occurrence(s) in {file_path}"}
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "insert_lines":
+            file_path = arguments["file_path"]
+            line_number = arguments["line_number"]
+            content = arguments["content"]
+
+            try:
+                if not Path(file_path).exists():
+                    return {"success": False, "error": f"File {file_path} does not exist"}
+
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+
+                # Insert at line_number (1-based index)
+                if line_number < 1 or line_number > len(lines) + 1:
+                    return {"success": False, "error": f"Line number {line_number} out of range (1-{len(lines)+1})"}
+
+                # Insert content (ensure it ends with newline)
+                insert_content = content if content.endswith('\n') else content + '\n'
+                lines.insert(line_number - 1, insert_content)
+
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.writelines(lines)
+
+                return {"success": True, "message": f"Inserted content at line {line_number} in {file_path}"}
             except Exception as e:
                 return {"success": False, "error": str(e)}
 
