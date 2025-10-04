@@ -214,6 +214,11 @@ class GrokCodeAgent:
                             "type": "string",
                             "description": "Text content to write"
                         },
+                        "mode": {
+                            "type": "string",
+                            "description": "Write mode: 'w' (overwrite) or 'a' (append)",
+                            "enum": ["w", "a"]
+                        },
                         "encoding": {
                             "type": "string",
                             "description": "File encoding (default: utf-8)"
@@ -276,6 +281,50 @@ class GrokCodeAgent:
                         }
                     },
                     "required": ["file_path", "line_number", "content"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "delete_file",
+                "description": "Delete a file or directory (use for cleanup, removing temp files, etc.)",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "description": "Path to file or directory to delete"
+                        },
+                        "recursive": {
+                            "type": "boolean",
+                            "description": "Delete directories recursively (default: false)"
+                        }
+                    },
+                    "required": ["path"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "create_directory",
+                "description": "Create a directory (and parent directories if needed)",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "description": "Directory path to create"
+                        },
+                        "parents": {
+                            "type": "boolean",
+                            "description": "Create parent directories if needed (default: true)"
+                        }
+                    },
+                    "required": ["path"],
                     "additionalProperties": False
                 }
             }
@@ -382,15 +431,19 @@ class GrokCodeAgent:
 - Iterate and refine solutions based on feedback
 - Handle complex multi-step coding tasks
 
-**Available Tools:**
+**Available Tools (11 total):**
 You have access to file operations, code search, command execution, and more. Use them strategically to solve problems.
 
 **Tool Selection Guidelines:**
 - **For JSON files**: ALWAYS use json_write or json_update (never write_text_file)
 - **For editing existing files**: Prefer edit_file (find/replace) over rewriting entire file
-- **For new text files**: Use write_text_file for .py, .txt, .md, etc.
+- **For new text files**: Use write_text_file for .py, .txt, .md, etc. (supports append mode)
 - **For inserting code**: Use insert_lines when adding to specific line numbers
 - **For reading**: Use read_file to examine existing code
+- **For code search**: Uses ripgrep (10x faster) when available, fallback to grep
+- **For cleanup**: Use delete_file to remove temp files or failed builds
+- **For project setup**: Use create_directory to create folder structures
+- **For safety**: Dangerous commands (rm -rf /, dd, fork bombs) are automatically blocked
 
 **IMPORTANT - Task Execution Strategy:**
 1. **Plan First**: Break the task into clear sequential steps
@@ -442,16 +495,25 @@ You have access to file operations, code search, command execution, and more. Us
                 return {"success": False, "error": str(e)}
 
         elif tool_name == "search_code":
-            # Implement code search using grep/ripgrep
+            # Implement code search using ripgrep (fast) or grep (fallback)
             pattern = arguments["pattern"]
             path = arguments.get("path", ".")
             file_pattern = arguments.get("file_pattern", "*")
 
             import subprocess
+            import shutil
             try:
-                cmd = ["grep", "-r", "-n", pattern, path]
-                if file_pattern != "*":
-                    cmd.extend(["--include", file_pattern])
+                # Prefer ripgrep (10x faster) if available
+                rg_path = shutil.which('rg')
+                if rg_path:
+                    cmd = ["rg", "-n", pattern, path]
+                    if file_pattern != "*":
+                        cmd.extend(["--glob", file_pattern])
+                else:
+                    # Fallback to grep
+                    cmd = ["grep", "-r", "-n", pattern, path]
+                    if file_pattern != "*":
+                        cmd.extend(["--include", file_pattern])
 
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
                 return {"success": True, "matches": result.stdout}
@@ -472,6 +534,24 @@ You have access to file operations, code search, command execution, and more. Us
         elif tool_name == "execute_command":
             command = arguments["command"]
             cwd = arguments.get("cwd", ".")
+
+            # Safety: Block dangerous commands
+            dangerous_patterns = [
+                'rm -rf /', 'rm -rf ~', 'rm -rf *',  # Destructive rm
+                'mkfs', 'dd if=', 'dd of=',  # Filesystem/disk operations
+                ':(){:|:&};:',  # Fork bomb
+                '> /dev/sd', '> /dev/hd',  # Direct disk writes
+                'chmod -R 777 /',  # Dangerous permissions
+                'chown -R'  # Mass ownership changes
+            ]
+
+            command_lower = command.lower()
+            for pattern in dangerous_patterns:
+                if pattern.lower() in command_lower:
+                    return {
+                        "success": False,
+                        "error": f"Potentially dangerous command rejected: contains '{pattern}'"
+                    }
 
             import subprocess
             try:
@@ -558,12 +638,14 @@ You have access to file operations, code search, command execution, and more. Us
         elif tool_name == "write_text_file":
             file_path = arguments["file_path"]
             content = arguments["content"]
+            mode = arguments.get("mode", "w")  # Default: overwrite
             encoding = arguments.get("encoding", "utf-8")
             try:
                 Path(file_path).parent.mkdir(parents=True, exist_ok=True)
-                with open(file_path, 'w', encoding=encoding) as f:
+                with open(file_path, mode, encoding=encoding) as f:
                     f.write(content)
-                return {"success": True, "message": f"Wrote {len(content)} chars to {file_path}"}
+                action = "Appended" if mode == "a" else "Wrote"
+                return {"success": True, "message": f"{action} {len(content)} chars to {file_path}"}
             except Exception as e:
                 return {"success": False, "error": str(e)}
 
@@ -621,6 +703,43 @@ You have access to file operations, code search, command execution, and more. Us
                     f.writelines(lines)
 
                 return {"success": True, "message": f"Inserted content at line {line_number} in {file_path}"}
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "delete_file":
+            path = arguments["path"]
+            recursive = arguments.get("recursive", False)
+
+            try:
+                import shutil
+                path_obj = Path(path)
+
+                if not path_obj.exists():
+                    return {"success": False, "error": f"Path does not exist: {path}"}
+
+                if path_obj.is_file():
+                    path_obj.unlink()
+                    return {"success": True, "message": f"Deleted file: {path}"}
+                elif path_obj.is_dir():
+                    if recursive:
+                        shutil.rmtree(path)
+                        return {"success": True, "message": f"Deleted directory recursively: {path}"}
+                    else:
+                        path_obj.rmdir()  # Only works if empty
+                        return {"success": True, "message": f"Deleted empty directory: {path}"}
+                else:
+                    return {"success": False, "error": f"Unknown path type: {path}"}
+            except Exception as e:
+                return {"success": False, "error": str(e)}
+
+        elif tool_name == "create_directory":
+            path = arguments["path"]
+            parents = arguments.get("parents", True)
+
+            try:
+                path_obj = Path(path)
+                path_obj.mkdir(parents=parents, exist_ok=True)
+                return {"success": True, "message": f"Created directory: {path}"}
             except Exception as e:
                 return {"success": False, "error": str(e)}
 

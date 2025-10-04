@@ -22,6 +22,9 @@ openai>=1.0.0
 # Anthropic (Claude models) - Popular alternative
 anthropic>=0.65.0
 
+# Claude Agent SDK - For ClaudeCodeAgent
+claude-agent-sdk>=0.1.0
+
 # Google AI Studio (Gemini models) - Simple API key auth
 google-generativeai>=0.8.0
 google-genai>=1.0.0  # New GenAI SDK for latest Gemini models

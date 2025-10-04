@@ -8,11 +8,12 @@
 
 ## 🌟 What is Harvester SDK?
 
-Harvester SDK is a comprehensive AI processing platform that provides a **unified interface** to all major AI providers. Whether you need text generation, image creation, batch processing, or real-time conversations, Harvester SDK handles the complexity so you can focus on building.
+Harvester SDK is a comprehensive AI processing platform that provides a **unified interface** to all major AI providers. Whether you need text generation, image creation, batch processing, agentic coding, or real-time conversations, Harvester SDK handles the complexity so you can focus on building.
 
 ### ⚡ Key Features
 
 - **Multi-Provider Support** - OpenAI, Anthropic, Google AI Studio, Vertex AI, XAI, DeepSeek
+- **Agentic Coding Assistants** - Grok Code Agent (fast) & Claude Code Agent (SDK-powered)
 - **Enhanced Chat Experience** - `prompt_toolkit` integration with multi-line paste, command history, and professional line editing
 - **Dual Authentication** - API keys (GenAI) and service accounts (Vertex AI)
 - **Streaming & Turn-Based Chat** - Real-time streaming or non-streaming conversations
@@ -29,11 +30,6 @@ Harvester SDK is a comprehensive AI processing platform that provides a **unifie
 # Install the SDK
 pip install harvester-sdk
 
-# Install with all providers
-pip install harvester-sdk[all]
-
-# Install specific providers
-pip install harvester-sdk[openai,anthropic,genai]
 ```
 
 ### Basic Usage
@@ -44,10 +40,10 @@ harvester --help
 
 # Turn-based conversation (non-streaming)
 harvester message --model gemini-2.5-flash
-harvester message --model claude-sonnet-4-20250514 --system "You are a helpful assistant"
+harvester message --model sonnet-4-5 --system "You are a helpful assistant"
 
 # Batch processing from CSV
-harvester batch data.csv --model gpt-4o --template quick
+harvester batch data.csv --model gpt-5 --template quick
 
 # Process directory with templates
 harvester process ./src --template refactor --model gemini-2.5-pro
@@ -88,6 +84,11 @@ export DEEPSEEK_API_KEY=your_deepseek_key
 - `harvester image` - Image generation (single or batch)
 - `harvester search` - AI-enhanced web search (Grok)
 
+### Agentic Commands
+- `harvester agent-grok` - **Grok Code Agent** - Fast / impressive agentic coding (grok-code-fast-1)
+- `harvester agent-claude` - **Claude Code Agent** - Prone to hallucinations, be careful Claude will delete the Claude Agent SDK
+- `harvester computer` - **GPT Computer Use** - AI agent that controls browser/computer
+
 ### Utility Commands
 - `harvester list-models` - Show available models
 - `harvester config --show` - Display configuration
@@ -110,14 +111,139 @@ The `harvester chat` command provides a professional terminal experience:
 |---------------------|------------------------------|--------------|
 | `gemini-2.5-flash` | `vtx-gemini-2.5-flash` | Fast, cost-effective |
 | `gemini-2.5-pro` | `vtx-gemini-2.5-pro` | High-quality reasoning |
-| `gemini-1.5-flash` | `vtx-gemini-1.5-flash` | Legacy support |
+| `gemini-2.5-flash-lite` | `vtx-gemini-2.5-flash-lite` | low latency |
 
 ### Other Providers
-- **OpenAI**: `gpt-4o`, `gpt-4o-mini`
-- **Anthropic**: `claude-sonnet-4-20250514`, `claude-opus-4-1-20250805`
-- **XAI**: `grok-4-0709`, `grok-3`, `grok-3-mini`
+- **OpenAI**: `gpt-5`, `gpt-5-mini`, `gpt-5-nano`
+- **Anthropic**: `claude-sonnet-4-5`,`claude-sonnet-4`, `claude-opus-4-1`
+- **XAI**: `grok-code-fast-1`,`grok-4-fast-reasoning`,`grok-4-fast`,`grok-4-0709`, `grok-3`, `grok-3-mini`
 - **DeepSeek**: `deepseek-chat`, `deepseek-reasoner`
 
+## 🤖 Agentic Coding Assistants
+
+Harvester SDK includes two powerful agentic coding assistants that can autonomously handle complex multi-step coding tasks.
+
+### Grok Code Agent (`agent-grok`)
+
+**Powered by xAI's `grok-code-fast-1` model** - The fastest, most cost-effective agentic coding solution.
+
+**Features:**
+- ⚡ **4x faster** than claude-code agents
+- 💰 **1/10th the cost** of comparable solutions
+- 🧰 **11 tools**: file operations, JSON tools, command execution, directory management
+- 🔁 **100 max iterations** with loop detection on file reads
+- 🎯 **Streaming reasoning traces** - Read the Agents thoughts after
+- 🛡️ **Safety first** - Dangerous commands (rm -rf /, dd, fork bombs) automatically blocked
+- 🚀 **Ripgrep support** - 10x faster code search when available
+
+**Example:**
+
+```bash
+🤖 agent-grok "build programs from this list /path/to/file.md" --show-reasoning
+🎯 Type: general
+
+============================================================
+🔄 Iteration 1/100
+============================================================
+
+🔧 Tool Calls (1)
+  → read_file({'file_path': '/home/user/linux_c_programs/linux_c_program_taxonomy.md'})
+    ✓ # Comprehensive Taxonomy of C Programs for Linux
+## ~300 Feasible Program Ideas by Category
+
+---
+
+##...
+
+============================================================
+🔄 Iteration 2/100
+============================================================
+
+🔧 Tool Calls (1)
+  → list_files({'path': '/home/user/linux_c_programs'})
+    ✓ Success
+
+============================================================
+🔄 Iteration 3/100
+============================================================
+
+🔧 Tool Calls (1)
+  → list_files({'path': '/home/user/linux_c_programs/libs'})
+    ✓ Success
+
+============================================================
+🔄 Iteration 4/100
+============================================================
+
+🔧 Tool Calls (1)
+  → read_file({'file_path': '/home/user/linux_c_programs/libs/common.h'})
+    ✓ #ifndef COMMON_H
+#define COMMON_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#inclu...
+
+```
+
+### Claude Code Agent (`agent-claude`)
+
+**Built on Anthropic's official Claude Agent SDK** - infrastructure from the team behind Claude Code CLI.
+
+```bash
+# Execute a coding task
+harvester agent-claude "Implement a REST API endpoint with validation"
+
+# Complex debugging
+harvester agent-claude "Debug the memory leak in the worker pool"
+```
+
+**Features:**
+- 🏗️ **Production-tested agent loop** - Anthropic's own implementation
+- 🎯 **Automatic context management** - Built-in compaction and caching
+- 🔧 **Professional tooling** - Same tools as Claude Code CLI
+- 🤝 **MCP protocol support** - External service integrations
+- ⚙️ **Subagents** - Parallel task execution (be careful, faceless Claude agents do not respect the project)
+
+**Example Output:**
+```bash
+🤖 agent-claude
+📋 Task: Implement REST API...
+🎯 Type: feature
+🧠 Model: claude-sonnet-4-5
+
+🔧 Using tool: Write
+✓ Created api/endpoints.py
+
+🔧 Using tool: Bash
+✓ Tests passed
+
+📊 Status: completed
+💰 Cost: $0.097
+```
+
+### Agent Comparison
+
+| Feature | Grok Agent | Claude Agent |
+|---------|-----------|--------------|
+| **Speed** | ⚡⚡⚡⚡ Very Fast (3-5 iterations) | ⚡⚡ Thorough (10-15 iterations) |
+| **Cost** | 💰 ~$0.002/task | 💰💰 ~$0.10/task |
+| **Use Case** | Fast iteration, prototyping | you like Claude
+| **Quality** | ✅ Excellent | DEPENDS |
+| **Tools** | 11 custom tools + safety | Full Claude Code SDK |
+| **Verification** | Basic | Comprehensive |
+
+**When to use which:**
+- **Grok Agent**: general use
+- **Claude Agent**: you like Claude
+
+### Examples
+
+See practical examples in:
+- `/example/agent-grok/` - Output from Grok Code Agent
+- `/example/agent-claude/` - Output from Claude Code Agent
+- `/example/batch-results...` - Batch processing files
 ## 💼 Programming Interface
 
 ### Python SDK Usage
@@ -166,20 +292,28 @@ response = await provider.complete("Hello, world!", "gemini-2.5-flash")
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    HARVESTER SDK                        │
-├─────────────────────────────────────────────────────────┤
-│                 Main CLI Conductor                      │
-│              (harvester command)                        │
-├──────────┬──────────┬──────────┬──────────┬────────────┤
-│ Message  │  Batch   │ Process  │  Image   │   Search   │
-│(Non-str) │   CSV    │   Dir    │   Gen    │ Enhanced   │
-├──────────┴──────────┴──────────┴──────────┴────────────┤
-│                  Provider Factory                       │
-├──────────┬──────────┬──────────┬──────────┬────────────┤
-│  GenAI   │ Vertex   │  OpenAI  │Anthropic │    XAI     │
-│(API Key) │(Service) │          │          │ DeepSeek   │
-└──────────┴──────────┴──────────┴──────────┴────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│                        HARVESTER SDK                              │
+├───────────────────────────────────────────────────────────────────┤
+│                    Main CLI Conductor                             │
+│                   (harvester command)                             │
+├────────┬────────┬────────┬────────┬────────┬────────┬────────────┤
+│Message │ Batch  │Process │ Image  │ Search │ Grok   │  Claude    │
+│(Chat)  │  CSV   │  Dir   │  Gen   │Enhanced│ Agent  │  Agent     │
+├────────┴────────┴────────┴────────┴────────┴────────┴────────────┤
+│                     Provider Factory                              │
+├────────┬────────┬────────┬────────┬────────┬──────────────────────┤
+│ GenAI  │Vertex  │ OpenAI │Anthropic│  XAI   │     DeepSeek         │
+│(APIKey)│(SA)    │        │         │ (Grok) │                      │
+└────────┴────────┴────────┴────────┴────────┴──────────────────────┘
+         └──────────────────────────────────────┘
+                    Agentic Tools Layer
+         ┌─────────────────┬────────────────────┐
+         │  Grok Agent     │  Claude Agent      │
+         │  (Custom Loop)  │  (Official SDK)    │
+         │  - 9 tools      │  - Full SDK tools  │
+         │  - Challenger   │  - previous champ  │
+         └─────────────────┴────────────────────┘
 ```
 
 ## 🔒 Authentication Methods
@@ -211,10 +345,10 @@ All features are **completely free and open source** under the MIT License. No t
 
 ```bash
 # Start a conversation with Gemini
-harvester message --model gemini-2.5-flash --save
+harvester message --model gemini-2.5-flash
 
 # Chat with Claude
-harvester message --model claude-sonnet-4-20250514 --temperature 0.3
+harvester message --model claude-sonnet-4
 
 # System prompt example
 harvester message --model grok-4-0709 --system "You are an expert programmer"
@@ -227,14 +361,14 @@ harvester message --model grok-4-0709 --system "You are an expert programmer"
 harvester batch questions.csv --model gemini-2.5-pro --template analysis
 
 # Directory transformation
-harvester process ./legacy_code --template modernize --model claude-sonnet-4-20250514
+harvester process ./legacy_code --template modernize.j2 --model claude-sonnet-4-5
 ```
 
 ### Image Generation
 
 ```bash
 # DALL-E 3
-harvester image "A futuristic city" --provider dalle3 --quality hd
+harvester image "A futuristic city" --provider dalle-3 --quality hd
 
 # Imagen 4
 harvester image "Abstract art" --provider vertex_image --model imagen-4

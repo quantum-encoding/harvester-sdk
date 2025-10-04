@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "harvester-sdk"
-version = "2.0.0"
-description = "Harvester SDK - The Complete AI Processing Platform. Unified interface for all AI processing paradigms with enterprise-grade reliability."
+version = "2.1.2"
+description = "Harvester SDK - The Complete AI Processing Platform with Agentic Coding Assistants. Unified interface for all AI processing paradigms with enterprise-grade reliability."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "LicenseRef-Proprietary"}
@@ -35,6 +35,10 @@ keywords = [
     "automation",
     "turn-based-chat",
     "non-streaming",
+    "agentic",
+    "agents",
+    "coding-assistant",
+    "claude-agent-sdk",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -63,7 +67,8 @@ dependencies = [
     "pillow>=10.0.0",
     # AI Provider SDKs - Core functionality
     "openai>=1.0.0",
-    "anthropic>=0.65.0", 
+    "anthropic>=0.65.0",
+    "claude-agent-sdk>=0.1.0",
     "google-generativeai>=0.8.0",
 ]
 
@@ -97,11 +102,11 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://harvester-sdk.quantumencoding.io"
-Documentation = "https://harvester-sdk.readthedocs.io"
+Homepage = "https://quantumencoding.io"
+Documentation = "https://github.com/quantum-encoding/harvester-sdk"
 Repository = "https://github.com/quantum-encoding/harvester-sdk"
 Issues = "https://github.com/quantum-encoding/harvester-sdk/issues"
-"Commercial Licensing" = "https://quantumencoding.io/harvester-sdk"
+PyPI = "https://pypi.org/project/harvester-sdk/"
 
 [project.scripts]
 # Main CLI Entry Point

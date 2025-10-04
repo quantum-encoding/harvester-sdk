@@ -7,9 +7,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="harvester-sdk",
-    version="2.0.0",
-    author="Quantum Encoding",
-    author_email="support@quantumencoding.io",
+    version="2.1.2",
+    author="Quantum Encoding Ltd",
+    author_email="info@quantumencoding.io",
     description="Open-source multi-provider AI SDK with parallel processing and enterprise features",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -34,6 +34,7 @@ setup(
         "aiohttp>=3.8.0",
         "aiofiles>=23.0.0",
         "anthropic>=0.39.0",
+        "claude-agent-sdk>=0.1.0",
         "openai>=1.54.0",
         "google-generativeai>=0.8.3",
         "groq>=0.11.0",
@@ -100,15 +101,18 @@ setup(
     },
     zip_safe=False,
     keywords=[
-        "ai", "llm", "gpt", "claude", "gemini", "mistral", "groq", 
+        "ai", "llm", "gpt", "claude", "gemini", "mistral", "groq",
         "anthropic", "openai", "google", "bedrock", "together",
         "multimodal", "parallel-processing", "batch-processing",
         "structured-output", "function-calling", "tool-use",
+        "agentic", "agents", "coding-assistant", "grok", "xai",
         "enterprise", "sdk", "api", "quantum-encoding"
     ],
     project_urls={
-        "Documentation": "https://docs.quantumencoding.io/harvester",
+        "Homepage": "https://quantumencoding.io",
+        "Documentation": "https://github.com/quantum-encoding/harvester-sdk",
         "Source": "https://github.com/quantum-encoding/harvester-sdk",
         "Tracker": "https://github.com/quantum-encoding/harvester-sdk/issues",
+        "PyPI": "https://pypi.org/project/harvester-sdk/",
     },
 )

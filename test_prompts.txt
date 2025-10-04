@@ -1,9 +1,0 @@
-Design a complete SVE (Scalable Vector Extension) implementation for ARM64 that performs real-time SIMD matrix multiplication with dynamic vector length detection and cache-optimized memory access patterns
-
-Architect a Mojo-based background removal system using deep learning that achieves 60fps on CPU-only processing with automatic subject detection, edge refinement, and alpha matting optimization
-
-Create a production-grade Mojo MAX video background remover that processes 4K video streams in real-time using GPU acceleration, temporal coherence, and adaptive quality scaling based on scene complexity
-
-Implement a high-frequency trading engine in Zig with microsecond-level latency, lock-free order book management, FPGA integration support, and deterministic garbage collection
-
-Build a blazing-fast file content search tool in Zig that combines regex pattern matching with fuzzy search, supports parallel directory traversal, memory-mapped file processing, and can search through binary formats with custom parsers

@@ -34,33 +34,16 @@ source venv/bin/activate
 echo "📦 Upgrading pip..."
 pip install --upgrade pip
 
-# Install based on user choice
+# Harvester SDK is now FREEMIUM - Full power, no restrictions!
 echo ""
-echo "Choose installation type:"
-echo "1) Core only (minimal dependencies)"
-echo "2) Full (all AI providers)"
-echo "3) Development (full + dev tools)"
-read -p "Enter choice [1-3]: " choice
-
-case $choice in
-    1)
-        echo "📥 Installing core dependencies..."
-        pip install -r requirements.txt
-        ;;
-    2)
-        echo "📥 Installing full dependencies (all providers)..."
-        pip install -r requirements-full.txt
-        ;;
-    3)
-        echo "📥 Installing development dependencies..."
-        pip install -r requirements-full.txt
-        pip install -e .
-        ;;
-    *)
-        echo "❌ Invalid choice. Installing core dependencies..."
-        pip install -r requirements.txt
-        ;;
-esac
+echo "🌟 FREEMIUM BUILD - MAX POWER! 🌟"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✨ All providers, all features, unlimited power"
+echo "✨ Agentic coding assistants (Grok + Claude)"
+echo "✨ No tiers, no paywalls, no restrictions"
+echo ""
+echo "📥 Installing FULL dependencies (all providers + agents)..."
+pip install -r requirements.txt
 
 # Create necessary directories
 echo "📁 Creating output directories..."
@@ -91,26 +74,47 @@ check_api_key "GOOGLE_APPLICATION_CREDENTIALS"
 
 # Show installation summary
 echo ""
-echo "✅ Installation complete!"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ FREEMIUM INSTALLATION COMPLETE - MAX POWER UNLOCKED! ✅"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "🎯 What you get (100% FREE):"
+echo "   ✨ ALL AI providers (OpenAI, Anthropic, Google, XAI, DeepSeek)"
+echo "   ✨ BOTH agentic coding assistants (Grok + Claude)"
+echo "   ✨ UNLIMITED workers and batch processing"
+echo "   ✨ ALL advanced features (structured output, function calling)"
+echo "   ✨ Production-grade reliability built-in"
 echo ""
 echo "🔑 Set up your API keys:"
 echo "   export GEMINI_API_KEY=your_key      # Google AI Studio"
-echo "   export OPENAI_API_KEY=your_key      # OpenAI" 
-echo "   export ANTHROPIC_API_KEY=your_key   # Anthropic"
-echo "   export XAI_API_KEY=your_key         # XAI"
+echo "   export OPENAI_API_KEY=your_key      # OpenAI"
+echo "   export ANTHROPIC_API_KEY=your_key   # Anthropic (for Claude Agent)"
+echo "   export XAI_API_KEY=your_key         # XAI (for Grok Agent)"
 echo "   export DEEPSEEK_API_KEY=your_key    # DeepSeek"
 echo ""
 echo "🎯 For Vertex AI (enterprise):"
 echo "   export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json"
 echo ""
-echo "2. Test the installation:"
+echo "🚀 Quick Start:"
 echo "   source venv/bin/activate"
 echo "   python harvester.py --help"
-echo "   python harvester.py tier"
 echo ""
-echo "3. Start using Harvester SDK:"
-echo "   harvester message --model gemini-2.5-flash"
-echo "   harvester message --model vtx-gemini-2.5-flash  # Vertex AI"
+echo "💬 Chat with AI:"
+echo "   harvester chat --model gemini-2.5-flash"
+echo "   harvester message --model claude-sonnet-4-20250514"
 echo ""
+echo "🤖 Agentic Coding (NEW!):"
+echo "   harvester agent-grok \"Create a Python script for data validation\""
+echo "   harvester agent-claude \"Implement a REST API endpoint\""
+echo ""
+echo "📦 Batch Processing:"
+echo "   harvester batch data.csv --model gpt-4o --template analysis"
+echo ""
+echo "🖼️  Image Generation:"
+echo "   harvester image \"A beautiful sunset\" --provider dalle3"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "📧 Support: info@quantumencoding.io"
 echo "🌐 Website: https://quantumencoding.io"
+echo "🎉 Enjoy unlimited AI processing power - it's FREE!"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

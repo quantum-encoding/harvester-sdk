@@ -6,8 +6,7 @@ Enhanced Template-Based Code Transformation Engine - UNIFIED EDITION
 Contact: info@quantumencoding.io
 Website: https://quantumencoding.io
 
-Reforged with the Crown Jewel ParallelProcessor for military-grade parallelism.
-Transform entire codebases with impossible speed and reliability.
+Reforged with the ParallelProcessor for military-grade parallelism.
 
 Copyright (c) 2025 Quantum Encoding Ltd.
 """
@@ -41,9 +40,7 @@ logger = logging.getLogger(__name__)
 
 class UnifiedCodeTransformer:
     """
-    Code Transformation with the Crown Jewel ParallelProcessor
-    
-    This is the Great Unification in action - sequential bottlenecks eliminated forever.
+    Code Transformation with the ParallelProcessor
     """
     
     def __init__(self, model: str = 'gemini-2.5-flash', template: str = 'documentation.j2'):
@@ -165,9 +162,7 @@ class UnifiedCodeTransformer:
                                 output_path: Path,
                                 template_vars: dict = None) -> dict:
         """
-        Transform an entire codebase using the Crown Jewel ParallelProcessor
-        
-        This replaces the old sequential loop with military-grade parallelism.
+        Transform an entire codebase using the ParallelProcessor
         """
         # Find files to process with proper filtering
         all_files = source_path.glob(file_pattern)
@@ -205,7 +200,7 @@ class UnifiedCodeTransformer:
                           f"({progress['progress_percent']:.1f}%)")
         
         # EXECUTE WITH THE CROWN JEWEL
-        logger.info("🔥 Initiating parallel transformation with Crown Jewel processor...")
+        logger.info("🔥 Initiating parallel transformation...")
         
         batch_result = await self.processor.execute_batch(
             operations=operations,
@@ -266,9 +261,9 @@ class UnifiedCodeTransformer:
 @click.option('--rpm', default=60, help='Requests per minute rate limit')
 def main(source, template, model, output, file_pattern, max_files, template_vars, dry_run, workers, rpm):
     """
-    Enhanced Template-Based Code Transformation Engine - UNIFIED EDITION
+    Enhanced Template-Based Code Transformation Engine
     
-    Transform codebases using AI-powered templates with the Crown Jewel ParallelProcessor.
+    Transform codebases using templates with the ParallelProcessor.
     Now with military-grade parallelism, intelligent rate limiting, and automatic retries.
     
     Examples:
@@ -289,8 +284,8 @@ def main(source, template, model, output, file_pattern, max_files, template_vars
     output_path = Path(output)
     source_path = Path(source)
     
-    click.echo(f"🔥 Sacred Wrapper SDK - Code Transformation Engine (UNIFIED)")
-    click.echo(f"⚡ Powered by the Crown Jewel ParallelProcessor")
+    click.echo(f"🔥 Sacred Wrapper SDK - Code Transformation Engine")
+    click.echo(f"⚡ Powered by the ParallelProcessor")
     click.echo(f"📁 Source: {source}")
     click.echo(f"📋 Template: {template}")
     click.echo(f"🤖 Model: {model}")
