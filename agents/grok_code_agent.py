@@ -549,9 +549,9 @@ You have access to file operations, code search, command execution, and more. Us
         # Store for cache optimization (don't modify prefix)
         self.message_history = messages.copy()
 
-        # Track recent tool calls to detect loops
-        recent_tools = []
-        loop_threshold = 3  # If same tool called 3+ times in row, warn
+        # Track recent tool calls to detect loops (file reads only)
+        recent_file_reads = []
+        loop_threshold = 3  # If same file read 3+ times in row, warn
 
         # Execute with tool calling loop
         for iteration in range(self.max_iterations):
@@ -581,17 +581,19 @@ You have access to file operations, code search, command execution, and more. Us
             if response.get("tool_calls") and len(response["tool_calls"]) > 0:
                 print(f"\n🔧 Tool Calls ({len(response['tool_calls'])})")
 
-                # Check for loops
-                tool_names = [tc["name"] for tc in response["tool_calls"]]
-                recent_tools.extend(tool_names)
-                recent_tools = recent_tools[-10:]  # Keep last 10 tool calls
+                # Check for loops on read_file operations only
+                for tc in response["tool_calls"]:
+                    if tc["name"] == "read_file":
+                        file_path = tc.get("arguments", {}).get("file_path", "")
+                        if file_path:
+                            recent_file_reads.append(file_path)
+                            recent_file_reads = recent_file_reads[-10:]  # Keep last 10
 
-                # Detect if stuck in loop
-                if len(recent_tools) >= loop_threshold:
-                    last_tools = recent_tools[-loop_threshold:]
-                    if len(set(last_tools)) == 1:  # Same tool 3+ times
-                        print(f"⚠️  Warning: Detected loop - '{last_tools[0]}' called {loop_threshold} times in a row!")
-                        print(f"   Agent may be stuck. Consider adding context or breaking down the task.")
+                # Detect if stuck reading same file
+                if len(recent_file_reads) >= loop_threshold:
+                    last_reads = recent_file_reads[-loop_threshold:]
+                    if len(set(last_reads)) == 1:  # Same file read 3+ times
+                        print(f"⚠️  Warning: Reading '{last_reads[0]}' {loop_threshold} times in a row - possible loop")
 
                 for tool_call in response["tool_calls"]:
                     print(f"  → {tool_call['name']}({tool_call['arguments']})", flush=True)
