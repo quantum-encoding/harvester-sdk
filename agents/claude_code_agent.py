@@ -377,8 +377,9 @@ Please complete this task using the available tools. When done, provide a summar
         # Configure Claude Agent SDK options
         options = ClaudeAgentOptions(
             system_prompt=system_prompt,
-            working_directory=self.working_directory,
-            tools=self.custom_tools  # Add our custom tools
+            cwd=self.working_directory,  # Use 'cwd' not 'working_directory'
+            model=self.model,
+            max_turns=self.max_iterations
         )
 
         # Execute with SDK's query() function
