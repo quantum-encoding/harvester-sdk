@@ -756,9 +756,11 @@ def message_command(model, system, temperature, save, max_tokens):
 @click.option('--environment', '-e', type=click.Choice(['browser', 'docker']), default='browser',
               help='Environment to use (browser or docker)')
 @click.option('--url', '-u', help='Initial URL to navigate to (browser only)')
+@click.option('--headed', is_flag=True, help='Run browser in headed mode (visible window)')
+@click.option('--cdp', help='Connect to Chrome DevTools Protocol URL (e.g., http://localhost:9222)')
 @click.option('--width', type=int, default=1024, help='Display width')
 @click.option('--height', type=int, default=768, help='Display height')
-def computer_command(task, environment, url, width, height):
+def computer_command(task, environment, url, headed, cdp, width, height):
     """GPT Computer Use - AI agent that controls browser/computer
 
     Examples:
@@ -779,6 +781,12 @@ def computer_command(task, environment, url, width, height):
 
     if url:
         cmd.extend(['--url', url])
+
+    if headed:
+        cmd.append('--headed')
+
+    if cdp:
+        cmd.extend(['--cdp', cdp])
 
     subprocess.run(cmd)
 

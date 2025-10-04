@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "harvester-sdk"
-version = "2.1.2"
+version = "2.1.3"
 description = "Harvester SDK - The Complete AI Processing Platform with Agentic Coding Assistants. Unified interface for all AI processing paradigms with enterprise-grade reliability."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -65,11 +65,49 @@ dependencies = [
     "click>=8.0.0",
     "pandas>=2.0.0",
     "pillow>=10.0.0",
-    # AI Provider SDKs - Core functionality
-    "openai>=1.0.0",
-    "anthropic>=0.65.0",
+    "rich>=13.0.0",
+    "tiktoken>=0.5.0",
+    "jsonschema>=4.0.0",
+    "pydantic>=2.0.0",
+    "prompt_toolkit>=3.0.0",
+    # AI Provider SDKs - All providers included by default
+    "openai>=1.54.0",
+    "anthropic>=0.39.0",
     "claude-agent-sdk>=0.1.0",
-    "google-generativeai>=0.8.0",
+    "google-generativeai>=0.8.3",
+    "google-genai>=1.0.0",
+    "google-cloud-aiplatform>=1.38.0",
+    "groq>=0.11.0",
+    "boto3>=1.35.0",
+    "mistralai>=1.2.3",
+    "cohere>=5.11.0",
+    "ollama>=0.4.4",
+    "together>=1.3.0",
+    "voyageai>=0.3.0",
+    # Search & Web
+    "tavily-python>=0.5.0",
+    "duckduckgo-search>=6.3.0",
+    # Document Processing
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.0",
+    "chardet>=5.2.0",
+    "PyPDF2>=3.0.0",
+    "python-docx>=1.0.0",
+    "python-pptx>=0.6.0",
+    "openpyxl>=3.1.0",
+    "ebooklib>=0.18",
+    "pypandoc>=1.13",
+    "textstat>=0.7.0",
+    # Media Processing
+    "moviepy>=1.0.0",
+    "speechrecognition>=3.10.0",
+    "pydub>=0.25.0",
+    "yt-dlp>=2024.0.0",
+    "ffmpeg-python>=0.2.0",
+    "python-magic>=0.4.0",
+    "python-multipart>=0.0.6",
+    "sqlalchemy>=2.0.0",
+    "aiosqlite>=0.19.0",
 ]
 
 [project.optional-dependencies]
@@ -86,6 +124,15 @@ all = [
     "google-genai>=0.1.0",
     "google-generativeai>=0.3.0",
     "google-cloud-aiplatform>=1.38.0",
+]
+computer = [
+    "openai>=1.0.0",
+    "anthropic>=0.3.0",
+    "google-genai>=0.1.0",
+    "google-generativeai>=0.3.0",
+    "google-cloud-aiplatform>=1.38.0",
+    "playwright>=1.40.0",
+    "openai-agents>=0.1.0",  # OpenAI Agents SDK for advanced agentic workflows
 ]
 dev = [
     "pytest>=7.0.0",
@@ -133,7 +180,7 @@ license-check = "license_check:main"        # License management
 test-xai-deepseek = "test_xai_deepseek:main"
 
 [tool.setuptools]
-packages = ["harvester_sdk", "providers", "processors", "core", "utils"]
+packages = ["harvester_sdk", "providers", "processors", "core", "utils", "agents", "cli"]
 include-package-data = true
 py-modules = [
     "harvester",  # Main CLI conductor
@@ -155,8 +202,10 @@ py-modules = [
 harvester_sdk = ["*.py"]
 core = ["*.py"]
 providers = ["*.py"]
-processors = ["*.py"] 
+processors = ["*.py"]
 utils = ["*.py"]
+agents = ["*.py"]
+cli = ["*.py"]
 config = ["*.yaml", "*.json"]
 templates = ["*.yaml", "*.json", "*.j2", "**/*.csv"]
 

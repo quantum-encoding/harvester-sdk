@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="harvester-sdk",
-    version="2.1.2",
+    version="2.1.3",
     author="Quantum Encoding Ltd",
     author_email="info@quantumencoding.io",
     description="Open-source multi-provider AI SDK with parallel processing and enterprise features",

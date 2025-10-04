@@ -46,7 +46,7 @@ class Colors:
     BOLD = '\033[1m'
 
 class GPTComputerUse:
-    def __init__(self, environment: str = "browser", display_width: int = 1024, display_height: int = 768):
+    def __init__(self, environment: str = "browser", display_width: int = 1024, display_height: int = 768, headless: bool = True, cdp_url: str = None):
         # Check for OpenAI SDK
         try:
             from openai import OpenAI
@@ -57,6 +57,9 @@ class GPTComputerUse:
         # Check API key
         if not os.getenv("OPENAI_API_KEY"):
             raise ValueError("OpenAI API key required. Set OPENAI_API_KEY environment variable")
+
+        self.headless = headless
+        self.cdp_url = cdp_url
 
         self.environment = environment
         self.display_width = display_width
@@ -78,17 +81,36 @@ class GPTComputerUse:
 
         print(f"{Colors.CYAN}🌐 Starting browser environment...{Colors.ENDC}")
         self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(
-            headless=False,
-            chromium_sandbox=True,
-            env={},
-            args=["--disable-extensions", "--disable-file-system"]
-        )
-        self.browser_page = await self.browser.new_page()
-        await self.browser_page.set_viewport_size({
-            "width": self.display_width,
-            "height": self.display_height
-        })
+
+        if self.cdp_url:
+            # Connect to existing browser via CDP
+            print(f"{Colors.CYAN}→ Connecting to browser at {self.cdp_url}{Colors.ENDC}")
+            self.browser = await self.playwright.chromium.connect_over_cdp(self.cdp_url)
+            # Get existing context or create new one
+            contexts = self.browser.contexts
+            if contexts:
+                context = contexts[0]
+                pages = context.pages
+                self.browser_page = pages[0] if pages else await context.new_page()
+            else:
+                context = await self.browser.new_context(
+                    viewport={"width": self.display_width, "height": self.display_height}
+                )
+                self.browser_page = await context.new_page()
+        else:
+            # Launch new browser instance
+            self.browser = await self.playwright.chromium.launch(
+                headless=self.headless,  # Configurable headless mode
+                chromium_sandbox=False,  # Disable sandbox for Linux compatibility
+                env={},
+                args=["--disable-extensions", "--disable-file-system", "--no-sandbox"]
+            )
+            self.browser_page = await self.browser.new_page()
+            await self.browser_page.set_viewport_size({
+                "width": self.display_width,
+                "height": self.display_height
+            })
+
         print(f"{Colors.GREEN}✓ Browser ready{Colors.ENDC}")
 
     def setup_docker(self, container_name: str = "cua-container", display: str = ":99"):
@@ -126,7 +148,7 @@ class GPTComputerUse:
 
     async def get_browser_screenshot(self) -> bytes:
         """Capture screenshot from browser"""
-        return await self.browser_page.screenshot()
+        return await self.browser_page.screenshot(timeout=60000)  # 60 second timeout
 
     def get_docker_screenshot(self) -> bytes:
         """Capture screenshot from Docker VM"""
@@ -263,10 +285,11 @@ class GPTComputerUse:
         # Setup environment
         if self.environment == "browser":
             await self.setup_browser()
-            if initial_url:
-                print(f"{Colors.CYAN}→ Navigating to {initial_url}{Colors.ENDC}")
-                await self.browser_page.goto(initial_url)
-                await self.browser_page.wait_for_timeout(2000)
+            # Always load an initial page (default to DuckDuckGo if not specified)
+            start_url = initial_url or "https://duckduckgo.com/"
+            print(f"{Colors.CYAN}→ Navigating to {start_url}{Colors.ENDC}")
+            await self.browser_page.goto(start_url, wait_until="domcontentloaded")
+            await self.browser_page.wait_for_timeout(2000)
         elif self.environment == "docker":
             self.setup_docker()
 
@@ -290,7 +313,7 @@ class GPTComputerUse:
                 "content": [
                     {
                         "type": "input_text",
-                        "text": task
+                        "text": f"{task}\n\nIMPORTANT: You are an autonomous agent. Make decisions and take actions without asking for user confirmation. For cookie banners or popups, dismiss or accept them as appropriate and continue with the task."
                     },
                     {
                         "type": "input_image",
@@ -318,10 +341,47 @@ class GPTComputerUse:
             computer_calls = [item for item in response.output if item.type == "computer_call"]
 
             if not computer_calls:
-                # No more actions - task complete
-                print(f"\n{Colors.GREEN}✓ Task complete!{Colors.ENDC}\n")
+                # Check if the agent is asking for help or truly done
+                message_text = ""
+                for item in response.output:
+                    if item.type == "message" and hasattr(item, 'content'):
+                        for content in item.content:
+                            if hasattr(content, 'text'):
+                                message_text = content.text.lower()
 
-                # Display final output
+                # If asking about CAPTCHA or cookies, tell it to try a different approach
+                if "captcha" in message_text or "how would you like" in message_text or "can you" in message_text:
+                    print(f"{Colors.YELLOW}⚠️  Agent encountered obstacle, attempting alternative approach...{Colors.ENDC}")
+
+                    # Get current screenshot and continue
+                    screenshot = await self.get_screenshot()
+                    screenshot_base64 = base64.b64encode(screenshot).decode("utf-8")
+
+                    response = self.client.responses.create(
+                        model=self.model,
+                        tools=[{
+                            "type": "computer_use_preview",
+                            "display_width": self.display_width,
+                            "display_height": self.display_height,
+                            "environment": self.environment
+                        }],
+                        input=[{
+                            "role": "user",
+                            "content": [{
+                                "type": "input_text",
+                                "text": "Try a different approach. If there's a CAPTCHA, try navigating to a different search engine or news source. If there are cookies, just accept them and continue. Don't ask - just do it."
+                            }, {
+                                "type": "input_image",
+                                "image_url": f"data:image/png;base64,{screenshot_base64}"
+                            }]
+                        }],
+                        reasoning={"summary": "concise"},
+                        truncation="auto"
+                    )
+                    continue
+
+                # Otherwise, task is complete
+                print(f"\n{Colors.GREEN}✓ Task complete!{Colors.ENDC}\n")
                 for item in response.output:
                     if item.type == "reasoning":
                         if hasattr(item, 'summary') and item.summary:
@@ -349,7 +409,8 @@ class GPTComputerUse:
                     print(f"{Colors.CYAN}💭 {summary_text}{Colors.ENDC}")
 
             # Show action
-            print(f"{Colors.MAGENTA}🔧 Action: {action.get('type', 'unknown')}{Colors.ENDC}")
+            action_type = type(action).__name__ if action else 'unknown'
+            print(f"{Colors.MAGENTA}🔧 Action: {action_type}{Colors.ENDC}")
 
             # Handle safety checks
             acknowledged_checks = []
@@ -432,6 +493,8 @@ async def main():
     parser.add_argument('--environment', '-e', choices=['browser', 'docker'], default='browser',
                        help='Environment to use (browser or docker)')
     parser.add_argument('--url', '-u', help='Initial URL to navigate to (browser only)')
+    parser.add_argument('--headed', action='store_true', help='Run browser in headed mode (visible window)')
+    parser.add_argument('--cdp', help='Connect to Chrome DevTools Protocol URL (e.g., http://localhost:9222)')
     parser.add_argument('--width', type=int, default=1024, help='Display width')
     parser.add_argument('--height', type=int, default=768, help='Display height')
     parser.add_argument('--container', default='cua-container', help='Docker container name')
@@ -450,7 +513,9 @@ async def main():
     agent = GPTComputerUse(
         environment=args.environment,
         display_width=args.width,
-        display_height=args.height
+        display_height=args.height,
+        headless=not args.headed,  # Invert: --headed flag means headless=False
+        cdp_url=args.cdp
     )
 
     try:

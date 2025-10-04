@@ -27,10 +27,17 @@ Harvester SDK is a comprehensive AI processing platform that provides a **unifie
 ### Installation
 
 ```bash
-# Install the SDK
+# Standard installation (all providers, no browser automation)
 pip install harvester-sdk
 
+# With computer use / browser automation support (includes Playwright)
+pip install harvester-sdk[computer]
+
+# After installing with [computer], download browser binaries:
+playwright install
 ```
+
+**Note:** The `[computer]` extra is only needed if you plan to use the `harvester computer` command for AI-powered browser automation. It adds ~600MB of browser downloads.
 
 ### Basic Usage
 

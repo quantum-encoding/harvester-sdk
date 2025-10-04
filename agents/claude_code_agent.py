@@ -15,6 +15,7 @@ Copyright (c) 2025 Quantum Encoding Ltd.
 import asyncio
 import json
 import logging
+import os
 from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -24,6 +25,12 @@ from pathlib import Path
 from claude_agent_sdk import query, tool, ClaudeAgentOptions
 
 logger = logging.getLogger(__name__)
+
+# Enable LD_PRELOAD safety for all subprocess calls
+_SAFE_EXEC_LIB = str(Path(__file__).parent / "safe_exec.so")
+if os.path.exists(_SAFE_EXEC_LIB):
+    os.environ['LD_PRELOAD'] = _SAFE_EXEC_LIB
+    logger.info(f"Safe execution library loaded: {_SAFE_EXEC_LIB}")
 
 
 @dataclass
