@@ -379,7 +379,8 @@ Please complete this task using the available tools. When done, provide a summar
             system_prompt=system_prompt,
             cwd=self.working_directory,  # Use 'cwd' not 'working_directory'
             model=self.model,
-            max_turns=self.max_iterations
+            max_turns=self.max_iterations,
+            permission_mode='bypassPermissions'  # Allow autonomous tool execution
         )
 
         # Execute with SDK's query() function
