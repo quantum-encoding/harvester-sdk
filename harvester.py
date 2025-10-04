@@ -1128,7 +1128,7 @@ def config_command(show, set_key, test):
         # Could implement provider test here
         click.echo("Provider test functionality coming soon!")
 
-@cli.command('grok-code')
+@cli.command('agent-grok')
 @click.argument('task', required=True)
 @click.option('--files', '-f', multiple=True, help='Files to include as context')
 @click.option('--project-structure', '-p', help='Project structure description or file')
@@ -1262,7 +1262,7 @@ def grok_code_command(task, files, project_structure, task_type, max_iterations,
     # Run async agent
     asyncio.run(run_agent())
 
-@cli.command('claude-code')
+@cli.command('agent-claude')
 @click.argument('task', required=True)
 @click.option('--files', '-f', multiple=True, help='Files to include as context')
 @click.option('--project-structure', '-p', help='Project structure description or file')
