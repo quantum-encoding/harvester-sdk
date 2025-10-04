@@ -1262,5 +1262,108 @@ def grok_code_command(task, files, project_structure, task_type, max_iterations,
     # Run async agent
     asyncio.run(run_agent())
 
+@cli.command('claude-code')
+@click.argument('task', required=True)
+@click.option('--files', '-f', multiple=True, help='Files to include as context')
+@click.option('--project-structure', '-p', help='Project structure description or file')
+@click.option('--task-type', '-t', default='general',
+              type=click.Choice(['general', 'debugging', 'refactoring', 'feature']),
+              help='Type of coding task')
+@click.option('--max-iterations', '-i', default=100, help='Maximum iterations')
+@click.option('--model', '-m', default='claude-sonnet-4-5', help='Claude model to use')
+@click.option('--output', '-o', help='Save result to file')
+def claude_code_command(task, files, project_structure, task_type, max_iterations, model, output):
+    """
+    🤖 Claude Code Agent - Professional agentic assistant
+
+    Built on Anthropic's official Claude Agent SDK with:
+    - Production-tested agent loop
+    - Built-in context compaction and cache optimization
+    - Proper verification and error handling
+    - Subagents for parallel work
+    - MCP integration for external services
+    - Custom harvester tools (query other providers, JSON tools)
+
+    Examples:
+        # Simple task
+        harvester claude-code "Add error handling to auth.py"
+
+        # With context files
+        harvester claude-code "Refactor database layer" -f db.py -f models.py
+
+        # Feature development
+        harvester claude-code "Implement rate limiting API" -t feature
+
+        # Different Claude model
+        harvester claude-code "Debug memory leak" -m claude-opus-4 -t debugging
+    """
+    from agents.claude_code_agent import ClaudeCodeAgent
+
+    click.echo("🤖 Claude Code Agent")
+    click.echo(f"📋 Task: {task}")
+    click.echo(f"🎯 Type: {task_type}")
+    click.echo(f"🧠 Model: {model}")
+    click.echo()
+
+    # Build context
+    context = {}
+
+    # Add files to context
+    if files:
+        context['files'] = {}
+        for file_path in files:
+            try:
+                with open(file_path, 'r') as f:
+                    context['files'][file_path] = f.read()
+                click.echo(f"📄 Loaded: {file_path}")
+            except Exception as e:
+                click.echo(f"⚠️  Could not load {file_path}: {e}")
+
+    # Add project structure
+    if project_structure:
+        try:
+            if os.path.isfile(project_structure):
+                with open(project_structure, 'r') as f:
+                    context['project_structure'] = f.read()
+            else:
+                context['project_structure'] = project_structure
+        except Exception as e:
+            click.echo(f"⚠️  Could not load project structure: {e}")
+
+    async def run_agent():
+        agent = ClaudeCodeAgent(
+            model=model,
+            max_iterations=max_iterations
+        )
+
+        click.echo("🚀 Starting Claude Agent SDK workflow...")
+        click.echo()
+
+        # Execute task (SDK handles everything)
+        result = await agent.execute_task(
+            description=task,
+            context=context if context else None,
+            task_type=task_type,
+            show_progress=True
+        )
+
+        # Save to file if requested
+        if output:
+            with open(output, 'w') as f:
+                output_data = {
+                    'task': task,
+                    'task_type': task_type,
+                    'model': model,
+                    'status': result.status,
+                    'iterations': result.iterations,
+                    'result': result.result,
+                    'messages': result.messages
+                }
+                json.dump(output_data, f, indent=2)
+            click.echo(f"\n💾 Saved to: {output}")
+
+    # Run async agent
+    asyncio.run(run_agent())
+
 if __name__ == '__main__':
     cli()
