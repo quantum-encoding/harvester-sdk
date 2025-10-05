@@ -11,25 +11,52 @@ tqdm>=4.65.0
 click>=8.0.0
 pandas>=2.0.0
 pillow>=10.0.0
+rich>=13.0.0
+tiktoken>=0.5.0
+jsonschema>=4.0.0
+pydantic>=2.0.0
 prompt_toolkit>=3.0.0
 
-# AI Provider SDKs - Essential for full functionality
-# Core providers included by default for best user experience
-
-# OpenAI (GPT-5, GPT-4o, DALL-E) - Primary provider
-openai>=1.0.0
-
-# Anthropic (Claude models) - Popular alternative
-anthropic>=0.65.0
-
-# Claude Agent SDK - For ClaudeCodeAgent
+# AI Provider SDKs - All providers included by default
+openai>=1.54.0
+anthropic>=0.39.0
 claude-agent-sdk>=0.1.0
+google-generativeai>=0.8.3
+google-genai>=1.0.0
+google-cloud-aiplatform>=1.38.0
+groq>=0.11.0
+boto3>=1.35.0
+mistralai>=1.2.3
+cohere>=5.11.0
+ollama>=0.4.4
+together>=1.3.0
+voyageai>=0.3.0
 
-# Google AI Studio (Gemini models) - Simple API key auth
-google-generativeai>=0.8.0
-google-genai>=1.0.0  # New GenAI SDK for latest Gemini models
+# Search & Web
+tavily-python>=0.5.0
+duckduckgo-search>=6.3.0
 
-# Optional providers (uncomment if needed):
-# google-cloud-aiplatform>=1.38.0  # Vertex AI (service account auth)
+# Document Processing
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+chardet>=5.2.0
+PyPDF2>=3.0.0
+python-docx>=1.0.0
+python-pptx>=0.6.0
+openpyxl>=3.1.0
+ebooklib>=0.18
+pypandoc>=1.13
+textstat>=0.7.0
 
-# Note: XAI and DeepSeek use OpenAI-compatible APIs (no additional SDK needed)
+# Media Processing
+moviepy>=1.0.0
+speechrecognition>=3.10.0
+pydub>=0.25.0
+yt-dlp>=2024.0.0
+ffmpeg-python>=0.2.0
+python-magic>=0.4.0
+python-multipart>=0.0.6
+
+# Agentic & Computer Use Capabilities
+playwright>=1.40.0
+openai-agents>=0.1.0  # OpenAI Agents SDK for advanced agentic workflows

@@ -59,13 +59,11 @@ class OpenAIAgent:
                 "pip install harvester-sdk[computer]"
             )
 
-        # Build model settings
-        model_settings = None
-        if temperature is not None or max_tokens is not None:
-            model_settings = ModelSettings(
-                temperature=temperature,
-                max_tokens=max_tokens
-            )
+        # Build model settings (always create one, SDK requires it)
+        model_settings = ModelSettings(
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
 
         # Create the agent
         self.agent = Agent(

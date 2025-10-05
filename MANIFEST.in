@@ -21,7 +21,7 @@ recursive-include providers *.py
 recursive-include core *.py
 recursive-include processors *.py
 recursive-include utils *.py
-recursive-include agents *.py *.c *.so
+recursive-include harvester_agents *.py *.c *.so
 recursive-include cli *.py
 
 # Configuration and Templates
@@ -56,12 +56,12 @@ prune staging/
 prune harvester_sdk.egg-info/
 
 # IMPORTANT: Include safety libraries (override global-exclude)
-include agents/safe_exec.so
-include agents/safe_open.so
-include agents/safe_fork.so
-include agents/safe_exec.c
-include agents/safe_open.c
-include agents/safe_fork.c
-include agents/prompt_sanitizer.py
-include agents/test_injection_protection.py
-include agents/README_SAFE_EXEC.md
+include harvester_agents/safe_exec.so
+include harvester_agents/safe_open.so
+include harvester_agents/safe_fork.so
+include harvester_agents/safe_exec.c
+include harvester_agents/safe_open.c
+include harvester_agents/safe_fork.c
+include harvester_agents/prompt_sanitizer.py
+include harvester_agents/test_injection_protection.py
+include harvester_agents/README_SAFE_EXEC.md

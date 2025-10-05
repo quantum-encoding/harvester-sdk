@@ -9,7 +9,7 @@ from openai.types.responses import (
     ResponseStreamEvent,
     ResponseCompletedEvent,
 )
-from openai.types.chat.chat_model import ChatModel
+# ChatModel import removed - using str for model parameter instead
 from openai.types.responses.response_includable import ResponseIncludable
 from openai.types.responses.response_prompt_param import ResponsePromptParam
 
@@ -325,7 +325,7 @@ class OpenAIResponsesModel:
 
     def __init__(
         self,
-        model: str | ChatModel,
+        model: str,
         openai_client: AsyncOpenAI,
     ) -> None:
         self.model = model

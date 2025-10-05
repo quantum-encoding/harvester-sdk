@@ -1169,7 +1169,7 @@ def grok_code_command(task, files, project_structure, task_type, max_iterations,
         # Feature development with reasoning display
         harvester grok-code "Add rate limiting" -t feature --show-reasoning
     """
-    from agents.grok_code_agent import GrokCodeAgent
+    from harvester_agents.grok_code_agent import GrokCodeAgent
 
     click.echo("🤖 Grok Code Agent")
     click.echo(f"📋 Task: {task}")
@@ -1305,7 +1305,7 @@ def claude_code_command(task, files, project_structure, task_type, max_iteration
         # Different Claude model
         harvester claude-code "Debug memory leak" -m claude-opus-4 -t debugging
     """
-    from agents.claude_code_agent import ClaudeCodeAgent
+    from harvester_agents.claude_code_agent import ClaudeCodeAgent
 
     click.echo("🤖 Claude Code Agent")
     click.echo(f"📋 Task: {task}")
@@ -1380,30 +1380,30 @@ def claude_code_command(task, files, project_structure, task_type, max_iteration
 @click.option('--output', '-o', help='Save result to file')
 def openai_agent_command(task, model, temperature, output):
     """
-    🤖 OpenAI Agent - GPT-powered agentic assistant
+    🤖 OpenAI Code Agent - GPT-powered agentic coding assistant
 
     Built on OpenAI's Agents SDK with:
+    - File reading, writing, and editing capabilities
+    - Shell command execution
     - Advanced reasoning models (o1, o3-mini)
-    - Function calling and tool use
-    - Conversation memory and sessions
-    - Structured output support
+    - Multi-step planning and execution
 
     Examples:
-        # Simple task with GPT-4o
-        harvester agent-openai "Explain how async/await works in Python"
+        # Create a Python script
+        harvester agent-openai "Create a hello world Python script"
 
         # Advanced reasoning with o1
-        harvester agent-openai "Design a distributed caching system" -m o1
+        harvester agent-openai "Refactor auth.py for better error handling" -m o1
 
-        # Creative task with temperature
-        harvester agent-openai "Write a creative story" -m gpt-4o -t 1.5
+        # Complex task
+        harvester agent-openai "Add logging to all functions in utils.py"
 
         # Save result to file
         harvester agent-openai "Analyze this codebase" -o analysis.txt
     """
-    from agents.openai_agent import OpenAIAgent
+    from harvester_agents.openai_code_agent import OpenAICodeAgent
 
-    click.echo("🤖 OpenAI Agent")
+    click.echo("🤖 OpenAI Code Agent")
     click.echo(f"📋 Task: {task}")
     click.echo(f"🧠 Model: {model}")
     if temperature is not None:
@@ -1411,28 +1411,20 @@ def openai_agent_command(task, model, temperature, output):
     click.echo()
 
     try:
-        # Create agent
-        agent_kwargs = {
-            'name': 'Assistant',
-            'instructions': 'You are a helpful AI assistant. Provide clear, accurate, and concise responses.',
-            'model': model,
-        }
+        # Create code agent
+        agent = OpenAICodeAgent(
+            model=model,
+            temperature=temperature,
+        )
 
-        if temperature is not None:
-            agent_kwargs['temperature'] = temperature
-
-        agent = OpenAIAgent(**agent_kwargs)
-
-        click.echo("🚀 Starting OpenAI Agent...")
-        click.echo()
-
-        # Run agent
-        result = agent.run(task)
+        # Run agent (sync wrapper for async execution)
+        result = agent.run_sync(task, show_progress=True)
 
         # Display result
+        click.echo()
         click.echo("📤 Result:")
         click.echo("-" * 60)
-        click.echo(result)
+        click.echo(result['result'])
         click.echo("-" * 60)
 
         # Save to file if requested

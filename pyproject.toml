@@ -36,7 +36,7 @@ keywords = [
     "turn-based-chat",
     "non-streaming",
     "agentic",
-    "agents",
+    "harvester_agents",
     "coding-assistant",
     "claude-agent-sdk",
 ]
@@ -180,7 +180,7 @@ license-check = "license_check:main"        # License management
 test-xai-deepseek = "test_xai_deepseek:main"
 
 [tool.setuptools]
-packages = ["harvester_sdk", "providers", "processors", "core", "utils", "agents", "cli"]
+packages = ["harvester_sdk", "providers", "processors", "core", "utils", "harvester_agents", "cli"]
 include-package-data = true
 py-modules = [
     "harvester",  # Main CLI conductor
@@ -204,7 +204,7 @@ core = ["*.py"]
 providers = ["*.py"]
 processors = ["*.py"]
 utils = ["*.py"]
-agents = ["*.py"]
+harvester_agents = ["*.py"]
 cli = ["*.py"]
 config = ["*.yaml", "*.json"]
 templates = ["*.yaml", "*.json", "*.j2", "**/*.csv"]
