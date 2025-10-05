@@ -46,7 +46,7 @@ class Colors:
     BOLD = '\033[1m'
 
 class GPTComputerUse:
-    def __init__(self, environment: str = "browser", display_width: int = 1024, display_height: int = 768, headless: bool = True, cdp_url: str = None):
+    def __init__(self, environment: str = "browser", display_width: int = 1024, display_height: int = 768, headless: bool = True, cdp_url: str = None, auto_detect_chrome: bool = True):
         # Check for OpenAI SDK
         try:
             from openai import OpenAI
@@ -59,6 +59,15 @@ class GPTComputerUse:
             raise ValueError("OpenAI API key required. Set OPENAI_API_KEY environment variable")
 
         self.headless = headless
+        self.auto_detect_chrome = auto_detect_chrome
+
+        # Auto-detect Chrome debug port in headed mode if no CDP URL provided
+        if not headless and cdp_url is None and auto_detect_chrome:
+            detected_url = self._detect_chrome_debug_port()
+            if detected_url:
+                print(f"{Colors.GREEN}✓ Auto-detected Chrome at {detected_url}{Colors.ENDC}")
+                cdp_url = detected_url
+
         self.cdp_url = cdp_url
 
         self.environment = environment
@@ -71,6 +80,31 @@ class GPTComputerUse:
         self.docker_vm = None
         self.playwright = None
         self.browser = None
+
+    def _detect_chrome_debug_port(self) -> Optional[str]:
+        """
+        Auto-detect Chrome remote debugging port.
+
+        Checks common ports: 9222, 9223, 9224
+        Returns CDP URL if Chrome is found, None otherwise.
+        """
+        common_ports = [9222, 9223, 9224]
+
+        for port in common_ports:
+            try:
+                # Try to connect to the debugging endpoint
+                import urllib.request
+                import json
+
+                url = f"http://localhost:{port}/json/version"
+                with urllib.request.urlopen(url, timeout=0.5) as response:
+                    data = json.loads(response.read().decode())
+                    if 'webSocketDebuggerUrl' in data:
+                        return f"http://localhost:{port}"
+            except Exception:
+                continue
+
+        return None
 
     async def setup_browser(self):
         """Setup Playwright browser environment"""
@@ -495,6 +529,7 @@ async def main():
     parser.add_argument('--url', '-u', help='Initial URL to navigate to (browser only)')
     parser.add_argument('--headed', action='store_true', help='Run browser in headed mode (visible window)')
     parser.add_argument('--cdp', help='Connect to Chrome DevTools Protocol URL (e.g., http://localhost:9222)')
+    parser.add_argument('--no-auto-detect', action='store_true', help='Disable auto-detection of Chrome debug port')
     parser.add_argument('--width', type=int, default=1024, help='Display width')
     parser.add_argument('--height', type=int, default=768, help='Display height')
     parser.add_argument('--container', default='cua-container', help='Docker container name')
@@ -508,6 +543,7 @@ async def main():
         print("  python gpt_computer_use.py 'Search for OpenAI news on bing.com'")
         print("  python gpt_computer_use.py --url https://bing.com 'Search for AI news'")
         print("  python gpt_computer_use.py --environment docker 'Open Firefox'")
+        print("  python gpt_computer_use.py --headed 'Browse to reddit.com' (auto-detects Chrome)")
         return
 
     agent = GPTComputerUse(
@@ -515,7 +551,8 @@ async def main():
         display_width=args.width,
         display_height=args.height,
         headless=not args.headed,  # Invert: --headed flag means headless=False
-        cdp_url=args.cdp
+        cdp_url=args.cdp,
+        auto_detect_chrome=not args.no_auto_detect
     )
 
     try:

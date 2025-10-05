@@ -1450,5 +1450,104 @@ def openai_agent_command(task, model, temperature, output):
         traceback.print_exc()
         sys.exit(1)
 
+@cli.command('agent-gpt5')
+@click.argument('task', required=True)
+@click.option('--model', '-m', default='gpt-5', help='GPT-5 model (gpt-5, gpt-5-mini, gpt-5-nano)')
+@click.option('--reasoning', '-r', default='medium',
+              type=click.Choice(['minimal', 'low', 'medium', 'high']),
+              help='Reasoning effort (minimal=fastest, high=most thorough)')
+@click.option('--verbosity', '-v', default='medium',
+              type=click.Choice(['low', 'medium', 'high']),
+              help='Output verbosity (low=concise, high=detailed)')
+@click.option('--output', '-o', help='Save result to file')
+def gpt5_agent_command(task, model, reasoning, verbosity, output):
+    """
+    🧠 GPT-5 Code Agent - Advanced reasoning for coding and agentic tasks
+
+    Built on GPT-5 with:
+    - Configurable reasoning effort (minimal to high)
+    - Verbosity control for output length
+    - Custom tools with freeform text inputs
+    - File operations and shell execution
+    - Preambles for transparent tool-calling
+
+    Reasoning effort guide:
+        minimal - Fastest time-to-first-token, best for simple tasks
+        low     - Quick reasoning, good for straightforward coding
+        medium  - Balanced reasoning (default), good for most tasks
+        high    - Thorough reasoning, best for complex multi-step tasks
+
+    Verbosity guide:
+        low    - Concise responses, minimal commentary
+        medium - Balanced explanations (default)
+        high   - Detailed explanations and documentation
+
+    Examples:
+        # Quick task with minimal reasoning
+        harvester agent-gpt5 "Create a hello world script" -r minimal -v low
+
+        # Standard coding task
+        harvester agent-gpt5 "Add error handling to auth.py"
+
+        # Complex refactoring with high reasoning
+        harvester agent-gpt5 "Refactor entire codebase for async/await" -r high -v high
+
+        # Cost-optimized with gpt-5-mini
+        harvester agent-gpt5 "Fix bugs in utils.py" -m gpt-5-mini
+
+        # High-throughput classification with nano
+        harvester agent-gpt5 "Classify all files by type" -m gpt-5-nano -r minimal
+    """
+    from harvester_agents.gpt5_code_agent import GPT5CodeAgent
+
+    click.echo("🧠 GPT-5 Code Agent")
+    click.echo(f"📋 Task: {task}")
+    click.echo(f"🤖 Model: {model}")
+    click.echo(f"💭 Reasoning: {reasoning}")
+    click.echo(f"📝 Verbosity: {verbosity}")
+    click.echo()
+
+    try:
+        # Create GPT-5 code agent
+        agent = GPT5CodeAgent(
+            model=model,
+            reasoning_effort=reasoning,
+            verbosity=verbosity,
+        )
+
+        # Run agent
+        result = agent.execute_task(task, show_progress=True)
+
+        # Display result
+        click.echo()
+        click.echo("📤 Result:")
+        click.echo("-" * 60)
+        click.echo(result['result'])
+        click.echo("-" * 60)
+
+        # Save to file if requested
+        if output:
+            with open(output, 'w') as f:
+                output_data = {
+                    'task': task,
+                    'model': model,
+                    'reasoning_effort': reasoning,
+                    'verbosity': verbosity,
+                    'result': result
+                }
+                json.dump(output_data, f, indent=2)
+            click.echo(f"\n💾 Saved to: {output}")
+
+    except ImportError as e:
+        click.echo(f"❌ Error: OpenAI SDK not installed")
+        click.echo(f"   Install with: pip install 'harvester-sdk[computer]'")
+        click.echo(f"   Details: {e}")
+        sys.exit(1)
+    except Exception as e:
+        click.echo(f"❌ Error running agent: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+
 if __name__ == '__main__':
     cli()

@@ -94,6 +94,8 @@ export DEEPSEEK_API_KEY=your_deepseek_key
 ### Agentic Commands
 - `harvester agent-grok` - **Grok Code Agent** - Fast / impressive agentic coding (grok-code-fast-1)
 - `harvester agent-claude` - **Claude Code Agent** - Prone to hallucinations, be careful Claude will delete the Claude Agent SDK
+- `harvester agent-openai` - **OpenAI Code Agent** - File operations with GPT-4o/o1/o3-mini
+- `harvester agent-gpt5` - **GPT-5 Code Agent** - Advanced reasoning for complex coding tasks
 - `harvester computer` - **GPT Computer Use** - AI agent that controls browser/computer
 
 ### Utility Commands
@@ -128,7 +130,7 @@ The `harvester chat` command provides a professional terminal experience:
 
 ## 🤖 Agentic Coding Assistants
 
-Harvester SDK includes two powerful agentic coding assistants that can autonomously handle complex multi-step coding tasks.
+Harvester SDK includes multiple powerful agentic coding assistants that can autonomously handle complex multi-step coding tasks.
 
 ### Grok Code Agent (`agent-grok`)
 
@@ -230,20 +232,88 @@ harvester agent-claude "Debug the memory leak in the worker pool"
 💰 Cost: $0.097
 ```
 
+### OpenAI Code Agent (`agent-openai`)
+
+**Built on OpenAI's Agents SDK** - File operations and code execution with GPT-4o, o1, and o3-mini.
+
+```bash
+# Create a Python script
+harvester agent-openai "Create a hello world Python script"
+
+# Advanced reasoning with o1
+harvester agent-openai "Refactor auth.py for better error handling" -m o1
+
+# Complex task
+harvester agent-openai "Add logging to all functions in utils.py"
+```
+
+**Features:**
+- 📁 **File operations** - Read, write, edit files with intelligent parsing
+- 🐚 **Shell execution** - Run commands and capture output
+- 🧠 **Multi-step reasoning** - o1/o3-mini for complex tasks
+- ⚡ **Fast iteration** - GPT-4o for quick tasks
+
+### GPT-5 Code Agent (`agent-gpt5`)
+
+**Powered by GPT-5** - Advanced reasoning for coding and agentic tasks with configurable effort and verbosity.
+
+```bash
+# Quick task with minimal reasoning
+harvester agent-gpt5 "Create a hello world script" -r minimal -v low
+
+# Standard coding task
+harvester agent-gpt5 "Add error handling to auth.py"
+
+# Complex refactoring with high reasoning
+harvester agent-gpt5 "Refactor entire codebase for async/await" -r high -v high
+
+# Cost-optimized with gpt-5-mini
+harvester agent-gpt5 "Fix bugs in utils.py" -m gpt-5-mini
+
+# High-throughput classification with nano
+harvester agent-gpt5 "Classify all files by type" -m gpt-5-nano -r minimal
+```
+
+**Features:**
+- 🧠 **Configurable reasoning** - minimal/low/medium/high effort levels
+- 📝 **Verbosity control** - low/medium/high output length
+- 🔧 **Custom tools** - Freeform text inputs with optional CFG constraints
+- 💡 **Preambles** - Transparent tool-calling explanations
+- 📁 **File operations** - Read, write, edit with intelligent parsing
+- 🐚 **Shell execution** - Run commands with output capture
+
+**Reasoning Effort Guide:**
+- `minimal` - Fastest time-to-first-token, best for simple tasks
+- `low` - Quick reasoning, good for straightforward coding
+- `medium` - Balanced reasoning (default), good for most tasks
+- `high` - Thorough reasoning, best for complex multi-step tasks
+
+**Verbosity Guide:**
+- `low` - Concise responses, minimal commentary
+- `medium` - Balanced explanations (default)
+- `high` - Detailed explanations and documentation
+
+**Model Variants:**
+- `gpt-5` - Complex reasoning, broad world knowledge, code-heavy tasks
+- `gpt-5-mini` - Cost-optimized reasoning, balances speed/cost/capability
+- `gpt-5-nano` - High-throughput, simple instruction-following
+
 ### Agent Comparison
 
-| Feature | Grok Agent | Claude Agent |
-|---------|-----------|--------------|
-| **Speed** | ⚡⚡⚡⚡ Very Fast (3-5 iterations) | ⚡⚡ Thorough (10-15 iterations) |
-| **Cost** | 💰 ~$0.002/task | 💰💰 ~$0.10/task |
-| **Use Case** | Fast iteration, prototyping | you like Claude
-| **Quality** | ✅ Excellent | DEPENDS |
-| **Tools** | 11 custom tools + safety | Full Claude Code SDK |
-| **Verification** | Basic | Comprehensive |
+| Feature | Grok | Claude | OpenAI | GPT-5 |
+|---------|------|--------|--------|-------|
+| **Speed** | ⚡⚡⚡⚡ Very Fast | ⚡⚡ Thorough | ⚡⚡⚡ Fast | ⚡⚡⚡⚡ Configurable |
+| **Cost** | 💰 ~$0.002 | 💰💰 ~$0.10 | 💰💰 ~$0.05 | 💰-💰💰💰 Configurable |
+| **Reasoning** | Fast | Deep | Multi-step | Configurable (minimal→high) |
+| **Best For** | Quick tasks | Claude fans | o1 reasoning | Complex coding |
+| **Models** | grok-code-fast-1 | claude-sonnet-4-5 | gpt-4o, o1, o3-mini | gpt-5, mini, nano |
+| **Configurability** | Low | Medium | Medium | High (effort+verbosity) |
 
 **When to use which:**
-- **Grok Agent**: general use
-- **Claude Agent**: you like Claude
+- **Grok Agent**: General use, fast iteration, prototyping, cost-effective
+- **Claude Agent**: If you like Claude (prone to hallucinations, use with caution)
+- **OpenAI Agent**: Advanced reasoning with o1/o3-mini, multi-step tasks
+- **GPT-5 Agent**: Complex coding tasks requiring configurable reasoning depth
 
 ### Examples
 
