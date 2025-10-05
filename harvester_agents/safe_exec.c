@@ -96,8 +96,24 @@ static int is_dangerous(const char *file, char *const argv[]) {
 
         // rm with dangerous flags/paths
         if (strstr(cmd, "rm")) {
+            // ====================================================================
+            // 🛡️ PROJECT PURGE: HOME DIRECTORY SHIELD
+            // Block ALL rm commands targeting /home/rich unless explicitly allowed
+            // ====================================================================
+            const char *home_override = getenv("SAFE_EXEC_ALLOW_HOME_DELETE");
+            int allow_home = (home_override && strcmp(home_override, "1") == 0);
+
             for (int j = 1; argv[j] != NULL; j++) {
-                const char *flag = argv[j];
+                const char *arg = argv[j];
+
+                // Check if any argument contains /home/rich
+                if (!allow_home && strstr(arg, "/home/rich")) {
+                    fprintf(stderr, "[SAFE_EXEC] 🛡️ HOME DIRECTORY SHIELD: Blocked rm targeting %s\n", arg);
+                    fprintf(stderr, "[SAFE_EXEC] To override: export SAFE_EXEC_ALLOW_HOME_DELETE=1\n");
+                    return 1;  // BLOCKED: Protect user home
+                }
+
+                const char *flag = arg;
                 // Check for recursive/force flags
                 if (strcmp(flag, "-r") == 0 || strcmp(flag, "-f") == 0 ||
                     strcmp(flag, "-rf") == 0 || strcmp(flag, "-fr") == 0 ||

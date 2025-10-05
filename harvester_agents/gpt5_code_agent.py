@@ -212,31 +212,16 @@ class GPT5CodeAgent:
         return f"✓ Successfully edited {filepath} (replaced {len(old_text)} chars with {len(new_text)} chars)"
 
     def _execute_shell(self, input_text: str) -> str:
-        """Parse and execute execute_shell command."""
-        import subprocess
+        """Parse and execute execute_shell command with SECURITY CHECKS."""
+        from python_security import secure_shell_execute, SecurityViolation
 
         command = input_text.strip()
 
         try:
-            result = subprocess.run(
-                command,
-                shell=True,
-                capture_output=True,
-                text=True,
-                timeout=30
-            )
-
-            output = f"Command: {command}\n"
-            output += f"Exit code: {result.returncode}\n"
-
-            if result.stdout:
-                output += f"\nOutput:\n{result.stdout}"
-            if result.stderr:
-                output += f"\nErrors:\n{result.stderr}"
-
-            return output
-        except subprocess.TimeoutExpired:
-            return f"✗ Command timed out after 30 seconds: {command}"
+            # 🛡️ PROJECT PURGE: All commands go through Python Security Interceptor
+            return secure_shell_execute(command, timeout=30)
+        except SecurityViolation as e:
+            return f"🚨 SECURITY VIOLATION: {str(e)}\nCommand blocked by Python Interceptor."
         except Exception as e:
             return f"✗ Error executing command: {str(e)}"
 
