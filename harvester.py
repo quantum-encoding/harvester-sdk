@@ -1373,5 +1373,90 @@ def claude_code_command(task, files, project_structure, task_type, max_iteration
     # Run async agent
     asyncio.run(run_agent())
 
+@cli.command('agent-openai')
+@click.argument('task', required=True)
+@click.option('--model', '-m', default='gpt-4o', help='OpenAI model to use (gpt-4o, gpt-4o-mini, o1)')
+@click.option('--temperature', '-t', type=float, help='Sampling temperature (0.0-2.0)')
+@click.option('--output', '-o', help='Save result to file')
+def openai_agent_command(task, model, temperature, output):
+    """
+    🤖 OpenAI Agent - GPT-powered agentic assistant
+
+    Built on OpenAI's Agents SDK with:
+    - Advanced reasoning models (o1, o3-mini)
+    - Function calling and tool use
+    - Conversation memory and sessions
+    - Structured output support
+
+    Examples:
+        # Simple task with GPT-4o
+        harvester agent-openai "Explain how async/await works in Python"
+
+        # Advanced reasoning with o1
+        harvester agent-openai "Design a distributed caching system" -m o1
+
+        # Creative task with temperature
+        harvester agent-openai "Write a creative story" -m gpt-4o -t 1.5
+
+        # Save result to file
+        harvester agent-openai "Analyze this codebase" -o analysis.txt
+    """
+    from agents.openai_agent import OpenAIAgent
+
+    click.echo("🤖 OpenAI Agent")
+    click.echo(f"📋 Task: {task}")
+    click.echo(f"🧠 Model: {model}")
+    if temperature is not None:
+        click.echo(f"🌡️  Temperature: {temperature}")
+    click.echo()
+
+    try:
+        # Create agent
+        agent_kwargs = {
+            'name': 'Assistant',
+            'instructions': 'You are a helpful AI assistant. Provide clear, accurate, and concise responses.',
+            'model': model,
+        }
+
+        if temperature is not None:
+            agent_kwargs['temperature'] = temperature
+
+        agent = OpenAIAgent(**agent_kwargs)
+
+        click.echo("🚀 Starting OpenAI Agent...")
+        click.echo()
+
+        # Run agent
+        result = agent.run(task)
+
+        # Display result
+        click.echo("📤 Result:")
+        click.echo("-" * 60)
+        click.echo(result)
+        click.echo("-" * 60)
+
+        # Save to file if requested
+        if output:
+            with open(output, 'w') as f:
+                output_data = {
+                    'task': task,
+                    'model': model,
+                    'temperature': temperature,
+                    'result': result
+                }
+                json.dump(output_data, f, indent=2)
+            click.echo(f"\n💾 Saved to: {output}")
+
+    except ImportError as e:
+        click.echo(f"❌ Error: OpenAI Agents SDK not installed")
+        click.echo(f"   Install with: pip install 'harvester-sdk[computer]'")
+        click.echo(f"   Details: {e}")
+        sys.exit(1)
+    except Exception as e:
+        click.echo(f"❌ Error running agent: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+
 if __name__ == '__main__':
     cli()
