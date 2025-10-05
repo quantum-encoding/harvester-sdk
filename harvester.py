@@ -1664,5 +1664,106 @@ def code_interpreter_command(task, model, upload, download_all, output_dir, cont
         traceback.print_exc()
         sys.exit(1)
 
+@cli.command('image-gen')
+@click.argument('prompt', required=True)
+@click.option('--model', '-m', default='gpt-5', help='Model to use (gpt-4o, gpt-4.1, gpt-5, o3)')
+@click.option('--output', '-o', default='generated.png', help='Output file path')
+@click.option('--size', '-s', default='auto', help='Image size (e.g., 1024x1024, auto)')
+@click.option('--quality', '-q', default='auto',
+              type=click.Choice(['low', 'medium', 'high', 'auto']),
+              help='Rendering quality')
+@click.option('--format', '-f', default='png',
+              type=click.Choice(['png', 'jpeg', 'webp']),
+              help='Output format')
+@click.option('--input-image', '-i', help='Input image for editing')
+@click.option('--edit', '-e', is_flag=True, help='Edit the previously generated image')
+def image_gen_command(prompt, model, output, size, quality, format, input_image, edit):
+    """
+    🎨 Image Generation Agent - AI-powered image creation and editing
+
+    Generate and edit images using GPT Image model with automatic prompt optimization.
+
+    Examples:
+        # Generate an image
+        harvester image-gen "A gray tabby cat hugging an otter with an orange scarf"
+
+        # Specify output path and quality
+        harvester image-gen "Sunset over mountains" -o sunset.png -q high
+
+        # Edit an existing image
+        harvester image-gen "Make it more colorful" -i input.jpg -o edited.png
+
+        # Use specific model and size
+        harvester image-gen "Abstract art" -m gpt-5 -s 1024x1536
+
+        # Multi-turn editing (stores previous response)
+        harvester image-gen "Draw a cat"
+        harvester image-gen "Make it realistic" --edit
+    """
+    from harvester_agents.image_generation_agent import ImageGenerationAgent
+
+    click.echo("🎨 Image Generation Agent")
+    click.echo(f"📝 Prompt: {prompt}")
+    click.echo(f"🤖 Model: {model}")
+    if input_image:
+        click.echo(f"🖼️  Input: {input_image}")
+    click.echo()
+
+    try:
+        # Create agent
+        agent = ImageGenerationAgent(
+            model=model,
+            size=size,
+            quality=quality,
+            format=format
+        )
+
+        # Generate or edit image
+        if edit:
+            result = agent.edit(
+                edit_prompt=prompt,
+                output_path=output,
+                show_progress=True
+            )
+        elif input_image:
+            result = agent.generate_from_file(
+                prompt=prompt,
+                input_image_path=input_image,
+                output_path=output,
+                show_progress=True
+            )
+        else:
+            result = agent.generate(
+                prompt=prompt,
+                output_path=output,
+                show_progress=True
+            )
+
+        # Display result
+        if result['status'] == 'completed':
+            click.echo()
+            click.echo("📤 Result:")
+            click.echo("-" * 60)
+            if result.get('revised_prompt'):
+                click.echo(f"✨ Revised prompt: {result['revised_prompt']}")
+            if result.get('output_path'):
+                click.echo(f"💾 Saved to: {result['output_path']}")
+            click.echo(f"🆔 Response ID: {result['response_id']}")
+            click.echo("-" * 60)
+        else:
+            click.echo(f"❌ Error: {result.get('error', 'Unknown error')}")
+            sys.exit(1)
+
+    except ImportError as e:
+        click.echo(f"❌ Error: OpenAI SDK not installed")
+        click.echo(f"   Install with: pip install 'harvester-sdk[computer]'")
+        click.echo(f"   Details: {e}")
+        sys.exit(1)
+    except Exception as e:
+        click.echo(f"❌ Error generating image: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+
 if __name__ == '__main__':
     cli()

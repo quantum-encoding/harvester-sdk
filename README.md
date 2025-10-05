@@ -97,6 +97,7 @@ export DEEPSEEK_API_KEY=your_deepseek_key
 - `harvester agent-openai` - **OpenAI Code Agent** - File operations with GPT-4o/o1/o3-mini
 - `harvester agent-gpt5` - **GPT-5 Code Agent** - Advanced reasoning for complex coding tasks
 - `harvester code-interpreter` - **Code Interpreter** - Python code execution in sandboxed containers
+- `harvester image-gen` - **Image Generation** - AI-powered image creation and editing
 - `harvester computer` - **GPT Computer Use** - AI agent that controls browser/computer
 
 ### Utility Commands
@@ -341,6 +342,56 @@ harvester code-interpreter "Calculate fibonacci(100) using memoization" -m gpt-5
 - Use `--container-id` to reuse an existing container
 - Files are automatically uploaded to the container
 - Use `-d` flag to download all generated files
+
+### Image Generation (`image-gen`)
+
+**AI-powered image creation and editing** - Generate and edit images using GPT Image model.
+
+```bash
+# Generate an image
+harvester image-gen "A gray tabby cat hugging an otter with an orange scarf"
+
+# High quality with custom size
+harvester image-gen "Sunset over mountains" -o sunset.png -q high -s 1024x1536
+
+# Edit an existing image
+harvester image-gen "Make it more colorful" -i input.jpg -o edited.png
+
+# Multi-turn editing
+harvester image-gen "Draw a futuristic cityscape" -o city.png
+harvester image-gen "Make it realistic" --edit -o city_realistic.png
+
+# Use GPT-5 for best results
+harvester image-gen "Abstract art with vibrant colors" -m gpt-5 -q high
+```
+
+**Features:**
+- 🎨 **Text-to-image generation** - Create images from descriptions
+- ✏️ **Image editing** - Modify existing images with text prompts
+- 🔄 **Multi-turn editing** - Iteratively refine images
+- ✨ **Automatic prompt optimization** - AI improves your prompts
+- 📐 **Configurable output** - Size, quality, format, background
+- 🖼️ **Input image support** - Edit or enhance existing images
+
+**Configuration Options:**
+- **Size**: 1024x1024, 1024x1536, 1536x1024, or auto
+- **Quality**: low, medium, high, or auto (model chooses best)
+- **Format**: png, jpeg, webp
+- **Background**: transparent, opaque, or auto
+
+**Use Cases:**
+- Art and illustration creation
+- Photo editing and enhancement
+- Concept visualization
+- Marketing material generation
+- Storyboarding and mockups
+- Style transfer and artistic effects
+
+**Prompting Tips:**
+- Use terms like "draw" or "edit" in your prompts
+- For combining images: "edit the first image by adding..." not "merge"
+- Be specific about style, colors, and composition
+- The model will automatically optimize your prompt for better results
 
 ### Agent Comparison
 
