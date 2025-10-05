@@ -1549,5 +1549,120 @@ def gpt5_agent_command(task, model, reasoning, verbosity, output):
         traceback.print_exc()
         sys.exit(1)
 
+@cli.command('code-interpreter')
+@click.argument('task', required=True)
+@click.option('--model', '-m', default='gpt-4.1', help='Model to use (gpt-4.1, gpt-5, o3, o4-mini)')
+@click.option('--upload', '-u', multiple=True, help='Upload file(s) to container')
+@click.option('--download-all', '-d', is_flag=True, help='Download all generated files')
+@click.option('--output-dir', '-o', default='./output', help='Directory for downloaded files')
+@click.option('--container-id', '-c', help='Use existing container ID')
+def code_interpreter_command(task, model, upload, download_all, output_dir, container_id):
+    """
+    🐍 Code Interpreter Agent - Python code execution in sandboxed containers
+
+    Allows models to write and run Python to solve complex problems:
+    - Data analysis and visualization
+    - Mathematical computations
+    - File processing and transformation
+    - Iterative problem solving
+
+    Examples:
+        # Solve a math problem
+        harvester code-interpreter "Solve the equation 3x + 11 = 14"
+
+        # Data analysis
+        harvester code-interpreter "Analyze data.csv and create a histogram" -u data.csv
+
+        # Image processing
+        harvester code-interpreter "Resize image.png to 800x600" -u image.png -d
+
+        # Generate visualization
+        harvester code-interpreter "Create a sine wave plot from 0 to 2π" -d
+
+        # Use specific model
+        harvester code-interpreter "Calculate fibonacci(100)" -m gpt-5
+    """
+    from harvester_agents.code_interpreter_agent import CodeInterpreterAgent
+    from pathlib import Path
+
+    click.echo("🐍 Code Interpreter Agent")
+    click.echo(f"📋 Task: {task}")
+    click.echo(f"🤖 Model: {model}")
+    if upload:
+        click.echo(f"📁 Uploading {len(upload)} file(s)")
+    click.echo()
+
+    try:
+        # Determine container mode
+        if container_id:
+            container_mode = "explicit"
+        else:
+            container_mode = "auto"
+
+        # Create agent
+        agent = CodeInterpreterAgent(
+            model=model,
+            container_mode=container_mode,
+            container_id=container_id
+        )
+
+        # Upload files if specified
+        uploaded_file_ids = []
+        if upload:
+            for filepath in upload:
+                if not Path(filepath).exists():
+                    click.echo(f"❌ File not found: {filepath}")
+                    sys.exit(1)
+                file_id = agent.upload_file(filepath)
+                uploaded_file_ids.append(file_id)
+                click.echo(f"✓ Uploaded: {filepath} → {file_id}")
+
+        # Add uploaded files to agent
+        if uploaded_file_ids:
+            agent.file_ids.extend(uploaded_file_ids)
+
+        # Run task
+        result = agent.execute_task(task, show_progress=True)
+
+        # Display result
+        click.echo()
+        click.echo("📤 Result:")
+        click.echo("-" * 60)
+        click.echo(result['result'])
+        click.echo("-" * 60)
+
+        # Download generated files if requested
+        if download_all and result['generated_files']:
+            output_path = Path(output_dir)
+            output_path.mkdir(parents=True, exist_ok=True)
+
+            click.echo()
+            click.echo(f"📥 Downloading {len(result['generated_files'])} file(s) to {output_dir}/")
+
+            for file_info in result['generated_files']:
+                filename = file_info['filename']
+                file_id = file_info['file_id']
+                save_path = output_path / filename
+
+                agent.download_file(file_id, str(save_path))
+                click.echo(f"✓ Downloaded: {filename}")
+
+        # Show container info
+        if result['container_id']:
+            click.echo()
+            click.echo(f"🗂️  Container ID: {result['container_id']}")
+            click.echo("   (Container expires after 20 minutes of inactivity)")
+
+    except ImportError as e:
+        click.echo(f"❌ Error: OpenAI SDK not installed")
+        click.echo(f"   Install with: pip install 'harvester-sdk[computer]'")
+        click.echo(f"   Details: {e}")
+        sys.exit(1)
+    except Exception as e:
+        click.echo(f"❌ Error running agent: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+
 if __name__ == '__main__':
     cli()

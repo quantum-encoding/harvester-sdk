@@ -9,6 +9,7 @@ Available Agents:
 - OpenAIAgent: General-purpose agent powered by OpenAI Agents SDK (GPT-4o, o1, o3-mini)
 - OpenAICodeAgent: File operations agent with GPT-4o/o1
 - GPT5CodeAgent: Advanced reasoning agent powered by GPT-5
+- CodeInterpreterAgent: Python code execution in sandboxed containers
 """
 
 from .grok_code_agent import GrokCodeAgent, AgentTask as GrokAgentTask, ReasoningTrace, ToolCall
@@ -16,6 +17,7 @@ from .claude_code_agent import ClaudeCodeAgent, AgentTask as ClaudeAgentTask
 from .openai_agent import OpenAIAgent, AgentSession, function_tool
 from .openai_code_agent import OpenAICodeAgent
 from .gpt5_code_agent import GPT5CodeAgent
+from .code_interpreter_agent import CodeInterpreterAgent
 from .streaming import StreamHandler, stream_to_console, collect_stream_text
 from .repl import run_demo_loop, run_interactive_chat
 from .tools import HostedTools, agent_as_tool, create_function_tool, ToolConfig
@@ -92,7 +94,7 @@ __all__ = [
     'GrokCodeAgent', 'GrokAgentTask', 'ReasoningTrace', 'ToolCall',
     'ClaudeCodeAgent', 'ClaudeAgentTask',
     'OpenAIAgent', 'AgentSession', 'function_tool',
-    'OpenAICodeAgent', 'GPT5CodeAgent',
+    'OpenAICodeAgent', 'GPT5CodeAgent', 'CodeInterpreterAgent',
     'StreamHandler', 'stream_to_console', 'collect_stream_text',
     'run_demo_loop', 'run_interactive_chat',
     'HostedTools', 'agent_as_tool', 'create_function_tool', 'ToolConfig',

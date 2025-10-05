@@ -96,6 +96,7 @@ export DEEPSEEK_API_KEY=your_deepseek_key
 - `harvester agent-claude` - **Claude Code Agent** - Prone to hallucinations, be careful Claude will delete the Claude Agent SDK
 - `harvester agent-openai` - **OpenAI Code Agent** - File operations with GPT-4o/o1/o3-mini
 - `harvester agent-gpt5` - **GPT-5 Code Agent** - Advanced reasoning for complex coding tasks
+- `harvester code-interpreter` - **Code Interpreter** - Python code execution in sandboxed containers
 - `harvester computer` - **GPT Computer Use** - AI agent that controls browser/computer
 
 ### Utility Commands
@@ -298,22 +299,66 @@ harvester agent-gpt5 "Classify all files by type" -m gpt-5-nano -r minimal
 - `gpt-5-mini` - Cost-optimized reasoning, balances speed/cost/capability
 - `gpt-5-nano` - High-throughput, simple instruction-following
 
+### Code Interpreter (`code-interpreter`)
+
+**Python code execution in sandboxed containers** - Write and run Python to solve complex problems.
+
+```bash
+# Solve a math problem
+harvester code-interpreter "Solve the equation 3x + 11 = 14"
+
+# Data analysis with file upload
+harvester code-interpreter "Analyze data.csv and create a histogram" -u data.csv
+
+# Image processing with file download
+harvester code-interpreter "Resize image.png to 800x600" -u image.png -d
+
+# Generate visualization
+harvester code-interpreter "Create a sine wave plot from 0 to 2π" -d
+
+# Use GPT-5 for complex problems
+harvester code-interpreter "Calculate fibonacci(100) using memoization" -m gpt-5
+```
+
+**Features:**
+- 🐍 **Sandboxed Python execution** - Safe, isolated environment
+- 📁 **File upload/download** - Work with data files and images
+- 📊 **Data analysis** - Process CSV, JSON, Excel files
+- 📈 **Visualization** - Create plots, charts, graphs
+- 🔄 **Iterative solving** - Model debugs and retries code automatically
+- 🖼️ **Image processing** - Crop, resize, transform images (with reasoning models)
+
+**Use Cases:**
+- Mathematical computations and equation solving
+- Data analysis and statistical processing
+- File format conversions
+- Image manipulation and computer vision
+- Chart and graph generation
+- Algorithm prototyping
+
+**Container Management:**
+- Containers auto-expire after 20 minutes of inactivity
+- Use `--container-id` to reuse an existing container
+- Files are automatically uploaded to the container
+- Use `-d` flag to download all generated files
+
 ### Agent Comparison
 
-| Feature | Grok | Claude | OpenAI | GPT-5 |
-|---------|------|--------|--------|-------|
-| **Speed** | ⚡⚡⚡⚡ Very Fast | ⚡⚡ Thorough | ⚡⚡⚡ Fast | ⚡⚡⚡⚡ Configurable |
-| **Cost** | 💰 ~$0.002 | 💰💰 ~$0.10 | 💰💰 ~$0.05 | 💰-💰💰💰 Configurable |
-| **Reasoning** | Fast | Deep | Multi-step | Configurable (minimal→high) |
-| **Best For** | Quick tasks | Claude fans | o1 reasoning | Complex coding |
-| **Models** | grok-code-fast-1 | claude-sonnet-4-5 | gpt-4o, o1, o3-mini | gpt-5, mini, nano |
-| **Configurability** | Low | Medium | Medium | High (effort+verbosity) |
+| Feature | Grok | Claude | OpenAI | GPT-5 | Code Interpreter |
+|---------|------|--------|--------|-------|------------------|
+| **Speed** | ⚡⚡⚡⚡ Very Fast | ⚡⚡ Thorough | ⚡⚡⚡ Fast | ⚡⚡⚡⚡ Configurable | ⚡⚡⚡ Fast |
+| **Cost** | 💰 ~$0.002 | 💰💰 ~$0.10 | 💰💰 ~$0.05 | 💰-💰💰💰 Configurable | 💰💰 ~$0.05 |
+| **Reasoning** | Fast | Deep | Multi-step | Configurable | Iterative |
+| **Best For** | Quick tasks | Claude fans | o1 reasoning | Complex coding | Data/Math |
+| **Capabilities** | File ops | File ops | File ops | File ops | Python execution |
+| **Environment** | Local files | Local files | Local files | Local files | Sandboxed container |
 
 **When to use which:**
 - **Grok Agent**: General use, fast iteration, prototyping, cost-effective
 - **Claude Agent**: If you like Claude (prone to hallucinations, use with caution)
 - **OpenAI Agent**: Advanced reasoning with o1/o3-mini, multi-step tasks
 - **GPT-5 Agent**: Complex coding tasks requiring configurable reasoning depth
+- **Code Interpreter**: Data analysis, math problems, visualizations, Python execution
 
 ### Examples
 
