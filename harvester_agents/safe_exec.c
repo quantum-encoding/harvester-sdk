@@ -5,9 +5,28 @@
 #include <string.h>   // For strstr, strcmp
 #include <unistd.h>   // For execvp prototype
 #include <stdlib.h>   // For getenv
+#include <sys/stat.h> // For stat (lock file check)
 
 // Original execvp function pointer
 static int (*original_execvp)(const char *file, char *const argv[]) = NULL;
+
+// ========================================================================
+// 🔒 WARDEN RECOMPILE LOCK
+// Prevents race conditions during safe_exec.so recompilation
+// ========================================================================
+#define WARDEN_LOCK_FILE "/tmp/warden_recompile.lock"
+
+static int check_warden_lock(void) {
+    struct stat st;
+    if (stat(WARDEN_LOCK_FILE, &st) == 0) {
+        // Lock file exists - recompile in progress
+        fprintf(stderr, "[SAFE_EXEC] ⚠️  WARDEN RECOMPILE IN PROGRESS - ALL COMMANDS BLOCKED\n");
+        fprintf(stderr, "[SAFE_EXEC] Lock file: %s\n", WARDEN_LOCK_FILE);
+        fprintf(stderr, "[SAFE_EXEC] Remove lock file when recompile is complete.\n");
+        return 1;  // BLOCKED
+    }
+    return 0;  // No lock, allow execution
+}
 
 // ========================================================================
 // PROJECT WARDEN: THE SCRIBE'S PASS
@@ -472,6 +491,15 @@ int execvp(const char *file, char *const argv[]) {
             errno = ENOENT;
             return -1;
         }
+    }
+
+    // ========================================================================
+    // 🔒 PRIORITY CHECK: Warden Recompile Lock
+    // If recompile is in progress, block ALL commands to prevent race conditions
+    // ========================================================================
+    if (check_warden_lock()) {
+        errno = EPERM;
+        return -1;  // BLOCKED: Recompile in progress
     }
 
     // Check if logging is enabled via env var
