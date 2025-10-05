@@ -6,20 +6,10 @@ Specialized agentic workflows for different AI models and tasks.
 Available Agents:
 - GrokCodeAgent: Agentic coding assistant powered by grok-code-fast-1
 - ClaudeCodeAgent: Professional agentic assistant powered by Claude Agent SDK
-- OpenAIAgent: General-purpose agent powered by OpenAI Agents SDK (GPT-4o, o1, o3-mini)
-- OpenAICodeAgent: File operations agent with GPT-4o/o1
-- GPT5CodeAgent: Advanced reasoning agent powered by GPT-5
-- CodeInterpreterAgent: Python code execution in sandboxed containers
-- ImageGenerationAgent: AI-powered image creation and editing
 """
 
 from .grok_code_agent import GrokCodeAgent, AgentTask as GrokAgentTask, ReasoningTrace, ToolCall
 from .claude_code_agent import ClaudeCodeAgent, AgentTask as ClaudeAgentTask
-from .openai_agent import OpenAIAgent, AgentSession, function_tool
-from .openai_code_agent import OpenAICodeAgent
-from .gpt5_code_agent import GPT5CodeAgent
-from .code_interpreter_agent import CodeInterpreterAgent
-from .image_generation_agent import ImageGenerationAgent
 from .streaming import StreamHandler, stream_to_console, collect_stream_text
 from .repl import run_demo_loop, run_interactive_chat
 from .tools import HostedTools, agent_as_tool, create_function_tool, ToolConfig
@@ -82,21 +72,10 @@ from .schemas import (
     generate_func_documentation,
 )
 from .prompt_sanitizer import PromptSanitizer, sanitize_prompt
-from .openai_models import (
-    OpenAIResponsesModel,
-    OpenAIChatCompletionsModel,
-    ModelSettings,
-    ModelResponse,
-    ModelTracing,
-    Tool as ModelTool,
-    Handoff as ModelHandoff,
-)
 
 __all__ = [
     'GrokCodeAgent', 'GrokAgentTask', 'ReasoningTrace', 'ToolCall',
     'ClaudeCodeAgent', 'ClaudeAgentTask',
-    'OpenAIAgent', 'AgentSession', 'function_tool',
-    'OpenAICodeAgent', 'GPT5CodeAgent', 'CodeInterpreterAgent', 'ImageGenerationAgent',
     'StreamHandler', 'stream_to_console', 'collect_stream_text',
     'run_demo_loop', 'run_interactive_chat',
     'HostedTools', 'agent_as_tool', 'create_function_tool', 'ToolConfig',
@@ -112,6 +91,4 @@ __all__ = [
     'AgentOutputSchemaBase', 'AgentOutputSchema', 'FuncSchema', 'FuncDocumentation',
     'DocstringStyle', 'ModelBehaviorError', 'function_schema', 'generate_func_documentation',
     'PromptSanitizer', 'sanitize_prompt',
-    'OpenAIResponsesModel', 'OpenAIChatCompletionsModel', 'ModelSettings', 'ModelResponse', 'ModelTracing',
-    'ModelTool', 'ModelHandoff'
 ]
