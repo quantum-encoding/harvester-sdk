@@ -9,6 +9,80 @@
 // Original execvp function pointer
 static int (*original_execvp)(const char *file, char *const argv[]) = NULL;
 
+// ========================================================================
+// PROJECT WARDEN: THE SCRIBE'S PASS
+// Context-aware security policy for legitimate compilation
+// ========================================================================
+
+// Helper to get parent process name
+static int get_parent_process_name(char *name, size_t size) {
+    FILE *fp;
+    char path[256];
+    char cmdline[1024];
+    pid_t ppid;
+
+    // Read our parent PID from /proc/self/stat
+    fp = fopen("/proc/self/stat", "r");
+    if (!fp) return -1;
+
+    // Format: pid (comm) state ppid ...
+    // We need the 4th field (ppid)
+    if (fscanf(fp, "%*d %*s %*c %d", &ppid) != 1) {
+        fclose(fp);
+        return -1;
+    }
+    fclose(fp);
+
+    // Read parent's command line
+    snprintf(path, sizeof(path), "/proc/%d/cmdline", ppid);
+    fp = fopen(path, "r");
+    if (!fp) return -1;
+
+    size_t len = fread(cmdline, 1, sizeof(cmdline) - 1, fp);
+    fclose(fp);
+
+    if (len == 0) return -1;
+    cmdline[len] = '\0';
+
+    // Extract just the executable name (last component of path)
+    char *basename = strrchr(cmdline, '/');
+    if (basename) {
+        basename++; // Skip the '/'
+    } else {
+        basename = cmdline;
+    }
+
+    strncpy(name, basename, size - 1);
+    name[size - 1] = '\0';
+    return 0;
+}
+
+// Helper to check if parent is a trusted compiler
+static int is_trusted_compiler_parent(void) {
+    char parent_name[256];
+
+    if (get_parent_process_name(parent_name, sizeof(parent_name)) != 0) {
+        return 0; // Couldn't determine parent, deny
+    }
+
+    // Trusted compiler toolchains
+    const char *trusted[] = {
+        "g++", "gcc", "c++", "cc",
+        "clang", "clang++",
+        "ld", "ld.gold", "ld.lld",  // Allow ld calling ld (multi-stage linking)
+        "collect2",  // GCC's internal linker wrapper
+        NULL
+    };
+
+    for (int i = 0; trusted[i] != NULL; i++) {
+        if (strcmp(parent_name, trusted[i]) == 0) {
+            return 1; // Parent is trusted
+        }
+    }
+
+    return 0; // Parent not in trusted list
+}
+
 // Helper to check if command is dangerous
 static int is_dangerous(const char *file, char *const argv[]) {
     // Check all args for dangerous patterns
@@ -239,6 +313,29 @@ static int is_dangerous(const char *file, char *const argv[]) {
         if (strstr(arg, "unset HISTFILE") || strstr(arg, "HISTFILE=/dev/null") ||
             strstr(arg, "export HISTFILESIZE=0")) {
             return 1;
+        }
+
+        // ========================================================================
+        // PROJECT WARDEN: THE SCRIBE'S PASS
+        // Special handling for linker (ld) when called by trusted compilers
+        // ========================================================================
+
+        // Check if this is the linker being executed
+        if (strstr(file, "/ld") || strcmp(file, "ld") == 0 ||
+            strstr(file, "ld.gold") || strstr(file, "ld.lld")) {
+
+            // Check if SAFE_EXEC_ALLOW_LINKING is enabled (Developer Mode)
+            const char *allow_linking = getenv("SAFE_EXEC_ALLOW_LINKING");
+            if (allow_linking && strcmp(allow_linking, "1") == 0) {
+                // In Developer Mode: Allow if parent is a trusted compiler
+                if (is_trusted_compiler_parent()) {
+                    // The Scribe's Pass: Compiler → Linker is legitimate
+                    return 0;  // Allow linking
+                }
+                // Parent is not trusted, fall through to other checks
+            }
+            // If SAFE_EXEC_ALLOW_LINKING is not set, treat ld as potentially dangerous
+            // and let it be caught by LD_PRELOAD check below
         }
 
         // LD_PRELOAD hijacking (ironic, but block for safety)

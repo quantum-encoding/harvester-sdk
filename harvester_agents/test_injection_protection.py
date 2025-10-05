@@ -219,6 +219,45 @@ ENV_MANIPULATION_TESTS = [
     ),
 ]
 
+# ========================================================================
+# PROJECT WARDEN: THE SCRIBE'S PASS
+# Tests for context-aware compilation security
+# ========================================================================
+
+SCRIBES_PASS_TESTS = [
+    # Test 1: Legitimate C++ compilation WITH Developer Mode enabled
+    InjectionTest(
+        "Legitimate C++ Compilation (Developer Mode)",
+        "g++ should be allowed to link when SAFE_EXEC_ALLOW_LINKING=1",
+        '''SAFE_EXEC_ALLOW_LINKING=1 bash -c "echo 'int main(){}' > /tmp/test_scribe.cpp && g++ -o /tmp/test_scribe /tmp/test_scribe.cpp && rm -f /tmp/test_scribe*"''',
+        should_block=False  # Should be ALLOWED
+    ),
+
+    # Test 2: Direct ld call should still be BLOCKED even in Developer Mode
+    InjectionTest(
+        "Direct Linker Call (Should Block)",
+        "Direct ld execution should be blocked even with Developer Mode",
+        'SAFE_EXEC_ALLOW_LINKING=1 /usr/bin/ld --version',
+        should_block=True  # Should be BLOCKED (parent is not g++/gcc)
+    ),
+
+    # Test 3: Compilation WITHOUT Developer Mode (default: blocked)
+    InjectionTest(
+        "C++ Compilation (Production Mode)",
+        "g++ linking should be blocked without SAFE_EXEC_ALLOW_LINKING=1",
+        '''bash -c "echo 'int main(){}' > /tmp/test_prod.cpp && g++ -o /tmp/test_prod /tmp/test_prod.cpp"''',
+        should_block=True  # Should be BLOCKED (Developer Mode not enabled)
+    ),
+
+    # Test 4: Compilation to object file (no linking) should work
+    InjectionTest(
+        "Compile to Object File (No Linking)",
+        "g++ -c should work (no linking required)",
+        '''bash -c "echo 'int main(){}' > /tmp/test_obj.cpp && g++ -c /tmp/test_obj.cpp -o /tmp/test_obj.o && rm -f /tmp/test_obj*"''',
+        should_block=False  # Should be ALLOWED (no linker invocation)
+    ),
+]
+
 SAFE_COMMANDS_TESTS = [
     InjectionTest(
         "ls command",
@@ -289,6 +328,7 @@ def main():
         ("Obfuscation Techniques", OBFUSCATION_TESTS),
         ("Backdoors & Miners", BACKDOOR_TESTS),
         ("Environment Manipulation", ENV_MANIPULATION_TESTS),
+        ("The Scribe's Pass (Compilation)", SCRIBES_PASS_TESTS),
         ("Safe Commands (Control)", SAFE_COMMANDS_TESTS),
     ]
 

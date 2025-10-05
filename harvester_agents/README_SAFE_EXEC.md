@@ -8,7 +8,59 @@ The `safe_exec.so` library provides **LD_PRELOAD-based command interception** to
 
 1. **LD_PRELOAD Hijacking**: The library uses `LD_PRELOAD` to intercept all `execvp()` calls system-wide for any process that loads it.
 2. **Pattern Matching**: Before allowing execution, it checks command names and arguments against dangerous patterns.
-3. **Transparent Fallback**: Safe commands pass through to the original `execvp()` without modification.
+3. **Context-Aware Security**: PROJECT WARDEN: THE SCRIBE'S PASS - Analyzes parent processes to allow legitimate compilation while blocking unauthorized execution.
+4. **Transparent Fallback**: Safe commands pass through to the original `execvp()` without modification.
+
+## 🛡️ PROJECT WARDEN: THE SCRIBE'S PASS
+
+**Context-Aware Compilation Security** - Allows legitimate C/C++ development while maintaining security.
+
+### The Problem
+AI agents need to compile and test code, but linking requires executing `ld` (the linker), which could be exploited for malicious purposes.
+
+### The Solution
+**Smart Firewall with Parent Process Analysis**:
+- Detects when `ld` is called by trusted compilers (g++, gcc, clang, etc.)
+- Allows linking ONLY when the parent process is a legitimate compiler toolchain
+- Blocks direct `ld` execution from untrusted sources (bash, python, etc.)
+
+### Developer Mode vs. Production Mode
+
+**Production Mode (Default)**:
+- Ultra-secure: Blocks ALL linking
+- Compilation to object files (.o) works
+- Final executable linking is blocked
+
+**Developer Mode (SAFE_EXEC_ALLOW_LINKING=1)**:
+- Context-aware: Allows linking when parent is g++/gcc/clang
+- Blocks direct ld calls from untrusted parents
+- Perfect for AI agent development workflows
+
+### Usage
+
+Enable Developer Mode:
+```bash
+export SAFE_EXEC_ALLOW_LINKING=1
+python harvester.py agent-gpt5 "create a hello world C++ program"
+```
+
+The agent can now:
+1. Write C++ source code ✅
+2. Compile to object files ✅
+3. **Link to executable** ✅ (Previously blocked!)
+4. Run and test the executable ✅
+
+### Trusted Compiler Toolchains
+- g++, gcc, c++, cc
+- clang, clang++
+- ld, ld.gold, ld.lld (multi-stage linking)
+- collect2 (GCC's internal linker wrapper)
+
+### Security Guarantees
+✅ Compiler → Linker: ALLOWED (legitimate development)
+❌ Bash → Linker: BLOCKED (potential exploit)
+❌ Python → Linker: BLOCKED (potential exploit)
+❌ Direct ld call: BLOCKED (suspicious activity)
 
 ## Protected Patterns
 
