@@ -1,0 +1,269 @@
+# Google AI Studio (GenAI) Embeddings Provider Configuration
+# Text embeddings for semantic search, RAG, classification, and clustering
+
+provider_name: genai_embeddings
+display_name: Google AI Studio Embeddings
+description: Generate text embeddings for various NLP tasks
+
+# Authentication
+# Set GOOGLE_GENAI_API_KEY environment variable or add api_key here
+api_key: ${GOOGLE_GENAI_API_KEY}
+
+# Default model
+default_model: gemini-embedding-001
+
+# Available models
+models:
+  gemini-embedding-001:
+    name: Gemini Embedding 001 (Stable)
+    description: Production-ready embedding model with MRL support
+    max_input_tokens: 2048
+    output_dimensions:
+      supported: [128, 256, 512, 768, 1536, 2048, 3072]
+      recommended: [768, 1536, 3072]
+      default: 3072
+    features:
+      - Matryoshka Representation Learning (MRL)
+      - Variable output dimensions
+      - Task-specific optimization
+      - Normalized at 3072 dimension
+    version: stable
+    
+  gemini-embedding-exp-03-07:
+    name: Gemini Embedding Experimental
+    description: Experimental embedding model with latest improvements
+    max_input_tokens: 2048
+    output_dimensions:
+      supported: [128, 256, 512, 768, 1536, 2048, 3072]
+      recommended: [768, 1536, 3072]
+      default: 3072
+    features:
+      - Experimental improvements
+      - Same dimension support as stable
+      - May have different performance characteristics
+    version: experimental
+
+# Model aliases for easier access
+aliases:
+  embeddings: gemini-embedding-001
+  embed: gemini-embedding-001
+  gemini-embed: gemini-embedding-001
+  embedding-stable: gemini-embedding-001
+  embedding-exp: gemini-embedding-exp-03-07
+  genai-embed: gemini-embedding-001
+
+# Task types with descriptions
+task_types:
+  SEMANTIC_SIMILARITY:
+    description: "Assess text similarity"
+    use_cases:
+      - Recommendation systems
+      - Duplicate detection
+      - Content matching
+    
+  CLASSIFICATION:
+    description: "Classify texts by labels"
+    use_cases:
+      - Sentiment analysis
+      - Spam detection
+      - Topic categorization
+    
+  CLUSTERING:
+    description: "Group similar texts"
+    use_cases:
+      - Document organization
+      - Market research
+      - Anomaly detection
+    
+  RETRIEVAL_DOCUMENT:
+    description: "Index documents for search"
+    use_cases:
+      - Document databases
+      - Knowledge bases
+      - Content libraries
+    note: "Use this for documents to be searched"
+    
+  RETRIEVAL_QUERY:
+    description: "Optimize search queries"
+    use_cases:
+      - Search engines
+      - Custom search
+      - Query processing
+    note: "Use this for search queries"
+    
+  CODE_RETRIEVAL_QUERY:
+    description: "Natural language to code search"
+    use_cases:
+      - Code suggestions
+      - Code search engines
+      - Documentation search
+    note: "Use RETRIEVAL_DOCUMENT for code blocks"
+    
+  QUESTION_ANSWERING:
+    description: "Find answer documents"
+    use_cases:
+      - QA systems
+      - Chatbots
+      - Help systems
+    note: "Use RETRIEVAL_DOCUMENT for answer documents"
+    
+  FACT_VERIFICATION:
+    description: "Find supporting evidence"
+    use_cases:
+      - Fact-checking systems
+      - Claim verification
+      - Evidence retrieval
+    note: "Use RETRIEVAL_DOCUMENT for evidence documents"
+
+# Dimension recommendations
+dimension_guide:
+  128:
+    description: "Minimal - extreme compression"
+    mteb_score: 63.31
+    use_case: "Very limited storage, basic similarity"
+    storage_reduction: "96%"
+    
+  256:
+    description: "Small - high compression"
+    mteb_score: 66.19
+    use_case: "Storage-constrained environments"
+    storage_reduction: "92%"
+    
+  512:
+    description: "Compact - good compression"
+    mteb_score: 67.55
+    use_case: "Mobile apps, edge devices"
+    storage_reduction: "83%"
+    
+  768:
+    description: "Recommended - balanced"
+    mteb_score: 67.99
+    use_case: "Most applications, RAG systems"
+    storage_reduction: "75%"
+    
+  1536:
+    description: "High quality - less compression"
+    mteb_score: 68.17
+    use_case: "When quality matters more than storage"
+    storage_reduction: "50%"
+    
+  2048:
+    description: "Very high quality"
+    mteb_score: 68.16
+    use_case: "Critical accuracy requirements"
+    storage_reduction: "33%"
+    
+  3072:
+    description: "Maximum - no compression"
+    mteb_score: 68.20
+    use_case: "Highest quality, pre-normalized"
+    storage_reduction: "0%"
+
+# Common use case configurations
+use_case_configs:
+  rag_system:
+    description: "Retrieval-Augmented Generation"
+    recommended_dimension: 768
+    document_task: RETRIEVAL_DOCUMENT
+    query_task: RETRIEVAL_QUERY
+    normalize: true
+    
+  semantic_search:
+    description: "Semantic document search"
+    recommended_dimension: 768
+    document_task: RETRIEVAL_DOCUMENT
+    query_task: RETRIEVAL_QUERY
+    normalize: true
+    
+  code_search:
+    description: "Code repository search"
+    recommended_dimension: 1536
+    document_task: RETRIEVAL_DOCUMENT
+    query_task: CODE_RETRIEVAL_QUERY
+    normalize: true
+    
+  qa_system:
+    description: "Question-answering system"
+    recommended_dimension: 1536
+    document_task: RETRIEVAL_DOCUMENT
+    query_task: QUESTION_ANSWERING
+    normalize: true
+    
+  content_similarity:
+    description: "Find similar content"
+    recommended_dimension: 768
+    task: SEMANTIC_SIMILARITY
+    normalize: true
+    
+  text_classification:
+    description: "Categorize text content"
+    recommended_dimension: 512
+    task: CLASSIFICATION
+    normalize: true
+    
+  document_clustering:
+    description: "Group related documents"
+    recommended_dimension: 768
+    task: CLUSTERING
+    normalize: true
+    
+  fact_checking:
+    description: "Verify claims with evidence"
+    recommended_dimension: 1536
+    document_task: RETRIEVAL_DOCUMENT
+    query_task: FACT_VERIFICATION
+    normalize: true
+
+# Vector database integrations
+vector_db_support:
+  google_cloud:
+    - BigQuery (native support)
+    - AlloyDB (pgvector extension)
+    - Cloud SQL (pgvector extension)
+    - Vertex AI Vector Search
+  
+  third_party:
+    - ChromaDB
+    - Qdrant
+    - Weaviate
+    - Pinecone
+    - Milvus
+    - FAISS
+
+# Performance benchmarks (MTEB scores)
+benchmarks:
+  description: "Massive Text Embedding Benchmark scores"
+  note: "Higher dimensions don't always mean better performance"
+  results:
+    3072: 68.20
+    2048: 68.16
+    1536: 68.17
+    768: 67.99
+    512: 67.55
+    256: 66.19
+    128: 63.31
+
+# Best practices
+best_practices:
+  - "Use 768 dimensions for most applications (good balance)"
+  - "Normalize embeddings for dimensions < 3072"
+  - "Match task types between queries and documents"
+  - "Use RETRIEVAL_DOCUMENT for indexing, RETRIEVAL_QUERY for searching"
+  - "Batch embed multiple texts for efficiency"
+  - "Consider storage vs quality tradeoffs when choosing dimensions"
+  - "Use cosine similarity for comparing normalized embeddings"
+
+# Limitations
+limitations:
+  - "Maximum 2048 input tokens per text"
+  - "Text input only (no images or other modalities)"
+  - "English performs best, multilingual support varies"
+  - "Not for generating new content (transform only)"
+
+# Usage notes
+notes:
+  - "Free tier available with Google AI Studio"
+  - "For production/enterprise use, consider Vertex AI"
+  - "All embeddings include positional information via MRL"
+  - "3072-dim embeddings are pre-normalized"
+  - "Smaller dimensions require manual normalization"

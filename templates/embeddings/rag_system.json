@@ -1,0 +1,84 @@
+{
+  "name": "rag_system",
+  "description": "Embeddings for Retrieval-Augmented Generation (RAG) systems",
+  "provider": "genai_embeddings",
+  "model": "gemini-embedding-001",
+  "version": "1.0",
+  "parameters": {
+    "document_config": {
+      "task_type": "RETRIEVAL_DOCUMENT",
+      "output_dimensionality": 768,
+      "normalize": true,
+      "batch_size": 100
+    },
+    "query_config": {
+      "task_type": "RETRIEVAL_QUERY",
+      "output_dimensionality": 768,
+      "normalize": true
+    },
+    "chunking_strategy": {
+      "method": "sliding_window",
+      "chunk_size": 512,
+      "overlap": 128,
+      "preserve_sentences": true
+    },
+    "vector_store": {
+      "type": "chromadb",
+      "collection_name": "rag_documents",
+      "distance_metric": "cosine"
+    }
+  },
+  "example_workflow": {
+    "step1": {
+      "action": "Chunk documents",
+      "description": "Split documents into overlapping chunks of 512 tokens"
+    },
+    "step2": {
+      "action": "Generate document embeddings",
+      "description": "Embed chunks with RETRIEVAL_DOCUMENT task type"
+    },
+    "step3": {
+      "action": "Store in vector database",
+      "description": "Save embeddings with metadata in ChromaDB"
+    },
+    "step4": {
+      "action": "Query processing",
+      "description": "Embed user queries with RETRIEVAL_QUERY task type"
+    },
+    "step5": {
+      "action": "Retrieve context",
+      "description": "Find top-k similar chunks using cosine similarity"
+    },
+    "step6": {
+      "action": "Augment prompt",
+      "description": "Add retrieved context to LLM prompt"
+    }
+  },
+  "sample_documents": [
+    "The Earth orbits around the Sun once every 365.25 days.",
+    "Water freezes at 0 degrees Celsius and boils at 100 degrees.",
+    "The speed of light in vacuum is approximately 299,792,458 meters per second.",
+    "DNA is composed of four nucleotide bases: adenine, thymine, guanine, and cytosine.",
+    "The Great Wall of China is over 13,000 miles long."
+  ],
+  "sample_queries": [
+    "How long does Earth take to orbit the Sun?",
+    "What temperature does water freeze?",
+    "How fast does light travel?",
+    "What are the components of DNA?",
+    "Tell me about the Great Wall"
+  ],
+  "optimization_tips": [
+    "Use 768 dimensions for optimal balance of quality and storage",
+    "Batch embed documents for better throughput",
+    "Cache frequently accessed embeddings",
+    "Use metadata filtering before similarity search",
+    "Consider hybrid search (semantic + keyword) for best results"
+  ],
+  "notes": [
+    "768-dimensional embeddings provide 75% storage reduction",
+    "Always normalize embeddings for consistent similarity scores",
+    "Use different task types for documents vs queries",
+    "MTEB score at 768 dims: 67.99 (only 0.21 less than max)"
+  ]
+}

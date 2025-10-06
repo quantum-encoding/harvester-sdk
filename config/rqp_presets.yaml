@@ -1,0 +1,266 @@
+# RQP V2 Preset Configurations
+# Define personas, defaults, and requirements for different domains
+
+presets:
+  # Performance Optimization
+  optimization:
+    personas:
+      requester: "Performance Optimization Architect"
+      target: "Systems Performance Engineer"
+    intent: "Seeking production-ready optimization patterns with measurable improvements"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "implementation_focused"
+      metadata_level: "comprehensive"
+      tone: "technical_pragmatic"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "high_confidence_patterns_only"
+      source_requirement: "minimum_2_authoritative"
+      implementation_threshold: "80_percent_complete"
+      avoid_speculation: true
+      concurrency_handling: "dependency_aware"
+      strict_schema: true
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      hardware: "x86_64 Ice Lake 4-core @ 2.6GHz"
+      require_benchmarks: true
+      require_failure_modes: true
+      require_cross_checks: true
+      optimization_targets:
+        - throughput
+        - latency
+        - memory_usage
+        - cpu_efficiency
+
+  # Machine Learning Serving
+  ml_serving:
+    personas:
+      requester: "ML Systems Architect"
+      target: "ML Infrastructure Engineer"
+    intent: "Implementing production ML serving with high throughput and reliability"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "implementation_focused"
+      metadata_level: "comprehensive"
+      tone: "technical_pragmatic"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "production_patterns_only"
+      source_requirement: "minimum_2_authoritative"
+      implementation_threshold: "90_percent_complete"
+      avoid_speculation: true
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      hardware: "NVIDIA T4 GPU"
+      performance_target: "1000 inferences/sec"
+      require_gpu_optimization: true
+      require_batching_strategies: true
+      require_memory_management: true
+      ml_frameworks:
+        - "PyTorch"
+        - "TensorFlow"
+        - "ONNX Runtime"
+        - "TensorRT"
+
+  # Database Optimization
+  database:
+    personas:
+      requester: "Database Performance Architect"
+      target: "Database Optimization Engineer"
+    intent: "Optimizing database queries, indexes, and architecture for production workloads"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "query_focused"
+      metadata_level: "comprehensive"
+      tone: "technical_analytical"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "data_driven_patterns"
+      source_requirement: "minimum_2_authoritative"
+      implementation_threshold: "85_percent_complete"
+      avoid_speculation: true
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      database_systems:
+        - "PostgreSQL"
+        - "MySQL"
+        - "MongoDB"
+        - "Redis"
+      require_query_plans: true
+      require_index_analysis: true
+      benchmark_queries: true
+      require_migration_safety: true
+      performance_targets:
+        query_latency: "<10ms p99"
+        throughput: ">10000 qps"
+        connection_pooling: "optimized"
+
+  # Distributed Systems
+  distributed:
+    personas:
+      requester: "Distributed Systems Architect"
+      target: "Distributed Systems Engineer"
+    intent: "Building scalable, fault-tolerant distributed systems"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "architecture_focused"
+      metadata_level: "comprehensive"
+      tone: "technical_rigorous"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "proven_patterns_only"
+      source_requirement: "minimum_3_authoritative"
+      implementation_threshold: "85_percent_complete"
+      avoid_speculation: true
+      require_formal_verification: false
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      require_consensus_analysis: true
+      require_failure_scenarios: true
+      require_partition_tolerance: true
+      network_assumptions: "Partial failures possible"
+      consistency_models:
+        - "strong_consistency"
+        - "eventual_consistency"
+        - "causal_consistency"
+      distributed_patterns:
+        - "leader_election"
+        - "consensus"
+        - "replication"
+        - "sharding"
+
+  # Security Hardening
+  security:
+    personas:
+      requester: "Security Architect"
+      target: "Security Engineer"
+    intent: "Implementing defense-in-depth security measures"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "security_focused"
+      metadata_level: "comprehensive"
+      tone: "technical_cautious"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "security_first_patterns"
+      source_requirement: "minimum_3_authoritative"
+      implementation_threshold: "95_percent_complete"
+      avoid_speculation: true
+      require_threat_model: true
+    security_clearance: "SECURITY_CRITICAL"
+    defaults:
+      require_threat_analysis: true
+      require_mitigation_strategies: true
+      require_security_testing: true
+      compliance_frameworks:
+        - "OWASP"
+        - "CIS"
+        - "NIST"
+      security_layers:
+        - "network"
+        - "application"
+        - "data"
+        - "infrastructure"
+
+  # Cloud Native
+  cloud_native:
+    personas:
+      requester: "Cloud Solutions Architect"
+      target: "Cloud Native Engineer"
+    intent: "Building cloud-native applications with optimal resource utilization"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "cloud_optimized"
+      metadata_level: "comprehensive"
+      tone: "technical_pragmatic"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "cloud_native_patterns"
+      source_requirement: "minimum_2_authoritative"
+      implementation_threshold: "85_percent_complete"
+      avoid_speculation: true
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      cloud_providers:
+        - "GCP"
+        - "AWS"
+        - "Azure"
+      require_auto_scaling: true
+      require_cost_optimization: true
+      require_observability: true
+      container_orchestration:
+        - "Kubernetes"
+        - "Cloud Run"
+        - "ECS"
+      serverless_support: true
+
+  # Real-time Systems
+  realtime:
+    personas:
+      requester: "Real-time Systems Architect"
+      target: "Real-time Systems Engineer"
+    intent: "Implementing systems with strict latency guarantees"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "latency_focused"
+      metadata_level: "comprehensive"
+      tone: "technical_precise"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "deterministic_patterns_only"
+      source_requirement: "minimum_2_authoritative"
+      implementation_threshold: "90_percent_complete"
+      avoid_speculation: true
+      require_timing_analysis: true
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      hardware: "Real-time capable hardware"
+      require_latency_bounds: true
+      require_jitter_analysis: true
+      require_preemption_safety: true
+      timing_requirements:
+        hard_deadline: "10ms"
+        soft_deadline: "5ms"
+        jitter_tolerance: "100μs"
+      real_time_os:
+        - "Linux RT_PREEMPT"
+        - "QNX"
+        - "VxWorks"
+
+  # Edge Computing
+  edge:
+    personas:
+      requester: "Edge Computing Architect"
+      target: "Edge Systems Engineer"
+    intent: "Optimizing for resource-constrained edge devices"
+    response_modality:
+      format: "batch_response_json"
+      content_density: "resource_aware"
+      metadata_level: "comprehensive"
+      tone: "technical_pragmatic"
+      brevity_boost: false
+    processing_directives:
+      response_structure: "array_of_answer_objects"
+      fill_strategy: "edge_optimized_patterns"
+      source_requirement: "minimum_2_authoritative"
+      implementation_threshold: "85_percent_complete"
+      avoid_speculation: true
+    security_clearance: "PRODUCTION_GRADE"
+    defaults:
+      hardware: "ARM Cortex-A53 @ 1.4GHz"
+      memory_limit: "1GB RAM"
+      storage_limit: "8GB Flash"
+      require_power_optimization: true
+      require_offline_capability: true
+      connectivity:
+        - "intermittent"
+        - "low_bandwidth"
+        - "high_latency"

@@ -1,0 +1,109 @@
+{
+  "technology_image_templates": {
+    "software_development": {
+      "tech1": {
+        "prefix": "SOFTWARE DEVELOPMENT WORKSPACE:",
+        "suffix": "Modern development environment, multiple monitors, coding workspace, software engineer, clean desk setup",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "💻 Software development workspace",
+        "category": "software_development",
+        "cost_tier": "standard"
+      },
+      "tech2": {
+        "prefix": "PROGRAMMING AND CODING:",
+        "suffix": "Developer writing code, programming session, software development, coding on screen, tech professional",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "⌨️ Programming and coding activities",
+        "category": "software_development",
+        "cost_tier": "standard"
+      },
+      "tech3": {
+        "prefix": "AGILE DEVELOPMENT TEAM:",
+        "suffix": "Software team collaboration, agile development, team meeting, tech professionals, modern office",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "👥 Development team collaboration",
+        "category": "software_development",
+        "cost_tier": "budget"
+      }
+    },
+    "tech_products": {
+      "product1": {
+        "prefix": "TECHNOLOGY PRODUCT PHOTOGRAPHY:",
+        "suffix": "Sleek tech products, modern electronics, product showcase, clean minimalist presentation, innovation",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "📱 Technology product photography",
+        "category": "tech_products",
+        "cost_tier": "premium"
+      },
+      "product2": {
+        "prefix": "MOBILE APP INTERFACE:",
+        "suffix": "Modern mobile app UI, smartphone interface, app design, user experience, digital interface",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "9:16",
+        "model_preference": "g1",
+        "description": "📲 Mobile app and interface design",
+        "category": "tech_products",
+        "cost_tier": "premium"
+      },
+      "product3": {
+        "prefix": "TECH GADGETS COLLECTION:",
+        "suffix": "Modern gadgets, technology accessories, tech lifestyle, consumer electronics, innovative devices",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🔌 Tech gadgets and accessories",
+        "category": "tech_products",
+        "cost_tier": "standard"
+      }
+    },
+    "data_analytics": {
+      "data1": {
+        "prefix": "DATA ANALYTICS DASHBOARD:",
+        "suffix": "Professional data visualization, analytics dashboard, business intelligence, charts and graphs, data insights",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "📊 Data analytics and visualization",
+        "category": "data_analytics",
+        "cost_tier": "premium"
+      },
+      "data2": {
+        "prefix": "DATA SCIENTIST WORKSPACE:",
+        "suffix": "Data scientist analyzing data, machine learning workspace, statistical analysis, research environment",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🔬 Data science and analysis",
+        "category": "data_analytics",
+        "cost_tier": "standard"
+      },
+      "data3": {
+        "prefix": "BUSINESS INTELLIGENCE MEETING:",
+        "suffix": "Team analyzing data, business intelligence presentation, data-driven decisions, corporate analytics",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "📈 Business intelligence meetings",
+        "category": "data_analytics",
+        "cost_tier": "budget"
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "nature_cosmic_templates": {
+    "cosmic_nature": {
+      "galactic_forest": {
+        "prefix": "GALACTIC FOREST REALM:",
+        "suffix": "Trees with star leaves, cosmic root systems, nebula flowers, space-nature fusion, bioluminescent plants, aurora lighting, mystical forest",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🌌 Cosmic forest with star trees",
+        "category": "cosmic_nature",
+        "cost_tier": "premium"
+      },
+      "ocean_universe": {
+        "prefix": "COSMIC OCEAN DEPTHS:",
+        "suffix": "Underwater galaxies, space whale migrations, stellar coral reefs, cosmic jellyfish, deep space marine life, aquatic cosmos",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🌊 Cosmic ocean depths",
+        "category": "cosmic_nature",
+        "cost_tier": "premium"
+      },
+      "mountain_portals": {
+        "prefix": "MOUNTAIN PORTAL PEAKS:",
+        "suffix": "Mountain peaks as cosmic gateways, dimensional rifts in stone, starlight waterfalls, celestial hiking trails, alpine cosmos",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "⛰️ Mountain cosmic portals",
+        "category": "cosmic_nature",
+        "cost_tier": "premium"
+      }
+    },
+    "elemental_cosmic": {
+      "fire_nebula": {
+        "prefix": "FIRE NEBULA ELEMENTAL:",
+        "suffix": "Cosmic fire spirits, stellar flame dancers, solar phoenix, burning star essence, fire elementals in space, cosmic combustion",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🔥 Cosmic fire elementals",
+        "category": "elemental_cosmic",
+        "cost_tier": "premium"
+      },
+      "ice_crystal_cosmos": {
+        "prefix": "ICE CRYSTAL COSMOS:",
+        "suffix": "Frozen galaxies, ice crystal planets, cosmic snowflakes, stellar frost patterns, aurora ice formations, crystalline space",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "❄️ Cosmic ice crystals",
+        "category": "elemental_cosmic",
+        "cost_tier": "premium"
+      },
+      "earth_planetoid": {
+        "prefix": "EARTH PLANETOID GARDEN:",
+        "suffix": "Floating earth gardens, gravity-defying plants, orbital ecosystems, miniature planets, cosmic terrarium, space gardening",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🌍 Floating earth gardens",
+        "category": "elemental_cosmic",
+        "cost_tier": "premium"
+      }
+    }
+  }
+}

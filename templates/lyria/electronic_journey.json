@@ -1,0 +1,111 @@
+{
+  "name": "electronic_journey",
+  "description": "Progressive electronic music journey with smooth transitions",
+  "provider": "genai_lyria",
+  "model": "models/lyria-realtime-exp",
+  "version": "1.0",
+  "parameters": {
+    "sequence": [
+      {
+        "name": "Ambient Intro",
+        "prompts": [
+          {"text": "Ambient", "weight": 1.0},
+          {"text": "Spacey Synths", "weight": 0.5}
+        ],
+        "duration": 15,
+        "config": {
+          "bpm": 90,
+          "temperature": 1.0,
+          "brightness": 0.3,
+          "density": 0.3
+        }
+      },
+      {
+        "name": "Build Up",
+        "prompts": [
+          {"text": "Deep House", "weight": 1.0},
+          {"text": "Synth Pads", "weight": 0.7},
+          {"text": "Funk Drums", "weight": 0.5}
+        ],
+        "duration": 20,
+        "config": {
+          "bpm": 120,
+          "brightness": 0.6,
+          "density": 0.6
+        },
+        "transition_time": 5
+      },
+      {
+        "name": "Main Drop",
+        "prompts": [
+          {"text": "Techno", "weight": 1.5},
+          {"text": "303 Acid Bass", "weight": 1.0},
+          {"text": "TR-909 Drum Machine", "weight": 0.8}
+        ],
+        "duration": 30,
+        "config": {
+          "bpm": 128,
+          "brightness": 0.8,
+          "density": 0.9,
+          "guidance": 5.0
+        },
+        "transition_time": 3
+      },
+      {
+        "name": "Breakdown",
+        "prompts": [
+          {"text": "Minimal Techno", "weight": 1.0},
+          {"text": "Echo", "weight": 0.5}
+        ],
+        "duration": 15,
+        "config": {
+          "bpm": 128,
+          "brightness": 0.5,
+          "density": 0.4,
+          "mute_drums": false,
+          "mute_bass": false
+        },
+        "transition_time": 2
+      },
+      {
+        "name": "Final Drop",
+        "prompts": [
+          {"text": "Psytrance", "weight": 1.2},
+          {"text": "Fat Beats", "weight": 0.8},
+          {"text": "Huge Drop", "weight": 1.0}
+        ],
+        "duration": 25,
+        "config": {
+          "bpm": 140,
+          "brightness": 0.9,
+          "density": 1.0,
+          "temperature": 1.5
+        },
+        "transition_time": 2
+      },
+      {
+        "name": "Outro",
+        "prompts": [
+          {"text": "Ambient", "weight": 1.0},
+          {"text": "Ethereal", "weight": 0.8}
+        ],
+        "duration": 10,
+        "config": {
+          "bpm": 90,
+          "brightness": 0.2,
+          "density": 0.2
+        },
+        "transition_time": 5
+      }
+    ],
+    "total_duration": 115,
+    "output_format": "WAV 48kHz 16-bit stereo"
+  },
+  "notes": [
+    "Creates a 2-minute electronic music journey",
+    "Smooth transitions between genres",
+    "BPM progression: 90 → 120 → 128 → 140 → 90",
+    "Requires WebSocket connection",
+    "Output is watermarked for AI identification"
+  ]
+}

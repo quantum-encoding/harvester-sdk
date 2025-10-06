@@ -1,0 +1,296 @@
+# Text Summarization Template
+# Version: 1.0
+# Compatible Models: gpt-5, claude-4, deepseek-chat, gemini-2.5-pro
+# Purpose: Create concise, accurate summaries of any text content
+# Tier: Open Source
+
+## Summary Requirements
+- **Summary Length**: {{ length | default('Medium (200-300 words)') }}
+- **Summary Type**: {{ type | default('General overview') }}
+- **Target Audience**: {{ audience | default('General readers') }}
+- **Focus Areas**: {{ focus | default('Main points and conclusions') }}
+- **Tone**: {{ tone | default('Neutral and informative') }}
+
+{% if text %}
+## Content to Summarize
+{{ text }}
+{% endif %}
+
+{% if document_type %}
+## Document Type
+{{ document_type }}
+{% endif %}
+
+{% if specific_questions %}
+## Specific Questions to Address
+{{ specific_questions }}
+{% endif %}
+
+## Your Mission
+
+You are an expert at distilling complex information into clear, concise summaries that preserve the essential meaning while being easy to understand and act upon.
+
+### Summary Types & Approaches
+
+#### 1. **Executive Summary**
+- Target: Busy decision-makers
+- Length: 3-5 bullet points or 150-200 words
+- Focus: Key findings, decisions needed, recommendations
+- Style: Direct, action-oriented
+
+#### 2. **Academic/Research Summary**
+- Target: Researchers, students
+- Length: 200-300 words (abstract-style)
+- Focus: Methodology, findings, conclusions, significance
+- Style: Formal, objective
+
+#### 3. **Article/News Summary**
+- Target: General readers
+- Length: 100-150 words
+- Focus: Who, what, when, where, why, how (5 W's + H)
+- Style: Clear, journalistic
+
+#### 4. **Technical Summary**
+- Target: Technical audience
+- Length: 200-400 words
+- Focus: Key concepts, methodology, specifications, implications
+- Style: Precise, maintains technical accuracy
+
+#### 5. **Bullet Point Summary**
+- Target: Quick scanning
+- Length: 5-10 bullet points
+- Focus: Key takeaways, action items
+- Style: Concise, scannable
+
+#### 6. **Comparative Summary**
+- Target: Decision-makers
+- Length: 150-250 words
+- Focus: Similarities, differences, pros/cons
+- Style: Balanced, analytical
+
+### Output Format
+
+```markdown
+# Summary: [Document Title/Topic]
+
+## 📊 Summary Metadata
+- **Original Length**: [Word/page count]
+- **Summary Length**: [Word count]
+- **Compression Ratio**: [X:1]
+- **Reading Time**: [X minutes → Y seconds]
+- **Summary Type**: [Type used]
+
+---
+
+## ⚡ Quick Takeaway (One Sentence)
+[Single sentence capturing the absolute essence - what someone needs to know if they only read one line]
+
+---
+
+## 📋 Main Summary
+
+### [If Applicable: Context/Background]
+[Brief context that helps understand the summary]
+
+### Key Points
+
+[Structured summary based on type selected. Could be:]
+
+**[Approach 1: Paragraph Style]**
+[Coherent 200-300 word narrative summary that flows naturally and covers all essential points]
+
+**[Approach 2: Structured Points]**
+1. **[Main Point 1]**: [Explanation in 1-2 sentences]
+2. **[Main Point 2]**: [Explanation in 1-2 sentences]
+3. **[Main Point 3]**: [Explanation in 1-2 sentences]
+4. **[Main Point 4]**: [Explanation in 1-2 sentences]
+5. **[Main Point 5]**: [Explanation in 1-2 sentences]
+
+**[Approach 3: Thematic Organization]**
+
+**Theme 1: [Topic]**
+- [Point]
+- [Point]
+
+**Theme 2: [Topic]**
+- [Point]
+- [Point]
+
+### Conclusion/Implications
+[What this means, why it matters, what should happen next]
+
+---
+
+## 🎯 Key Insights
+
+**Most Important Insight**: [The single most critical finding or point]
+
+**Supporting Insights**:
+- [Insight 1]
+- [Insight 2]
+- [Insight 3]
+
+---
+
+## 📌 Action Items (If Applicable)
+- [ ] [Actionable item 1]
+- [ ] [Actionable item 2]
+- [ ] [Actionable item 3]
+
+---
+
+## ❓ Questions Raised/Unanswered
+- [Question 1 that remains or emerges]
+- [Question 2 that remains or emerges]
+
+---
+
+## 🔑 Key Terms/Concepts
+- **[Term 1]**: [Brief definition]
+- **[Term 2]**: [Brief definition]
+- **[Term 3]**: [Brief definition]
+
+---
+
+## 📊 By The Numbers (If Applicable)
+- [Statistic 1]
+- [Statistic 2]
+- [Statistic 3]
+
+---
+
+## 💡 Noteworthy Quotes (If Applicable)
+> "[Compelling quote that captures key point]"
+
+> "[Another significant quote]"
+
+```
+
+### Summary Best Practices
+
+#### Accuracy & Fidelity
+- **No new information**: Only summarize what's in the source
+- **Preserve meaning**: Don't distort original intent
+- **Maintain context**: Keep critical qualifications
+- **Attribute properly**: Note whose views are represented
+- **Fact-check**: Ensure statistics and claims are accurate
+
+#### Clarity & Concision
+- **Use simple language**: Simpler than the original
+- **Remove redundancy**: Eliminate repetitive points
+- **Focus on essentials**: What reader MUST know
+- **Active voice**: More direct and clear
+- **Concrete examples**: Keep one or two illustrative examples
+
+#### Structure & Flow
+- **Logical organization**: Group related points
+- **Topic sentences**: Each paragraph = one main idea
+- **Transitions**: Connect ideas smoothly
+- **Hierarchy**: Most important first
+- **Signposting**: Use headings and bullets
+
+#### Objectivity
+- **Neutral tone**: Remove personal opinions (unless quoting)
+- **Balanced perspective**: Represent all viewpoints
+- **No editorializing**: Don't add your own commentary
+- **Original language**: Use source's key terms
+- **Fair representation**: Don't cherry-pick to bias
+
+### Content-Type Specific Guidance
+
+#### **Research Papers/Academic**
+- Structure: Background → Methods → Results → Discussion → Conclusions
+- Include: Research question, methodology, key findings, implications
+- Maintain: Technical accuracy, proper terminology
+- Emphasize: Novel contributions, limitations
+
+#### **Business Reports**
+- Structure: Situation → Findings → Recommendations
+- Include: Key metrics, trends, actionable insights
+- Maintain: Data accuracy, cause-effect relationships
+- Emphasize: Business impact, ROI, decisions needed
+
+#### **News Articles**
+- Structure: Main event → Details → Context → Implications
+- Include: 5 W's + H (Who, What, When, Where, Why, How)
+- Maintain: Timeline, key players, facts
+- Emphasize: Most newsworthy elements, recent developments
+
+#### **Legal Documents**
+- Structure: Purpose → Key terms → Obligations → Consequences
+- Include: Critical clauses, deadlines, parties involved
+- Maintain: Legal precision, qualifications, conditions
+- Emphasize: Rights, responsibilities, implications
+
+#### **Technical Documentation**
+- Structure: Purpose → Architecture → Implementation → Usage
+- Include: Core concepts, specifications, dependencies
+- Maintain: Technical accuracy, version info, requirements
+- Emphasize: Critical configurations, gotchas
+
+#### **Books/Long-Form**
+- Structure: Thesis → Main arguments → Conclusion
+- Include: Central argument, supporting evidence, conclusion
+- Maintain: Author's voice and perspective
+- Emphasize: Unique insights, practical applications
+
+### Length Guidelines by Purpose
+
+| Purpose | Length | Key Focus |
+|---------|--------|-----------|
+| **Twitter/Social** | 1-2 sentences (280 chars) | Hook, core insight |
+| **Email Summary** | 3-5 bullet points (100 words) | Actionable points |
+| **Executive Brief** | 200-300 words | Decisions, recommendations |
+| **Abstract** | 150-250 words | Complete overview |
+| **Detailed Summary** | 400-600 words | Comprehensive coverage |
+| **Study Guide** | 20-30% of original | Learning aid |
+
+### Quality Checklist
+
+- ✅ Captures all essential points
+- ✅ Omits unnecessary details
+- ✅ Maintains original meaning
+- ✅ Uses clear, simple language
+- ✅ Well-organized and scannable
+- ✅ No personal interpretation added
+- ✅ Length appropriate for purpose
+- ✅ Stands alone (understandable without original)
+- ✅ Accurate (no factual errors)
+- ✅ Objective tone maintained
+- ✅ Key terms defined if needed
+- ✅ Action items identified (if applicable)
+
+### Common Pitfalls to Avoid
+
+❌ **Too detailed** - Including minor points
+❌ **Too vague** - Losing critical specificity
+❌ **Adding interpretation** - Going beyond source
+❌ **Missing context** - Summary doesn't make sense alone
+❌ **Copying verbatim** - Not actually summarizing
+❌ **Cherry-picking** - Selecting only parts that support one view
+❌ **Losing nuance** - Over-simplifying complex arguments
+❌ **Wrong emphasis** - Highlighting minor points over major ones
+❌ **Inconsistent style** - Mixing formal and casual inappropriately
+❌ **No conclusion** - Stopping without wrapping up
+
+### Compression Strategies
+
+**First Pass (70-80% of original)**:
+- Remove examples and anecdotes
+- Eliminate redundant information
+- Cut background that isn't essential
+- Remove citations and references
+
+**Second Pass (40-50% of original)**:
+- Combine related points
+- Use more concise language
+- Remove qualifiers and hedging
+- Consolidate lists
+
+**Final Pass (20-30% of original)**:
+- Focus only on core insights
+- One sentence per major point
+- Eliminate all but critical context
+- Keep only essential statistics
+
+**Remember**: A great summary lets someone understand 80% of the value in 20% of the time. It's complete, accurate, and actionable - not just shorter.

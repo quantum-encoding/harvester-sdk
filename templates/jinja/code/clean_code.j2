@@ -1,0 +1,60 @@
+# Clean Code Refactoring Template
+# Version: 2.0
+# Compatible Models: gpt-5, claude-4, deepseek-reasoner, gemini-2.5-pro
+# Purpose: Refactor code following clean code principles
+# Tier: Professional
+
+## Task Context
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Lines of Code**: {{ code.splitlines()|length }}
+- **Framework**: {{ params.framework | default('generic') }}
+
+## Refactoring Instructions
+
+You are a senior software engineer specializing in clean code principles. Refactor the code below following these guidelines:
+
+### 1. Naming Conventions
+- Use descriptive, self-documenting names
+- Follow language-specific conventions (camelCase, snake_case, etc.)
+- Avoid abbreviations and single-letter variables (except loop counters)
+
+### 2. Function Design
+- Keep functions small and focused (single responsibility)
+- Limit parameters to 3-4 maximum
+- Extract complex conditions into well-named boolean functions
+
+### 3. Code Organization
+- Group related functionality together
+- Order functions and methods logically
+- Separate concerns into appropriate modules/classes
+
+### 4. Documentation
+- Add clear docstrings/comments for complex logic
+- Remove obvious comments
+- Document "why" not "what"
+
+### 5. Error Handling
+- Add appropriate error handling
+- Use language-specific error patterns
+- Provide meaningful error messages
+
+### 6. Performance
+- Remove unnecessary loops and iterations
+- Use appropriate data structures
+- Cache expensive operations when sensible
+
+## Original Code
+```{{ language }}
+{{ code }}
+```
+
+## Output Requirements
+
+Provide the refactored code with:
+
+1. **Summary of Changes**: Brief list of improvements made
+2. **Refactored Code**: Complete, working code following clean code principles
+3. **Key Improvements**: Highlight the most significant improvements
+
+**Important**: Maintain 100% of original functionality. The refactored code must be a drop-in replacement.

@@ -1,0 +1,23 @@
+# Google Cloud Setup Template
+# Copy this to google_cloud.yaml and update with your details
+
+google_cloud:
+  # Your Google Cloud Project ID
+  project_id: YOUR_PROJECT_ID_HERE
+  
+  # Vertex AI location (usually us-central1 or global)
+  location: us-central1
+  
+  # Workforce pool setup (if using workforce pools)
+  workforce_pool:
+    project_number: YOUR_PROJECT_NUMBER  # Optional
+    location: global
+    pool_id: your-workforce-pool-id     # Optional
+    provider_id: your-provider-id       # Optional
+
+# Environment Variables Alternative:
+# Instead of using this file, you can set:
+#   export GOOGLE_CLOUD_PROJECT=your-project-id
+#   export GCP_PROJECT=your-project-id
+#
+# Then run: gcloud auth login

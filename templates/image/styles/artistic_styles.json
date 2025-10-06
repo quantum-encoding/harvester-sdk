@@ -1,0 +1,76 @@
+{
+  "artistic_styles": {
+    "description": "Artistic style templates for image generation",
+    "version": "2.0",
+    "templates": {
+      "digital_art": {
+        "description": "Modern digital art style",
+        "base_modifier": "digital art, vibrant colors, artistic composition",
+        "optional_modifiers": ["detailed", "abstract", "minimalist", "complex"],
+        "negative": "blurry, low quality, distorted",
+        "models": {
+          "dalle-3": {"size": "1024x1024", "quality": "hd"},
+          "dall-e-3": {"size": "1024x1024", "quality": "hd"},
+          "imagen": {"size": "16:9", "quality": "high"},
+          "imagen-3": {"size": "16:9", "quality": "high"},
+          "gpt-image": {"size": "1024x1024", "quality": "hd"}
+        }
+      },
+      "oil_painting": {
+        "description": "Classic oil painting style",
+        "base_modifier": "oil painting, brushstrokes visible, classical art style",
+        "optional_modifiers": ["impressionist", "renaissance", "baroque", "modern"],
+        "negative": "digital, photograph, cartoon",
+        "models": {
+          "dalle-3": {"size": "1024x1024", "quality": "hd"},
+          "imagen": {"size": "4:3", "quality": "high"},
+          "gpt-image": {"size": "1024x1024", "quality": "hd"}
+        }
+      },
+      "watercolor": {
+        "description": "Soft watercolor painting style",
+        "base_modifier": "watercolor painting, soft edges, flowing colors",
+        "optional_modifiers": ["pastel", "vibrant", "monochrome", "abstract"],
+        "negative": "sharp edges, digital, photograph",
+        "models": {
+          "dalle-3": {"size": "1024x1024", "quality": "standard"},
+          "imagen": {"size": "1:1", "quality": "high"},
+          "gpt-image": {"size": "1024x1024", "quality": "standard"}
+        }
+      },
+      "anime": {
+        "description": "Japanese anime/manga style",
+        "base_modifier": "anime style, manga art, Japanese animation",
+        "optional_modifiers": ["studio ghibli", "shonen", "kawaii", "detailed"],
+        "negative": "realistic, photograph, western cartoon",
+        "models": {
+          "dalle-3": {"size": "1024x1024", "quality": "hd"},
+          "imagen": {"size": "16:9", "quality": "high"},
+          "gpt-image": {"size": "1024x1024", "quality": "hd"}
+        }
+      },
+      "photorealistic": {
+        "description": "Highly realistic photographic style",
+        "base_modifier": "photorealistic, high detail, professional photography",
+        "optional_modifiers": ["8k resolution", "studio lighting", "natural lighting", "HDR"],
+        "negative": "cartoon, painting, illustration, low quality",
+        "models": {
+          "dalle-3": {"size": "1024x1024", "quality": "hd"},
+          "imagen": {"size": "16:9", "quality": "high"},
+          "gpt-image": {"size": "1024x1024", "quality": "hd"}
+        }
+      },
+      "cosmic_duck": {
+        "description": "Your legendary cosmic duck style",
+        "base_modifier": "cosmic nebula background, ethereal lighting, space fantasy art style, majestic,print QUANTUM ENCODING LTD",
+        "optional_modifiers": ["with galaxies", "aurora effects", "quantum particles", "dimensional rifts"],
+        "negative": "mundane, ordinary, earthly",
+        "models": {
+          "dalle-3": {"size": "1024x1024", "quality": "hd"},
+          "imagen": {"size": "16:9", "quality": "high"},
+          "gpt-image": {"size": "1024x1024", "quality": "hd"}
+        }
+      }
+    }
+  }
+}

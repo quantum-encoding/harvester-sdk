@@ -1,0 +1,78 @@
+{
+  "imagen_batch_templates": {
+    "description": "Optimized templates for Google Imagen 3 batch processing",
+    "version": "2.0",
+    "model": "imagen-3",
+    "rate_limits": {
+      "ultra": {"rpm": 60, "concurrent": 10},
+      "fast": {"rpm": 120, "concurrent": 20}
+    },
+    "templates": {
+      "blog_headers": {
+        "description": "Blog header images optimized for web",
+        "aspect_ratio": "16:9",
+        "quality": "high",
+        "prompts": [
+          {
+            "base": "Professional blog header image about {topic}",
+            "style": "modern, clean design, subtle gradients, professional photography",
+            "negative": "text, watermarks, logos, cluttered",
+            "params": {
+              "safety_filter": "block_few",
+              "person_generation": "allow_all"
+            }
+          }
+        ]
+      },
+      "product_showcase": {
+        "description": "E-commerce product images",
+        "aspect_ratio": "1:1",
+        "quality": "high",
+        "prompts": [
+          {
+            "base": "Product photography of {product}",
+            "style": "white background, studio lighting, professional product shot, high detail",
+            "negative": "shadows, reflections, background objects",
+            "params": {
+              "safety_filter": "block_few",
+              "add_watermark": false
+            }
+          }
+        ]
+      },
+      "social_media": {
+        "description": "Social media content images",
+        "aspect_ratios": {
+          "instagram_square": "1:1",
+          "instagram_story": "9:16",
+          "twitter_header": "16:9",
+          "linkedin_post": "4:3"
+        },
+        "quality": "high",
+        "prompts": [
+          {
+            "base": "Eye-catching social media image about {topic}",
+            "style": "vibrant colors, modern design, engaging composition",
+            "negative": "boring, dull, text-heavy"
+          }
+        ]
+      },
+      "architectural": {
+        "description": "Architecture and real estate images",
+        "aspect_ratio": "16:9",
+        "quality": "high",
+        "prompts": [
+          {
+            "base": "Architectural photography of {building_type}",
+            "style": "golden hour lighting, professional architectural photography, wide angle",
+            "negative": "people, cars, distractions"
+          }
+        ]
+      }
+    },
+    "batch_csv_format": {
+      "columns": ["prompt", "batch_id", "aspect_ratio", "filename", "negative_prompt"],
+      "example": "Modern tech blog header,blog_001,16:9,tech_header.png,text watermarks"
+    }
+  }
+}

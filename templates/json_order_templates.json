@@ -1,0 +1,300 @@
+{
+  "image_order_templates": {
+    "photography": {
+      "hyper-realistic": {
+        "prefix": "HYPER-REALISTIC PHOTOGRAPH:",
+        "suffix": "Ultra-detailed, photographic quality, 8K resolution, professional lighting, sharp focus, masterpiece",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "📸 Photographic quality, ultra-realistic",
+        "category": "photography",
+        "cost_tier": "premium"
+      },
+      "portrait": {
+        "prefix": "PROFESSIONAL PORTRAIT PHOTOGRAPH:",
+        "suffix": "Professional headshot, studio lighting, sharp focus, high quality, commercial photography",
+        "style": "natural",
+        "quality": "hd", 
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "📸 Professional headshot photography",
+        "category": "photography",
+        "cost_tier": "premium"
+      },
+      "product": {
+        "prefix": "COMMERCIAL PRODUCT PHOTOGRAPHY:",
+        "suffix": "White background, studio lighting, commercial quality, marketing photo, high resolution, clean composition",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "📦 Commercial product shots",
+        "category": "photography",
+        "cost_tier": "standard"
+      },
+      "food": {
+        "prefix": "PROFESSIONAL FOOD PHOTOGRAPHY:",
+        "suffix": "Appetizing presentation, natural lighting, food styling, commercial quality, mouth-watering",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1", 
+        "description": "🍕 Professional culinary photography",
+        "category": "photography",
+        "cost_tier": "standard"
+      }
+    },
+    "digital_art": {
+      "anime": {
+        "prefix": "ANIME STYLE DIGITAL ART:",
+        "suffix": "High-quality anime style, vibrant colors, detailed illustration, manga aesthetic",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🎌 Japanese animation style",
+        "category": "digital_art",
+        "cost_tier": "budget"
+      },
+      "comic": {
+        "prefix": "COMIC BOOK ILLUSTRATION:",
+        "suffix": "Comic book style, bold colors, dynamic composition, graphic novel aesthetic",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "3:4",
+        "model_preference": "o2",
+        "description": "💥 Comic book illustration",
+        "category": "digital_art", 
+        "cost_tier": "budget"
+      },
+      "watercolor": {
+        "prefix": "WATERCOLOR PAINTING:",
+        "suffix": "Traditional watercolor technique, soft edges, transparent layers, artistic brushwork",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "g1",
+        "description": "🎨 Traditional watercolor painting",
+        "category": "digital_art",
+        "cost_tier": "standard"
+      }
+    },
+    "themed": {
+      "cyberpunk": {
+        "prefix": "CYBERPUNK AESTHETIC:",
+        "suffix": "Neon lighting, futuristic cityscape, dark atmosphere, high-tech low-life, digital art style",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "🌃 Futuristic neon dystopian aesthetic",
+        "category": "themed",
+        "cost_tier": "premium"
+      },
+      "steampunk": {
+        "prefix": "STEAMPUNK DESIGN:",
+        "suffix": "Victorian-era technology, brass and copper, steam-powered machinery, retro-futuristic",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "⚙️ Victorian-era technology fusion",
+        "category": "themed",
+        "cost_tier": "standard"
+      },
+      "fantasy": {
+        "prefix": "FANTASY ART:",
+        "suffix": "Magical atmosphere, mystical elements, ethereal lighting, fantasy illustration",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "9:16",
+        "model_preference": "g1",
+        "description": "🐉 Magical and mystical artwork",
+        "category": "themed",
+        "cost_tier": "premium"
+      }
+    },
+    "business": {
+      "corporate": {
+        "prefix": "CORPORATE BUSINESS IMAGERY:",
+        "suffix": "Professional environment, modern office, business atmosphere, clean composition, corporate aesthetic",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏢 Professional corporate imagery",
+        "category": "business",
+        "cost_tier": "premium"
+      },
+      "marketing": {
+        "prefix": "MARKETING VISUAL:",
+        "suffix": "Eye-catching, commercial appeal, brand-friendly, marketing photography, engaging composition",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "📈 Marketing and advertising visuals",
+        "category": "business",
+        "cost_tier": "premium"
+      },
+      "social_media": {
+        "prefix": "SOCIAL MEDIA CONTENT:",
+        "suffix": "Social media optimized, engaging visual, shareable content, vibrant and appealing",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "1:1",
+        "model_preference": "o2",
+        "description": "📱 Social media optimized content",
+        "category": "business",
+        "cost_tier": "budget"
+      }
+    },
+    "technical": {
+      "architectural": {
+        "prefix": "ARCHITECTURAL VISUALIZATION:",
+        "suffix": "Architectural rendering, structural design, precise geometry, professional visualization",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "🏗️ Building and structural visualization",
+        "category": "technical",
+        "cost_tier": "premium"
+      },
+      "scientific": {
+        "prefix": "SCIENTIFIC ILLUSTRATION:",
+        "suffix": "Scientific accuracy, educational diagram, clear visualization, technical illustration",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "g1",
+        "description": "🔬 Scientific and educational illustration",
+        "category": "technical",
+        "cost_tier": "standard"
+      },
+      "infographic": {
+        "prefix": "INFOGRAPHIC DESIGN:",
+        "suffix": "Information visualization, clear data presentation, graphic design, educational format",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "9:16",
+        "model_preference": "g2",
+        "description": "📊 Information visualization design",
+        "category": "technical",
+        "cost_tier": "budget"
+      }
+    },
+    "artistic": {
+      "abstract": {
+        "prefix": "ABSTRACT ART:",
+        "suffix": "Non-representational forms, bold colors and shapes, artistic expression, modern art",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "1:1",
+        "model_preference": "g1",
+        "description": "🎨 Non-representational artistic expression",
+        "category": "artistic",
+        "cost_tier": "standard"
+      },
+      "surreal": {
+        "prefix": "SURREALIST ART:",
+        "suffix": "Dreamlike imagery, unexpected juxtapositions, surreal atmosphere, artistic interpretation",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "g1",
+        "description": "🌀 Dreamlike surrealist imagery",
+        "category": "artistic",
+        "cost_tier": "premium"
+      },
+      "minimalist": {
+        "prefix": "MINIMALIST DESIGN:",
+        "suffix": "Clean composition, simple elegance, negative space, minimal elements, refined aesthetic",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "g2",
+        "description": "⚪ Clean, simple compositions",
+        "category": "artistic",
+        "cost_tier": "budget"
+      }
+    }
+  },
+  "batch_order_presets": {
+    "e_commerce_pack": {
+      "description": "Complete e-commerce product imagery package",
+      "templates": ["product", "social_media", "marketing"],
+      "models": ["o1", "o2"],
+      "quantity_per_template": 3,
+      "cost_estimate": "premium"
+    },
+    "social_media_bundle": {
+      "description": "Social media content variety pack",
+      "templates": ["social_media", "anime", "minimalist"],
+      "models": ["o2", "g2"],
+      "quantity_per_template": 5,
+      "cost_estimate": "budget"
+    },
+    "corporate_package": {
+      "description": "Professional corporate imagery set",
+      "templates": ["corporate", "portrait", "marketing"],
+      "models": ["o1", "g1"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    },
+    "artistic_collection": {
+      "description": "Creative artistic interpretation set",
+      "templates": ["fantasy", "abstract", "surreal", "watercolor"],
+      "models": ["g1", "o1"],
+      "quantity_per_template": 2,
+      "cost_estimate": "premium"
+    },
+    "budget_variety": {
+      "description": "Cost-effective variety pack",
+      "templates": ["anime", "comic", "minimalist", "infographic"],
+      "models": ["o2", "g2"],
+      "quantity_per_template": 4,
+      "cost_estimate": "budget"
+    }
+  },
+  "cost_tiers": {
+    "budget": {
+      "models": ["o2", "g2"],
+      "quality": "standard",
+      "cost_per_image": 0.020,
+      "description": "Cost-effective generation"
+    },
+    "standard": {
+      "models": ["o1", "g1", "o2"],
+      "quality": "standard", 
+      "cost_per_image": 0.040,
+      "description": "Balanced quality and cost"
+    },
+    "premium": {
+      "models": ["o1", "g1"],
+      "quality": "hd",
+      "cost_per_image": 0.080,
+      "description": "Highest quality generation"
+    }
+  },
+  "template_routing": {
+    "style_to_model": {
+      "photorealistic": "o1",
+      "artistic": "g1",
+      "commercial": "o1",
+      "creative": "g1",
+      "budget": "o2",
+      "fast": "g2"
+    },
+    "category_preferences": {
+      "photography": ["o1", "o2"],
+      "digital_art": ["g1", "g2", "o2"],
+      "themed": ["g1", "o1"],
+      "business": ["o1", "g1"],
+      "technical": ["g1", "g2"],
+      "artistic": ["g1", "o1"]
+    }
+  }
+}

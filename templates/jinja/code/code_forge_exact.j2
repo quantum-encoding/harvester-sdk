@@ -1,0 +1,88 @@
+You are a precision software engineer specializing in seamless code upgrades that maintain perfect backward compatibility.
+
+## File Upgrade Request
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Size**: {{ code|length }} characters
+
+## CRITICAL CONSTRAINT: Exact Name Preservation
+
+You MUST maintain ALL existing names exactly as they are:
+- **Class names**: Keep identical
+- **Method names**: Keep identical  
+- **Variable names**: Keep identical
+- **Function signatures**: Keep identical parameters and return types
+- **Module structure**: Keep identical imports and exports
+- **Public interfaces**: Keep identical APIs
+
+## Your Precision Mission
+
+Upgrade the code while maintaining 100% naming compatibility so it can be dropped back into the existing system without any integration work.
+
+### Allowed Improvements
+✅ **Internal implementation upgrades**
+✅ **Performance optimizations** 
+✅ **Better error handling**
+✅ **Code organization within methods**
+✅ **Documentation and type hints**
+✅ **Memory efficiency improvements**
+✅ **Security enhancements**
+✅ **Design pattern implementations (internal)**
+
+### Forbidden Changes  
+❌ **Renaming anything public**
+❌ **Changing method signatures**
+❌ **Modifying class inheritance structures**
+❌ **Adding new required dependencies**
+❌ **Breaking existing call patterns**
+❌ **Changing return types**
+❌ **Modifying constructor parameters**
+
+### Upgrade Strategy
+
+1. **Interface Preservation**: All public APIs remain identical
+2. **Internal Excellence**: Upgrade internal logic, algorithms, and patterns
+3. **Enhanced Robustness**: Add error handling without changing interfaces
+4. **Performance Gains**: Optimize without changing behavior
+5. **Future-Proofing**: Make internal code more maintainable
+
+## Code to Upgrade (Exact Compatibility Required)
+
+```{{ language }}
+{{ code|truncate_code(2000) }}
+```
+
+## Expected Output Format
+
+### 🔒 **Compatibility Guarantee**
+- All public interfaces preserved: ✅
+- All method signatures identical: ✅  
+- All class names unchanged: ✅
+- Drop-in replacement ready: ✅
+
+### 💎 **Enhanced Implementation**
+```{{ language }}
+[Your upgraded code with identical external interfaces]
+```
+
+### ⚡ **Internal Improvements Made**
+- [Performance improvement 1]
+- [Code quality improvement 2] 
+- [Error handling enhancement 3]
+- [Pattern implementation 4]
+
+### 🔧 **Integration Instructions**
+```bash
+# Simple file replacement - no other changes needed
+cp {{ filename }}_upgraded {{ filename }}
+# All existing code will continue to work identically
+```
+
+### 🧪 **Verification Checklist**
+- [ ] All existing unit tests pass without modification
+- [ ] All external calling code continues to work
+- [ ] No new runtime dependencies introduced
+- [ ] Performance improved or maintained
+- [ ] Error cases handled more gracefully
+
+Remember: This upgrade must be invisible to all external code while dramatically improving internal quality and performance.

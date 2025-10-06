@@ -1,0 +1,79 @@
+{
+  "dalle3_templates": {
+    "description": "DALL-E 3 specific templates with optimal settings",
+    "version": "2.0",
+    "model": "dalle-3",
+    "sizes": ["1024x1024", "1792x1024", "1024x1792"],
+    "templates": {
+      "artistic_portrait": {
+        "description": "Artistic portrait generation",
+        "size": "1024x1792",
+        "quality": "hd",
+        "style": "vivid",
+        "prompts": [
+          {
+            "base": "Portrait of {subject}",
+            "modifiers": "artistic style, dramatic lighting, detailed features, professional portrait",
+            "avoid": "photorealistic, photograph"
+          }
+        ]
+      },
+      "concept_art": {
+        "description": "Game and movie concept art",
+        "size": "1792x1024",
+        "quality": "hd",
+        "style": "vivid",
+        "prompts": [
+          {
+            "base": "Concept art of {scene}",
+            "modifiers": "digital painting, cinematic composition, detailed environment, atmospheric",
+            "avoid": "low quality, amateur"
+          }
+        ]
+      },
+      "logo_design": {
+        "description": "Logo and brand design",
+        "size": "1024x1024",
+        "quality": "hd",
+        "style": "natural",
+        "prompts": [
+          {
+            "base": "Minimalist logo design for {company}",
+            "modifiers": "vector style, clean lines, modern design, professional branding",
+            "avoid": "complex, cluttered, photographic"
+          }
+        ]
+      },
+      "illustration": {
+        "description": "Book and article illustrations",
+        "size": "1024x1024",
+        "quality": "standard",
+        "style": "vivid",
+        "prompts": [
+          {
+            "base": "Illustration of {scene}",
+            "modifiers": "detailed illustration, vibrant colors, storytelling composition",
+            "avoid": "photographic, realistic"
+          }
+        ]
+      },
+      "cosmic_scenes": {
+        "description": "Space and cosmic imagery",
+        "size": "1792x1024",
+        "quality": "hd",
+        "style": "vivid",
+        "prompts": [
+          {
+            "base": "Cosmic scene featuring {elements}",
+            "modifiers": "nebula, stars, galaxies, ethereal lighting, space art, majestic",
+            "avoid": "earthly, mundane"
+          }
+        ]
+      }
+    },
+    "batch_format": {
+      "columns": ["prompt", "model", "size", "quality", "style", "filename"],
+      "example": "A majestic eagle in flight,dalle-3,1792x1024,hd,vivid,eagle_flight.png"
+    }
+  }
+}

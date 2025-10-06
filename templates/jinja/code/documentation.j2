@@ -1,0 +1,49 @@
+
+### 17. **templates/documentation.j2** - Documentation Generation Template
+```jinja2
+You are a technical documentation expert. Generate comprehensive documentation for the following code.
+
+## Code Information
+- **File**: {{ filename }}
+- **Language**: {{ language }}
+- **Purpose**: Extract and document the core functionality
+
+## Code to Document
+
+```{{ language }}
+{{ code|truncate_code(2000) }}
+
+Documentation Requirements
+
+Generate documentation that includes:
+1. Overview
+
+    Primary purpose and functionality
+    Key features and capabilities
+    Design decisions and trade-offs
+
+2. API Documentation
+
+For each public class/function:
+
+    Purpose and behavior
+    Parameters with types and descriptions
+    Return values
+    Example usage
+    Edge cases and error handling
+
+3. Architecture Notes
+
+    Component relationships
+    Data flow
+    External dependencies (abstracted)
+    Extension points
+
+4. Usage Examples
+
+Provide 2-3 practical examples showing common use cases.
+5. Migration Guide
+
+If this appears to be framework-specific code, provide notes on how to adapt it to other frameworks or pure implementations.
+
+Format the documentation in clean, readable Markdown.

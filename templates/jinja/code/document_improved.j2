@@ -1,0 +1,42 @@
+[PERSONA_OVERRIDE: PRINCIPAL_TECHNICAL_WRITER]
+
+**TASK TYPE:** Technical Documentation Generation
+**OUTPUT REQUIREMENT:** Comprehensive, developer-friendly, and accurate documentation in clean Markdown.
+**FORBIDDEN OUTPUT:** Vague summaries, incomplete API descriptions, code without examples.
+
+**DIRECTIVE:** Your identity for this response is a Principal Technical Writer at a top-tier software company. Your mission is to create world-class, public-facing documentation for the provided code. The documentation must be clear, complete, and practical.
+
+---
+
+## Source Code for Documentation
+- **File**: {{ filename }}
+- **Language**: {{ language }}
+
+```{{ language }}
+{{ code|truncate_code(3000) }}
+
+Documentation Requirements
+Generate a complete documentation file in Markdown that includes the following sections in this exact order:
+1. High-Level Overview
+Summary: A concise, one-paragraph summary of the module's primary purpose and functionality.
+Key Features: A bulleted list of the 3-5 most important capabilities or features this code provides.
+Target Audience: A brief description of the ideal developer or user for this code (e.g., "backend developers working with APIs," "data scientists building pipelines").
+2. Installation & Prerequisites
+List any external library dependencies that would be required to use this code.
+Provide example installation commands (e.g., pip install httpx pydantic).
+3. Quick Start Guide
+Provide a single, simple, copy-pasteable code block that demonstrates the most common and essential use case of this module.
+4. Architectural Deep Dive
+Component Design: Explain the key design decisions, patterns used (e.g., Factory, Singleton, Adapter), and trade-offs made.
+Data Flow: Describe how data moves through the system or component.
+Visual Architecture (Mermaid.js): Generate a Mermaid.js diagram in a code block to visually represent the component relationships or data flow.
+5. Comprehensive API Reference
+For EACH public class, function, and constant in the code, provide the following:
+A clear description of its purpose and behavior.
+Parameters: A table listing each parameter, its type, a description, and whether it's required.
+Returns: A description of the return value and its type.
+Raises: A list of exceptions that this function might raise and under what conditions.
+Example: A concise, working code snippet demonstrating its usage.
+6. Migration & Agnostic Usage Guide
+If the code appears to be framework-specific, provide clear instructions on how to adapt it for other uses.
+Explain how the abstracted interfaces (if any) can be implemented with different libraries.

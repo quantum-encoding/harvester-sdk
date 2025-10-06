@@ -1,0 +1,50 @@
+## 🛡️ QUALITY GUARDIAN - AUTOMATED CODE REMEDIATION ANALYSIS
+
+> **This is an automated response from the Quality Guardian system. Faulty or placeholder code has been detected in this implementation. Please analyze the findings and implement the corrections.**
+
+## Original File Information
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Size**: {{ code|length }} characters
+- **Analysis Type**: {{ analysis_type | default('Architectural Violation Remediation') }}
+
+## Guardian Detection Summary
+
+The Quality Guardian has identified violations or placeholder implementations in this code that must be resolved before deployment.
+
+## Your Task
+
+Analyze the code below and provide corrected, production-ready implementations that resolve ALL violations:
+
+1. **Eliminate ALL placeholder patterns** (TODO, FIXME, dummy implementations)
+2. **Implement proper dependency injection** where appropriate
+3. **Ensure stateless service design** for scalability
+4. **Apply correct abstraction layers** for maintainability
+5. **Ensure backwards compatibility** with existing patterns
+6. **Add proper error handling** for all edge cases
+7. **Include necessary validation** for inputs and outputs
+
+## Code Under Analysis
+
+```{{ language }}
+{{ code|truncate(3000) if code|length > 3000 else code }}
+```
+
+## Expected Output Format
+
+Provide your analysis and corrections in this exact format:
+
+1. **Violation Summary** - List all architectural violations found
+2. **Corrected Implementation** - Complete, production-ready code with all violations resolved
+3. **Implementation Notes** - Brief explanation of what was fixed and why
+
+## Critical Reminders
+
+- This is **automated quality enforcement** - not a conversation
+- Every line must be **production-ready and functional**
+- **No placeholders or incomplete implementations** except for API keys and environment variables
+- Code must integrate seamlessly with the **project architecture**
+- Focus on **functional implementation**, not explanations
+
+**Guardian Enforcement Level: {{ enforcement_level | default('PROFESSIONAL') }}**
+**Quality Standard: {{ quality_standard | default('PRODUCTION DEPLOYMENT') }}**

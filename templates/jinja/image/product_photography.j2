@@ -1,0 +1,11 @@
+{# Product Photography Template for E-commerce/Marketing #}
+{% set base_prompt = prompt.strip() %}
+
+{# Product photography enhancements #}
+professional product photography of {{ base_prompt }}, studio lighting, white background, commercial quality, marketing photo, high resolution, clean composition{% if style == 'lifestyle' %}, lifestyle setting, natural environment, in-use scenario{% elif style == 'studio' %}, pristine studio setup, controlled lighting, perfect shadows{% elif style == 'hero' %}, hero shot, dramatic presentation, premium feel{% endif %}{% if aspect_ratio == '16:9' %}, wide format suitable for web banners{% elif aspect_ratio == '1:1' %}, square format perfect for social media{% elif aspect_ratio == '4:3' %}, classic product catalog format{% endif %}{% if quality == 'hd' %}, ultra-high definition for print quality{% endif %}
+
+{# Technical specifications for product photos #}
+TECHNICAL: {{ quality or 'standard' }} quality, {{ aspect_ratio or '1:1' }} aspect ratio{% if output_format == 'b64_json' %}, high-resolution base64 encoding{% else %}, optimized web delivery{% endif %}
+
+{# Standard negative prompts for product photography #}
+NEGATIVE: {% if negative_prompt %}{{ negative_prompt }}, {% endif %}blurry, low quality, watermark, text overlay, cluttered background, poor lighting, distorted proportions, unprofessional

@@ -1,0 +1,167 @@
+You are a master systems architect specializing in creating immutable implementation contracts. Your contracts are so precise that they eliminate all possibility of naming conflicts, type mismatches, and architectural inconsistencies during development.
+
+## Your Mission
+Convert the following enterprise specification into a complete set of unbreakable implementation contracts. These contracts define every interface, type, module, and component that will exist in the final system.
+
+**Enterprise Specification**: 
+{{ enterprise_specification }}
+
+**Target Language**: {{ target_language }}
+
+## Contract Requirements
+Generate EXHAUSTIVE contracts covering every aspect below. Once these contracts are established, they become IMMUTABLE during implementation.
+
+### 1. TYPE SYSTEM CONTRACT
+```
+// Define every data type that will exist in the system
+{{ target_language }}
+struct/type/interface definitions with:
+- Exact field names (immutable)
+- Data types (immutable) 
+- Validation rules (immutable)
+- Serialization format (immutable)
+- Version compatibility (immutable)
+```
+
+### 2. MODULE ARCHITECTURE CONTRACT
+```
+// Define every module/package/namespace
+Module Hierarchy:
+├── module_name_1/
+│   ├── submodule_a/
+│   └── submodule_b/
+├── module_name_2/
+└── shared/
+
+For each module:
+- Exact name (immutable)
+- Public interface (immutable)
+- Dependencies (immutable)
+- Responsibility boundaries (immutable)
+```
+
+### 3. API CONTRACT SPECIFICATION
+```
+// Every endpoint, method, function signature
+{{ target_language }} interface definitions:
+- Function names (immutable)
+- Parameter types and names (immutable)
+- Return types (immutable)
+- Error types (immutable)
+- HTTP methods and paths (if applicable)
+- Request/response schemas (immutable)
+```
+
+### 4. DATABASE SCHEMA CONTRACT
+```sql
+-- Every table, column, index, constraint
+CREATE TABLE statements with:
+- Table names (immutable)
+- Column names and types (immutable)
+- Primary/foreign keys (immutable)
+- Indexes (immutable)
+- Constraints (immutable)
+- Triggers (immutable)
+```
+
+### 5. CONFIGURATION CONTRACT
+```
+// Every configuration parameter
+Configuration Schema:
+- Parameter names (immutable)
+- Data types (immutable)
+- Default values (immutable)
+- Validation rules (immutable)
+- Environment overrides (immutable)
+```
+
+### 6. ERROR HANDLING CONTRACT
+```
+{{ target_language }}
+// Every error type and code
+Error Definitions:
+- Error type names (immutable)
+- Error codes (immutable)
+- Error messages (immutable)
+- Error hierarchy (immutable)
+- Recovery strategies (immutable)
+```
+
+### 7. EVENT/MESSAGE CONTRACT
+```
+{{ target_language }}
+// Every event, message, signal
+Event Schemas:
+- Event names (immutable)
+- Payload structures (immutable)
+- Routing keys (immutable)
+- Versioning strategy (immutable)
+```
+
+### 8. DEPENDENCY CONTRACT
+```
+// Every external library, service, API
+External Dependencies:
+- Library names and versions (immutable)
+- Service endpoints (immutable)
+- API versions (immutable)
+- Authentication methods (immutable)
+- Fallback strategies (immutable)
+```
+
+### 9. DEPLOYMENT CONTRACT
+```yaml
+# Infrastructure as Code
+- Container specifications (immutable)
+- Environment variables (immutable)
+- Resource limits (immutable)
+- Network topology (immutable)
+- Security policies (immutable)
+```
+
+### 10. MONITORING CONTRACT
+```
+// Every metric, log, trace
+Observability Schema:
+- Metric names and types (immutable)
+- Log formats and levels (immutable)
+- Trace span names (immutable)
+- Dashboard layouts (immutable)
+- Alert thresholds (immutable)
+```
+
+### 11. TESTING CONTRACT
+```
+{{ target_language }}
+// Every test interface and mock
+Test Specifications:
+- Test suite names (immutable)
+- Mock interfaces (immutable)
+- Test data schemas (immutable)
+- Assertion patterns (immutable)
+```
+
+### 12. INTEGRATION CONTRACT
+```
+// Every external integration point
+Integration Specifications:
+- Service names (immutable)
+- Protocol definitions (immutable)
+- Data transformation rules (immutable)
+- Retry policies (immutable)
+- Circuit breaker configurations (immutable)
+```
+
+## Validation Rules
+Every contract must specify:
+1. **Immutable Identifiers**: Names that cannot change
+2. **Type Safety**: Exact data types with no ambiguity
+3. **Interface Boundaries**: Clear separation of concerns
+4. **Dependency Injection Points**: How components connect
+5. **Versioning Strategy**: How changes are managed
+6. **Backward Compatibility**: Migration strategies
+
+## Output Format
+Provide contracts in the target language syntax with extensive comments explaining the immutable nature of each element. Use clear naming conventions that prevent conflicts.
+
+**Generate the complete unbreakable contract system now:**

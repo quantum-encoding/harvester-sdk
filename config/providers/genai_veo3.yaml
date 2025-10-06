@@ -1,0 +1,155 @@
+# Google AI Studio (GenAI) Veo 3 Video Provider Configuration
+# State-of-the-art video generation with native audio
+# Get your API key from: https://aistudio.google.com/
+
+provider_name: genai_veo3
+display_name: Google AI Studio Veo 3
+description: Video generation with native audio using Google AI Studio API
+
+# Authentication
+# Set GOOGLE_GENAI_API_KEY environment variable or add api_key here
+api_key: ${GOOGLE_GENAI_API_KEY}
+
+# Default model
+default_model: veo-3.0-generate-preview
+
+# Available models
+models:
+  # Veo 3 Preview - Latest with audio
+  veo-3.0-generate-preview:
+    name: Veo 3 Preview
+    description: 8-second 720p videos with native audio generation
+    features:
+      duration: 8  # seconds
+      resolution: 720p
+      fps: 24
+      has_audio: true
+      watermark: SynthID
+    supported:
+      aspect_ratios: ["16:9"]
+      input_types: ["text", "image"]
+      person_generation: ["allow_all"]  # Text-to-video
+      person_generation_image: ["allow_adult"]  # Image-to-video
+    limits:
+      max_text_tokens: 1024
+      videos_per_request: 1
+    latency:
+      min_seconds: 11
+      max_seconds: 360  # 6 minutes during peak
+    retention_days: 2
+    
+  # Veo 3 Fast Preview - Faster generation
+  veo-3.0-fast-generate-preview:
+    name: Veo 3 Fast Preview
+    description: Faster 8-second 720p videos with audio
+    features:
+      duration: 8
+      resolution: 720p
+      fps: 24
+      has_audio: true
+      watermark: SynthID
+    supported:
+      aspect_ratios: ["16:9"]
+      input_types: ["text", "image"]
+      person_generation: ["allow_all"]
+      person_generation_image: ["allow_adult"]
+    limits:
+      max_text_tokens: 1024
+      videos_per_request: 1
+    latency:
+      min_seconds: 8
+      max_seconds: 180
+    retention_days: 2
+    
+  # Veo 2 Stable - Previous generation (no audio)
+  veo-2.0-generate-001:
+    name: Veo 2 Stable
+    description: 5-8 second 720p silent videos with image seeding support
+    features:
+      duration: "5-8"  # variable
+      resolution: 720p
+      fps: 24
+      has_audio: false  # Silent only
+      watermark: SynthID
+    supported:
+      aspect_ratios: ["16:9", "9:16"]
+      input_types: ["text", "image"]
+      person_generation: ["allow_all", "allow_adult", "dont_allow"]
+      person_generation_image: ["allow_adult", "dont_allow"]
+    limits:
+      max_text_tokens: 1024
+      max_image_size_mb: 20  # Up to 20MB image files
+      videos_per_request: 2  # Can generate up to 2 videos
+    latency:
+      min_seconds: 10
+      max_seconds: 240
+    retention_days: 2
+
+# Model aliases for easier access
+aliases:
+  veo: veo-3.0-generate-preview
+  veo3: veo-3.0-generate-preview
+  veo-3: veo-3.0-generate-preview
+  veo-fast: veo-3.0-fast-generate-preview
+  veo2: veo-2.0-generate-001
+  veo-2: veo-2.0-generate-001
+  genai-veo: veo-3.0-generate-preview
+  genai-video: veo-3.0-generate-preview
+
+# Generation defaults
+generation_defaults:
+  poll_interval: 10  # seconds between status checks
+  aspect_ratio: "16:9"
+  person_generation: "allow_all"
+
+# Audio prompting guide
+audio_prompting:
+  dialogue:
+    description: "Use quotes for specific speech"
+    example: '"This must be the key," he murmured.'
+  sound_effects:
+    description: "Explicitly describe sounds"
+    example: "tires screeching loudly, engine roaring"
+  ambient_noise:
+    description: "Describe the environment's soundscape"
+    example: "A faint, eerie hum resonates in the background"
+
+# Prompt templates for better results
+prompt_templates:
+  cinematic:
+    template: "{subject}, cinematic shot, {camera_motion}, {lighting}"
+    variables:
+      camera_motion: ["dolly shot", "tracking shot", "crane shot", "steadicam"]
+      lighting: ["golden hour", "dramatic lighting", "soft diffused light"]
+  
+  dialogue_scene:
+    template: '{scene_description}. {character1}: "{dialogue1}" {character2}: "{dialogue2}" {ambient_sound}'
+    
+  action_sequence:
+    template: "{subject} {action}, {camera_angle}, {style}. SFX: {sound_effects}"
+    variables:
+      camera_angle: ["aerial view", "close-up", "wide shot", "POV shot"]
+      style: ["slow motion", "time-lapse", "handheld", "smooth tracking"]
+  
+  nature_documentary:
+    template: "{subject} in {environment}, {time_of_day}, {camera_work}. Ambient: {nature_sounds}"
+    variables:
+      environment: ["rainforest", "savannah", "ocean", "mountains", "desert"]
+      time_of_day: ["dawn", "golden hour", "midday", "dusk", "night"]
+      nature_sounds: ["birds chirping", "wind rustling", "water flowing", "insects buzzing"]
+
+# Regional limitations
+regional_notes:
+  EU_UK_CH_MENA:
+    veo3_person_generation: "allow_adult only"
+    veo2_person_generation: ["dont_allow", "allow_adult"]
+    veo2_default: "dont_allow"
+
+# Usage notes
+notes:
+  - "Videos are stored on server for 2 days only - download promptly"
+  - "All videos include SynthID watermark for AI identification"
+  - "Audio may be blocked by safety filters (no charge if blocked)"
+  - "Latency varies significantly during peak hours"
+  - "Veo 3 excels at dialogue, sound effects, and ambient audio"
+  - "Use image-to-video for consistent starting frames"

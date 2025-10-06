@@ -1,0 +1,41 @@
+{# Creative Art Generation Template for Artistic Expression #}
+{% set base_prompt = prompt.strip() %}
+
+{# Art style mappings #}
+{% set art_styles = {
+    'impressionist': 'impressionist painting style, visible brushstrokes, light and color focus',
+    'abstract': 'abstract art, non-representational forms, bold colors and shapes',
+    'surreal': 'surrealist art, dreamlike imagery, unexpected juxtapositions',
+    'pop_art': 'pop art style, bold colors, commercial imagery, graphic design elements',
+    'watercolor': 'watercolor painting, soft edges, transparent layers, fluid techniques',
+    'digital_art': 'digital art, modern techniques, sharp details, vibrant colors',
+    'concept_art': 'concept art style, detailed design, visual development, production quality'
+} %}
+
+{# Mood and atmosphere enhancers #}
+{% set mood_enhancers = {
+    'peaceful': 'serene atmosphere, calming mood, gentle lighting',
+    'energetic': 'dynamic energy, vibrant atmosphere, exciting composition',
+    'mysterious': 'mysterious mood, atmospheric lighting, intriguing shadows',
+    'joyful': 'joyful expression, bright colors, uplifting mood',
+    'melancholic': 'melancholic mood, subdued colors, contemplative atmosphere'
+} %}
+
+{# Construct artistic prompt #}
+Create {{ base_prompt }}{% if style and style in art_styles %} in {{ art_styles[style] }}{% endif %}{% if metadata %}
+{% set parsed_metadata = metadata | from_json %}
+{% if parsed_metadata.mood and parsed_metadata.mood in mood_enhancers %} with {{ mood_enhancers[parsed_metadata.mood] }}{% endif %}
+{% if parsed_metadata.medium %} using {{ parsed_metadata.medium }} medium{% endif %}
+{% if parsed_metadata.inspiration %} inspired by {{ parsed_metadata.inspiration }}{% endif %}
+{% endif %}{% if aspect_ratio == '16:9' %}, wide cinematic composition{% elif aspect_ratio == '9:16' %}, tall portrait orientation{% elif aspect_ratio == '1:1' %}, balanced square composition{% endif %}
+
+{# Quality and technical specifications #}
+TECHNICAL SPECS:
+- Style: {{ style or 'artistic' }}
+- Quality: {{ quality or 'standard' }}
+- Aspect Ratio: {{ aspect_ratio or '1:1' }}
+- Model: {{ model or 'o1' }}
+{% if seed %}- Seed: {{ seed }} (for reproducibility){% endif %}
+
+{# Artistic negative prompts #}
+AVOID: {% if negative_prompt %}{{ negative_prompt }}, {% endif %}low quality, amateur work, poorly composed, muddy colors, unclear details, commercial photography style{% if style == 'abstract' %}, realistic representation, photographic elements{% elif style == 'impressionist' %}, sharp digital lines, photorealistic details{% endif %}

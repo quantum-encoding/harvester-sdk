@@ -1,0 +1,248 @@
+# Template Configuration
+# Decouples model specifications from templates
+# Allows provider-aware template adaptation
+
+template_registry:
+  # Business & Productivity Templates
+  blog_post:
+    category: business
+    path: jinja/business/blog_post.j2
+    recommended_models:
+      openai: [gpt-5, gpt-5-mini]
+      anthropic: [claude-opus-4, claude-sonnet-4-5]
+      google: [gemini-2.5-pro, gemini-2.5-flash]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-flash
+
+  email_draft:
+    category: business
+    path: jinja/business/email_draft.j2
+    recommended_models:
+      openai: [gpt-5-nano, gpt-5-mini]
+      anthropic: [claude-sonnet-4-5, claude-3-5-haiku]
+      google: [gemini-2.5-flash, gemini-2.5-flash-lite]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-flash
+
+  data_analysis:
+    category: business
+    path: jinja/business/data_analysis.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-opus-4, claude-sonnet-4-5]
+      google: [gemini-2.5-pro]
+      deepseek: [deepseek-reasoner, deepseek-chat]
+    default: deepseek-reasoner
+
+  meeting_summary:
+    category: business
+    path: jinja/business/meeting_summary.j2
+    recommended_models:
+      openai: [gpt-5, gpt-5-mini]
+      anthropic: [claude-sonnet-4-5]
+      google: [gemini-2.5-flash, gemini-2.5-pro]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-flash
+
+  product_description:
+    category: business
+    path: jinja/business/product_description.j2
+    recommended_models:
+      openai: [gpt-5, gpt-5-mini]
+      anthropic: [claude-sonnet-4-5]
+      google: [gemini-2.5-flash]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-flash
+
+  text_summary:
+    category: business
+    path: jinja/business/text_summary.j2
+    recommended_models:
+      openai: [gpt-5, gpt-5-mini, gpt-5-nano]
+      anthropic: [claude-sonnet-4-5, claude-3-5-haiku]
+      google: [gemini-2.5-flash, gemini-2.5-flash-lite]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-flash
+
+  # Content Creation Templates
+  seo_content:
+    category: content
+    path: jinja/content/seo_content.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-opus-4, claude-sonnet-4-5]
+      google: [gemini-2.5-pro, gemini-2.5-flash]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-pro
+
+  translation:
+    category: content
+    path: jinja/content/translation.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-opus-4, claude-sonnet-4-5]
+      google: [gemini-2.5-pro]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-pro
+
+  # Code Templates
+  code_forge:
+    category: code
+    path: jinja/code/code_forge.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-sonnet-4-5, claude-opus-4]
+      google: [gemini-2.5-pro]
+      deepseek: [deepseek-reasoner, deepseek-chat]
+    default: deepseek-reasoner
+
+  code_forge_exact:
+    category: code
+    path: jinja/code/code_forge_exact.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-sonnet-4-5]
+      deepseek: [deepseek-reasoner]
+    default: deepseek-reasoner
+
+  architectural_review:
+    category: code
+    path: jinja/code/architectural_review.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-opus-4, claude-sonnet-4-5]
+      google: [gemini-2.5-pro]
+      deepseek: [deepseek-reasoner]
+    default: claude-sonnet-4-5
+
+  clean_code:
+    category: code
+    path: jinja/code/clean_code.j2
+    recommended_models:
+      openai: [gpt-5]
+      anthropic: [claude-sonnet-4-5]
+      deepseek: [deepseek-chat, deepseek-reasoner]
+    default: deepseek-chat
+
+  documentation:
+    category: code
+    path: jinja/code/documentation.j2
+    recommended_models:
+      openai: [gpt-5, gpt-5-mini]
+      anthropic: [claude-sonnet-4-5]
+      google: [gemini-2.5-pro, gemini-2.5-flash]
+      deepseek: [deepseek-chat]
+    default: gemini-2.5-flash
+
+  # Image Generation Templates
+  basic_image_generation:
+    category: image
+    path: jinja/image/basic_image_generation.j2
+    recommended_models:
+      openai:
+        models: [dall-e-3]
+        format: openai_image
+      google:
+        models: [gemini-2.5-flash-image]
+        format: genai_image
+      vertex:
+        models: [imagen-4, imagen-4-ultra, imagen-4-fast]
+        format: vertex_image
+    default: gemini-2.5-flash-image
+
+  enhanced_image_prompt:
+    category: image
+    path: jinja/image/enhanced_image_prompt.j2
+    recommended_models:
+      openai:
+        models: [dall-e-3]
+        format: openai_image
+      google:
+        models: [gemini-2.5-flash-image]
+        format: genai_image
+      vertex:
+        models: [imagen-4, imagen-4-ultra]
+        format: vertex_image
+    default: gemini-2.5-flash-image
+
+  creative_art_generation:
+    category: image
+    path: jinja/image/creative_art_generation.j2
+    recommended_models:
+      openai:
+        models: [dall-e-3]
+        format: openai_image
+      google:
+        models: [gemini-2.5-flash-image]
+        format: genai_image
+      vertex:
+        models: [imagen-4-ultra]
+        format: vertex_image
+    default: imagen-4-ultra
+
+  product_photography:
+    category: image
+    path: jinja/image/product_photography.j2
+    recommended_models:
+      openai:
+        models: [dall-e-3]
+        format: openai_image
+      google:
+        models: [gemini-2.5-flash-image]
+        format: genai_image
+      vertex:
+        models: [imagen-4, imagen-4-ultra]
+        format: vertex_image
+    default: imagen-4
+
+# Provider format adapters
+provider_formats:
+  openai_image:
+    api_type: rest
+    endpoint: /v1/images/generations
+    request_format: openai
+    supports_streaming: false
+
+  genai_image:
+    api_type: genai_sdk
+    sdk_method: generate_images
+    request_format: genai
+    supports_streaming: false
+
+  vertex_image:
+    api_type: vertex_sdk
+    sdk_method: generate_images
+    request_format: vertex
+    supports_streaming: false
+
+# Auto-selection rules
+auto_selection:
+  # Prefer these models for specific tasks
+  code_tasks:
+    priority: [deepseek-reasoner, claude-sonnet-4-5, gpt-5]
+
+  content_creation:
+    priority: [gemini-2.5-pro, claude-sonnet-4-5, gpt-5]
+
+  quick_tasks:
+    priority: [gemini-2.5-flash, gpt-5-nano, claude-3-5-haiku]
+
+  image_generation:
+    priority: [gemini-2.5-flash-image, imagen-4, dall-e-3]
+
+  cost_effective:
+    priority: [gemini-2.5-flash-lite, deepseek-chat, gpt-5-nano]
+
+# Template aliases for backwards compatibility
+aliases:
+  blog: blog_post
+  email: email_draft
+  data: data_analysis
+  meeting: meeting_summary
+  product: product_description
+  summary: text_summary
+  seo: seo_content
+  translate: translation
+  code: code_forge
+  docs: documentation
+  image: basic_image_generation

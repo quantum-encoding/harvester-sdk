@@ -1,0 +1,85 @@
+{
+  "name": "jazz_lounge",
+  "description": "Smooth jazz lounge music for relaxation",
+  "provider": "genai_lyria",
+  "model": "models/lyria-realtime-exp",
+  "version": "1.0",
+  "parameters": {
+    "prompts": [
+      {"text": "Smooth Jazz", "weight": 1.5},
+      {"text": "Piano", "weight": 1.0},
+      {"text": "Alto Saxophone", "weight": 0.8},
+      {"text": "Live Performance", "weight": 0.5},
+      {"text": "Lounge", "weight": 0.7}
+    ],
+    "config": {
+      "bpm": 85,
+      "temperature": 1.2,
+      "guidance": 4.5,
+      "density": 0.6,
+      "brightness": 0.5,
+      "scale": "F_MAJOR_D_MINOR",
+      "music_generation_mode": "QUALITY"
+    },
+    "duration_seconds": 60,
+    "variations": {
+      "late_night": {
+        "prompts": [
+          {"text": "Neo-Soul", "weight": 1.0},
+          {"text": "Rhodes Piano", "weight": 1.2},
+          {"text": "Subdued Melody", "weight": 0.6}
+        ],
+        "config": {
+          "bpm": 75,
+          "brightness": 0.3,
+          "density": 0.4
+        }
+      },
+      "upbeat_brunch": {
+        "prompts": [
+          {"text": "Bossa Nova", "weight": 1.2},
+          {"text": "Acoustic Guitar", "weight": 1.0},
+          {"text": "Bright Tones", "weight": 0.7}
+        ],
+        "config": {
+          "bpm": 95,
+          "brightness": 0.7,
+          "density": 0.7
+        }
+      },
+      "cocktail_hour": {
+        "prompts": [
+          {"text": "Latin Jazz", "weight": 1.3},
+          {"text": "Vibraphone", "weight": 0.9},
+          {"text": "Funk Drums", "weight": 0.5}
+        ],
+        "config": {
+          "bpm": 105,
+          "brightness": 0.6,
+          "density": 0.8
+        }
+      }
+    }
+  },
+  "interactive_controls": {
+    "description": "Real-time controls for live performance",
+    "solo_instrument": {
+      "action": "Increase weight of specific instrument",
+      "example": "Increase Piano weight to 2.0 for piano solo"
+    },
+    "mood_shift": {
+      "action": "Gradually change mood prompts",
+      "example": "Transition from 'Smooth Jazz' to 'Jazz Fusion'"
+    },
+    "dynamics": {
+      "action": "Adjust density and brightness",
+      "example": "Lower density to 0.3 for breakdown sections"
+    }
+  },
+  "notes": [
+    "Perfect for background music in lounges, cafes, or relaxation",
+    "Three variations for different times of day",
+    "Interactive controls allow real-time performance",
+    "F major / D minor scale for warm jazz tonality"
+  ]
+}

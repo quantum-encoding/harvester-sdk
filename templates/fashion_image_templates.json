@@ -1,0 +1,109 @@
+{
+  "fashion_image_templates": {
+    "retail_fashion": {
+      "fashion1": {
+        "prefix": "FASHION RETAIL PHOTOGRAPHY:",
+        "suffix": "Professional fashion photography, clothing showcase, retail presentation, style photography, commercial fashion",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "👗 Fashion and clothing retail",
+        "category": "retail_fashion",
+        "cost_tier": "premium"
+      },
+      "fashion2": {
+        "prefix": "FASHION MODEL PHOTOGRAPHY:",
+        "suffix": "Fashion model shoot, professional styling, fashion photography, clothing presentation, editorial style",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "📸 Fashion model photography",
+        "category": "retail_fashion",
+        "cost_tier": "premium"
+      },
+      "fashion3": {
+        "prefix": "CLOTHING PRODUCT PHOTOGRAPHY:",
+        "suffix": "Clothing flat lay, product photography, e-commerce fashion, retail product shots, clean clothing presentation",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "👕 Clothing product photography",
+        "category": "retail_fashion",
+        "cost_tier": "standard"
+      }
+    },
+    "retail_stores": {
+      "store1": {
+        "prefix": "FASHION BOUTIQUE INTERIOR:",
+        "suffix": "Elegant boutique interior, fashion retail space, clothing displays, store design, shopping experience",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "🏪 Fashion boutique and retail stores",
+        "category": "retail_stores",
+        "cost_tier": "premium"
+      },
+      "store2": {
+        "prefix": "RETAIL WINDOW DISPLAY:",
+        "suffix": "Creative window display, fashion merchandising, retail presentation, storefront design, visual merchandising",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🪟 Retail window displays",
+        "category": "retail_stores",
+        "cost_tier": "standard"
+      },
+      "store3": {
+        "prefix": "SHOPPING EXPERIENCE:",
+        "suffix": "Customers shopping, retail experience, fashion consultation, personal shopping, boutique service",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🛍️ Shopping and customer experience",
+        "category": "retail_stores",
+        "cost_tier": "standard"
+      }
+    },
+    "accessories": {
+      "accessory1": {
+        "prefix": "LUXURY ACCESSORIES:",
+        "suffix": "High-end accessories, jewelry photography, luxury goods, elegant presentation, premium accessories",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "💎 Luxury accessories and jewelry",
+        "category": "accessories",
+        "cost_tier": "premium"
+      },
+      "accessory2": {
+        "prefix": "HANDBAG COLLECTION:",
+        "suffix": "Designer handbags, leather goods, accessory collection, fashion accessories, luxury bags",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "👜 Handbags and leather goods",
+        "category": "accessories",
+        "cost_tier": "standard"
+      },
+      "accessory3": {
+        "prefix": "FASHION ACCESSORIES STYLING:",
+        "suffix": "Accessories styling, fashion coordination, jewelry and accessories, style combinations, fashion details",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "1:1",
+        "model_preference": "o2",
+        "description": "✨ Fashion accessories and styling",
+        "category": "accessories",
+        "cost_tier": "budget"
+      }
+    }
+  }
+}

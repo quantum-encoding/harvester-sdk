@@ -1,0 +1,312 @@
+# Google AI Studio (GenAI) Lyria RealTime Music Provider Configuration
+# Real-time, streaming instrumental music generation
+# Experimental model with WebSocket streaming
+
+provider_name: genai_lyria
+display_name: Google AI Studio Lyria RealTime
+description: Real-time interactive music generation with steering control
+
+# Authentication
+# Set GOOGLE_GENAI_API_KEY environment variable or add api_key here
+api_key: ${GOOGLE_GENAI_API_KEY}
+
+# Model (only one available)
+model: models/lyria-realtime-exp
+
+# Audio specifications
+audio_specs:
+  format: "16-bit PCM"
+  sample_rate: 48000  # 48kHz
+  channels: 2  # Stereo
+  bits_per_sample: 16
+
+# Model aliases for easier access
+aliases:
+  lyria: models/lyria-realtime-exp
+  music: models/lyria-realtime-exp
+  genai-music: models/lyria-realtime-exp
+  realtime-music: models/lyria-realtime-exp
+
+# Generation parameters and ranges
+parameters:
+  guidance:
+    description: "How strictly the model follows prompts"
+    range: [0.0, 6.0]
+    default: 4.0
+    note: "Higher values = better prompt adherence but more abrupt transitions"
+  
+  bpm:
+    description: "Beats per minute"
+    range: [60, 200]
+    note: "Requires context reset or stop/play to take effect"
+  
+  temperature:
+    description: "Creativity/randomness"
+    range: [0.0, 3.0]
+    default: 1.1
+  
+  density:
+    description: "Musical note density"
+    range: [0.0, 1.0]
+    note: "Lower = sparser music, Higher = busier music"
+  
+  brightness:
+    description: "Tonal quality"
+    range: [0.0, 1.0]
+    note: "Higher = brighter sound with more high frequencies"
+  
+  top_k:
+    description: "Top-k sampling"
+    range: [1, 1000]
+    default: 40
+  
+  seed:
+    description: "Random seed for reproducibility"
+    range: [0, 2147483647]
+    default: "random"
+
+# Musical scales
+scales:
+  C_MAJOR_A_MINOR: "C major / A minor (all white keys)"
+  D_FLAT_MAJOR_B_FLAT_MINOR: "D♭ major / B♭ minor"
+  D_MAJOR_B_MINOR: "D major / B minor"
+  E_FLAT_MAJOR_C_MINOR: "E♭ major / C minor"
+  E_MAJOR_D_FLAT_MINOR: "E major / C♯ minor"
+  F_MAJOR_D_MINOR: "F major / D minor (white keys except B♭)"
+  G_FLAT_MAJOR_E_FLAT_MINOR: "G♭ major / E♭ minor"
+  G_MAJOR_E_MINOR: "G major / E minor"
+  A_FLAT_MAJOR_F_MINOR: "A♭ major / F minor"
+  A_MAJOR_G_FLAT_MINOR: "A major / F♯ minor"
+  B_FLAT_MAJOR_G_MINOR: "B♭ major / G minor"
+  B_MAJOR_A_FLAT_MINOR: "B major / G♯ minor"
+  SCALE_UNSPECIFIED: "Model decides based on prompts"
+
+# Music generation modes
+generation_modes:
+  QUALITY: "Focus on musical quality (default)"
+  DIVERSITY: "Focus on musical diversity"
+  VOCALIZATION: "Enable vocalizations as instruments"
+
+# Control flags
+control_flags:
+  mute_bass: "Reduce bass output"
+  mute_drums: "Reduce drum output"
+  only_bass_and_drums: "Focus on rhythm section only"
+
+# Prompt categories with examples
+prompt_library:
+  instruments:
+    synthesizers:
+      - "303 Acid Bass"
+      - "Buchla Synths"
+      - "Dirty Synths"
+      - "Moog Oscillations"
+      - "Spacey Synths"
+      - "Synth Pads"
+    
+    drums_percussion:
+      - "808 Hip Hop Beat"
+      - "Bongos"
+      - "Conga Drums"
+      - "Djembe"
+      - "Drumline"
+      - "Funk Drums"
+      - "Maracas"
+      - "Tabla"
+      - "TR-909 Drum Machine"
+    
+    strings:
+      - "Acoustic Guitar"
+      - "Banjo"
+      - "Bass Clarinet"
+      - "Cello"
+      - "Fiddle"
+      - "Flamenco Guitar"
+      - "Harp"
+      - "Sitar"
+      - "Viola Ensemble"
+    
+    keys:
+      - "Accordion"
+      - "Clavichord"
+      - "Glockenspiel"
+      - "Harpsichord"
+      - "Mellotron"
+      - "Piano"
+      - "Ragtime Piano"
+      - "Rhodes Piano"
+      - "Vibraphone"
+    
+    winds:
+      - "Alto Saxophone"
+      - "Bagpipes"
+      - "Harmonica"
+      - "Ocarina"
+      - "Trumpet"
+      - "Tuba"
+      - "Woodwinds"
+    
+    world:
+      - "Balalaika Ensemble"
+      - "Bouzouki"
+      - "Charango"
+      - "Didgeridoo"
+      - "Dulcimer"
+      - "Hang Drum"
+      - "Hurdy-gurdy"
+      - "Kalimba"
+      - "Koto"
+      - "Lyre"
+      - "Mandolin"
+      - "Mbira"
+      - "Persian Tar"
+      - "Pipa"
+      - "Shamisen"
+      - "Steel Drum"
+  
+  genres:
+    electronic:
+      - "Acid House"
+      - "Breakbeat"
+      - "Chiptune"
+      - "Deep House"
+      - "Drum & Bass"
+      - "Dubstep"
+      - "EDM"
+      - "Glitch Hop"
+      - "Minimal Techno"
+      - "Psytrance"
+      - "Synthpop"
+      - "Techno"
+      - "Trance"
+      - "Vaporwave"
+    
+    jazz_blues:
+      - "Acid Jazz"
+      - "Blues Rock"
+      - "Jazz Fusion"
+      - "Latin Jazz"
+      - "Neo-Soul"
+      - "Smooth Jazz"
+    
+    world_music:
+      - "Afrobeat"
+      - "Bengal Baul"
+      - "Bhangra"
+      - "Bossa Nova"
+      - "Celtic Folk"
+      - "Cumbia"
+      - "Indian Classical"
+      - "Irish Folk"
+      - "Jamaican Dub"
+      - "Merengue"
+      - "Polka"
+      - "Reggae"
+      - "Reggaeton"
+      - "Salsa"
+      - "Ska"
+    
+    rock_pop:
+      - "Alternative Country"
+      - "Classic Rock"
+      - "Garage Rock"
+      - "Indie Electronic"
+      - "Indie Folk"
+      - "Indie Pop"
+      - "Post-Punk"
+      - "Psychedelic Rock"
+      - "Shoegaze"
+      - "Surf Rock"
+    
+    classical:
+      - "Baroque"
+      - "Marching Band"
+      - "Orchestral Score"
+      - "Piano Ballad"
+      - "Renaissance Music"
+    
+    urban:
+      - "Contemporary R&B"
+      - "Funk Metal"
+      - "G-funk"
+      - "Grime"
+      - "Hip Hop"
+      - "Hyperpop"
+      - "Lo-Fi Hip Hop"
+      - "New Jack Swing"
+      - "R&B"
+      - "Trap Beat"
+      - "Trip Hop"
+  
+  moods:
+    atmosphere:
+      - "Ambient"
+      - "Dreamy"
+      - "Ethereal Ambience"
+      - "Lo-fi"
+      - "Psychedelic"
+      - "Swirling Phasers"
+    
+    energy:
+      - "Bright Tones"
+      - "Chill"
+      - "Danceable"
+      - "Funky"
+      - "Tight Groove"
+      - "Upbeat"
+    
+    emotion:
+      - "Emotional"
+      - "Ominous Drone"
+      - "Subdued Melody"
+      - "Unsettling"
+    
+    production:
+      - "Acoustic Instruments"
+      - "Crunchy Distortion"
+      - "Echo"
+      - "Experimental"
+      - "Fat Beats"
+      - "Glitchy Effects"
+      - "Huge Drop"
+      - "Live Performance"
+      - "Rich Orchestration"
+      - "Saturated Tones"
+      - "Sustained Chords"
+      - "Virtuoso"
+      - "Weird Noises"
+
+# Best practices
+best_practices:
+  prompting:
+    - "Be descriptive with mood, genre, and instrumentation"
+    - "Use weights to control influence (1.0 is standard)"
+    - "Iterate gradually for smoother transitions"
+    - "Combine multiple prompts for complex sounds"
+  
+  transitions:
+    - "Use intermediate weight values for crossfading"
+    - "Avoid drastic prompt changes for smooth flow"
+    - "Reset context when changing BPM or scale"
+  
+  performance:
+    - "Implement audio buffering for smooth playback"
+    - "Handle network jitter with proper buffering"
+    - "Monitor generation latency"
+
+# Limitations
+limitations:
+  - "Instrumental music only (no vocals/lyrics)"
+  - "Prompts checked by safety filters"
+  - "Output always watermarked for AI identification"
+  - "WebSocket connection required"
+  - "Experimental model - may change"
+
+# Usage notes
+notes:
+  - "Real-time streaming via WebSocket"
+  - "Interactive control during generation"
+  - "Smooth transitions with weight interpolation"
+  - "BPM range: 60-200"
+  - "48kHz stereo PCM audio output"
+  - "Requires v1alpha API version"

@@ -1,0 +1,50 @@
+{
+  "digital_art_templates": {
+    "illustration_styles": {
+      "digital_art": {
+        "prefix": "DIGITAL ART MASTERPIECE:",
+        "suffix": "High-quality digital painting, professional artwork, detailed illustration, concept art quality",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🎨 Professional digital artwork",
+        "category": "illustration_styles",
+        "cost_tier": "standard"
+      },
+      "anime": {
+        "prefix": "ANIME STYLE ILLUSTRATION:",
+        "suffix": "Japanese animation style, vibrant colors, detailed character art, studio quality animation, manga aesthetic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🌸 Japanese anime style",
+        "category": "illustration_styles",
+        "cost_tier": "standard"
+      },
+      "comic": {
+        "prefix": "COMIC BOOK STYLE:",
+        "suffix": "Bold colors, dynamic composition, superhero comic aesthetic, graphic novel quality, cel-shaded art",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "💥 Comic book illustration",
+        "category": "illustration_styles",
+        "cost_tier": "standard"
+      },
+      "watercolor": {
+        "prefix": "WATERCOLOR PAINTING:",
+        "suffix": "Soft brushstrokes, flowing colors, artistic paper texture, traditional watercolor technique, painterly style",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "4:3",
+        "model_preference": "o1",
+        "description": "🖌️ Traditional watercolor painting",
+        "category": "illustration_styles",
+        "cost_tier": "standard"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "genai_cosmic_duck",
+  "description": "Cosmic duck generation using Google AI Studio API",
+  "provider": "genai_imagen",
+  "model": "imagen-4.0-generate-001",
+  "version": "1.0",
+  "parameters": {
+    "prompt_template": "A cosmic ethereal duck floating in {setting}, surrounded by {effects}, rendered in {style} style, with {lighting} lighting",
+    "generation_config": {
+      "number_of_images": 2,
+      "aspect_ratio": "16:9",
+      "sample_image_size": "2K",
+      "person_generation": "allow_adult"
+    },
+    "variables": {
+      "setting": ["nebula", "galaxy", "asteroid field", "solar system", "black hole event horizon"],
+      "effects": ["stardust", "aurora lights", "cosmic rays", "gravitational lensing", "quantum particles"],
+      "style": ["photorealistic", "artistic", "surreal", "hyperdetailed", "ethereal"],
+      "lighting": ["bioluminescent", "stellar", "nebulous", "dramatic", "ethereal glow"]
+    }
+  },
+  "examples": [
+    {
+      "prompt": "A cosmic ethereal duck floating in nebula, surrounded by stardust, rendered in photorealistic style, with stellar lighting",
+      "expected_output": "Photorealistic duck with cosmic elements"
+    }
+  ],
+  "notes": [
+    "Uses Google AI Studio API with key authentication",
+    "All images include SynthID watermark",
+    "Alternative to Vertex AI (which uses service accounts)"
+  ]
+}

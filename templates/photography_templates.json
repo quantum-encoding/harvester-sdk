@@ -1,0 +1,96 @@
+{
+  "photography_templates": {
+    "photographic_styles": {
+      "hyper_realistic": {
+        "prefix": "HYPER-REALISTIC PHOTOGRAPH:",
+        "suffix": "Ultra-detailed, photographic quality, 8K resolution, professional photography, realistic lighting, sharp focus, high dynamic range, natural textures",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "📸 Photographic quality, ultra-realistic",
+        "category": "photographic_styles",
+        "cost_tier": "standard"
+      },
+      "portrait": {
+        "prefix": "PROFESSIONAL PORTRAIT PHOTOGRAPHY:",
+        "suffix": "Studio lighting, shallow depth of field, 85mm lens, professional headshot, crisp details, natural skin tones, professional photography",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "👤 Professional portrait photography",
+        "category": "photographic_styles",
+        "cost_tier": "standard"
+      },
+      "landscape": {
+        "prefix": "LANDSCAPE PHOTOGRAPHY:",
+        "suffix": "Wide-angle lens, golden hour lighting, dramatic sky, high resolution, nature photography, National Geographic style",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏔️ Epic landscape photography",
+        "category": "photographic_styles",
+        "cost_tier": "standard"
+      },
+      "macro": {
+        "prefix": "MACRO PHOTOGRAPHY:",
+        "suffix": "Extreme close-up, shallow depth of field, intricate details, professional macro lens, studio lighting, scientific photography quality",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🔬 Detailed macro photography",
+        "category": "photographic_styles",
+        "cost_tier": "standard"
+      }
+    },
+    "commercial_photography": {
+      "product": {
+        "prefix": "PRODUCT PHOTOGRAPHY:",
+        "suffix": "Clean white background, professional lighting, commercial quality, high-end product shot, e-commerce ready",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "📦 Commercial product photography",
+        "category": "commercial_photography",
+        "cost_tier": "standard"
+      },
+      "food": {
+        "prefix": "FOOD PHOTOGRAPHY:",
+        "suffix": "Appetizing presentation, natural lighting, restaurant quality, culinary photography, mouth-watering details",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🍽️ Professional food photography",
+        "category": "commercial_photography",
+        "cost_tier": "standard"
+      },
+      "architecture": {
+        "prefix": "ARCHITECTURAL PHOTOGRAPHY:",
+        "suffix": "Professional building photography, geometric composition, structural details, clean lines, architectural digest quality",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏢 Professional architectural shots",
+        "category": "commercial_photography",
+        "cost_tier": "standard"
+      },
+      "fashion": {
+        "prefix": "FASHION PHOTOGRAPHY:",
+        "suffix": "High-fashion editorial, professional model, designer clothing, magazine quality, artistic composition",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "👗 High-fashion editorial",
+        "category": "commercial_photography",
+        "cost_tier": "premium"
+      }
+    }
+  }
+}

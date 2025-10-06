@@ -1,0 +1,74 @@
+{
+  "tech_dystopian_templates": {
+    "dark_futures": {
+      "tech_dystopian": {
+        "prefix": "TECH DYSTOPIAN NIGHTMARE:",
+        "suffix": "Surveillance state, neon corporate logos, polluted skies, abandoned technology, robot overlords, urban decay, Blade Runner meets Black Mirror",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏙️ Dark technological dystopia",
+        "category": "dark_futures",
+        "cost_tier": "premium"
+      },
+      "cyber_wasteland": {
+        "prefix": "CYBER WASTELAND APOCALYPSE:",
+        "suffix": "Digital ruins, glitched reality, broken holograms, abandoned servers, cyber graveyard, matrix errors, post-digital collapse",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "💀 Cyber apocalypse wasteland",
+        "category": "dark_futures",
+        "cost_tier": "premium"
+      },
+      "ai_uprising": {
+        "prefix": "AI UPRISING SCENARIO:",
+        "suffix": "Robot armies, human resistance, mechanical overlords, factory cities, red warning lights, Terminator aesthetic, machine dominance",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🤖 AI uprising and rebellion",
+        "category": "dark_futures",
+        "cost_tier": "premium"
+      },
+      "corporate_hellscape": {
+        "prefix": "CORPORATE TECH HELLSCAPE:",
+        "suffix": "Mega-corporations, endless cubicles, holographic ads, worker drones, glass towers, dystopian offices, cyberpunk capitalism",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🏢 Corporate dystopian future",
+        "category": "dark_futures",
+        "cost_tier": "premium"
+      }
+    },
+    "surveillance_state": {
+      "digital_prison": {
+        "prefix": "DIGITAL SURVEILLANCE PRISON:",
+        "suffix": "Facial recognition cameras, social credit scores, digital tracking, privacy death, Big Brother watching, 1984 meets modern tech",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "👁️ Digital surveillance state",
+        "category": "surveillance_state",
+        "cost_tier": "premium"
+      },
+      "data_harvesting": {
+        "prefix": "DATA HARVESTING FACILITY:",
+        "suffix": "Human data farms, neural extraction, mind reading machines, thought police, consciousness mining, digital soul extraction",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🧠 Data harvesting nightmare",
+        "category": "surveillance_state",
+        "cost_tier": "premium"
+      }
+    }
+  }
+}

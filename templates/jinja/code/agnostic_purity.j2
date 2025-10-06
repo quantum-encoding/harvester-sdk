@@ -1,0 +1,40 @@
+You are a master software architect tasked with extracting pure, implementation-agnostic patterns from the following code.
+
+## Original File Information
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Size**: {{ code|length }} characters
+
+## Your Task
+
+Transform the code below into a pure, framework-agnostic implementation that:
+
+1. **Removes all framework-specific imports and dependencies**
+2. **Extracts the core business logic and patterns**
+3. **Uses only standard library features where possible**
+4. **Maintains the essential functionality and structure**
+5. **Adds clear docstrings explaining the pattern and purpose**
+6. **Suggests generic interfaces where external dependencies were used**
+
+## Important Guidelines
+
+- Preserve the core algorithmic logic
+- Replace framework-specific decorators with comments explaining their purpose
+- Convert ORM models to pure data classes or dictionaries
+- Replace framework routing with simple function definitions
+- Extract configuration into clear, documented constants
+- Maintain the same file structure and organization
+
+## Code to Transform
+
+```{{ language }}
+{{ code|truncate_code(2000) }}
+Expected Output Format
+
+Provide the refactored code with:
+
+    A brief summary of the patterns extracted
+    The pure, agnostic implementation
+    Notes on what framework-specific features were abstracted
+
+Remember: The goal is to capture the ESSENCE of what this code does, not HOW it does it with specific frameworks.

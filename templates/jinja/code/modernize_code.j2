@@ -1,0 +1,71 @@
+# Code Modernization Template
+# Version: 2.0
+# Compatible Models: gpt-5, claude-4, deepseek-reasoner
+# Purpose: Update legacy code to modern standards
+# Tier: Premium
+
+## File Information
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Target Version**: {{ params.target_version | default('latest') }}
+- **Framework**: {{ params.framework | default('') }}
+
+## Modernization Tasks
+
+Transform the legacy code below to use modern patterns and features:
+
+### 1. Language Features
+- Update to modern syntax (arrow functions, destructuring, etc.)
+- Use latest language features appropriately
+- Replace deprecated methods with current alternatives
+- Add type hints/annotations where applicable
+
+### 2. Async Patterns
+- Convert callbacks to async/await
+- Use Promises properly
+- Implement proper error handling for async code
+- Add concurrent processing where beneficial
+
+### 3. Modern Libraries
+- Replace outdated libraries with modern alternatives
+- Use built-in methods instead of utility libraries where possible
+- Update import statements to modern syntax
+
+### 4. Design Patterns
+- Apply modern design patterns (composition over inheritance)
+- Use functional programming concepts where appropriate
+- Implement SOLID principles
+
+### 5. Testing Ready
+- Make code more testable
+- Separate concerns for easier mocking
+- Add interfaces/types for better testing
+
+### 6. Security Updates
+- Replace insecure patterns
+- Add input validation
+- Use secure defaults
+
+## Original Code
+```{{ language }}
+{{ code }}
+```
+
+## Output Requirements
+
+### 1. Modernized Code
+Complete, working code using modern standards and patterns.
+
+### 2. Migration Notes
+List of significant changes and why they were made.
+
+### 3. Breaking Changes
+Any changes that might affect existing integrations.
+
+### 4. Dependencies
+List any new dependencies or version requirements.
+
+### 5. Performance Impact
+Expected performance improvements or considerations.
+
+**Note**: Ensure backward compatibility unless explicitly allowed to break it.

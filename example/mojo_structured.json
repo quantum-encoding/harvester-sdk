@@ -1,0 +1,12 @@
+{
+  "language": "Mojo",
+  "description": "A superset of Python designed for AI workloads with performance comparable to C++.",
+  "key_features": [
+    "ownership semantics",
+    "compile-time metaprogramming",
+    "GPU acceleration through MLIR"
+  ],
+  "use_cases": [
+    "AI workloads"
+  ]
+}

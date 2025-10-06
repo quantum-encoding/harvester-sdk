@@ -1,0 +1,133 @@
+{
+  "food_image_templates": {
+    "gourmet_food": {
+      "food1": {
+        "prefix": "GOURMET FOOD PHOTOGRAPHY:",
+        "suffix": "Professional food styling, restaurant quality presentation, appetizing lighting, culinary artistry, high-end dining",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🍽️ Gourmet and fine dining dishes",
+        "category": "gourmet_food",
+        "cost_tier": "premium"
+      },
+      "food2": {
+        "prefix": "ARTISAN FOOD PREPARATION:",
+        "suffix": "Chef preparing artisan food, professional kitchen, culinary craftsmanship, cooking process, restaurant setting",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "👨‍🍳 Chef and food preparation",
+        "category": "gourmet_food",
+        "cost_tier": "premium"
+      },
+      "food3": {
+        "prefix": "DESSERT PRESENTATION:",
+        "suffix": "Elegant dessert plating, pastry artistry, sweet presentation, restaurant dessert, culinary creativity",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🍰 Desserts and pastry presentation",
+        "category": "gourmet_food",
+        "cost_tier": "premium"
+      }
+    },
+    "restaurant_dining": {
+      "resto1": {
+        "prefix": "RESTAURANT INTERIOR:",
+        "suffix": "Elegant restaurant dining room, atmospheric lighting, fine dining ambiance, upscale restaurant design, hospitality",
+        "style": "natural",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "g1",
+        "description": "🏨 Restaurant dining rooms and ambiance",
+        "category": "restaurant_dining",
+        "cost_tier": "premium"
+      },
+      "resto2": {
+        "prefix": "RESTAURANT SERVICE:",
+        "suffix": "Professional restaurant service, waitstaff serving, hospitality excellence, dining experience, customer service",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🍽️ Restaurant service and hospitality",
+        "category": "restaurant_dining",
+        "cost_tier": "standard"
+      },
+      "resto3": {
+        "prefix": "RESTAURANT KITCHEN:",
+        "suffix": "Professional commercial kitchen, chef brigade, restaurant operations, culinary teamwork, kitchen equipment",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "🔪 Restaurant kitchen operations",
+        "category": "restaurant_dining",
+        "cost_tier": "standard"
+      }
+    },
+    "cafe_bakery": {
+      "cafe1": {
+        "prefix": "COFFEE SHOP INTERIOR:",
+        "suffix": "Cozy coffee shop, cafe atmosphere, comfortable seating, artisan coffee, welcoming environment",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "16:9",
+        "model_preference": "o2",
+        "description": "☕ Coffee shop and cafe interiors",
+        "category": "cafe_bakery",
+        "cost_tier": "standard"
+      },
+      "bakery1": {
+        "prefix": "ARTISAN BAKERY:",
+        "suffix": "Fresh baked goods, bakery display, artisan breads, pastry showcase, traditional baking",
+        "style": "vivid",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "🥖 Bakery and fresh baked goods",
+        "category": "cafe_bakery",
+        "cost_tier": "standard"
+      },
+      "barista1": {
+        "prefix": "BARISTA COFFEE PREPARATION:",
+        "suffix": "Professional barista, espresso preparation, latte art, coffee craftsmanship, specialty coffee",
+        "style": "natural",
+        "quality": "standard",
+        "aspect_ratio": "4:3",
+        "model_preference": "o2",
+        "description": "☕ Barista and coffee preparation",
+        "category": "cafe_bakery",
+        "cost_tier": "budget"
+      }
+    }
+  },
+  
+  "batch_order_presets": {
+    "restaurant_portfolio": {
+      "description": "Complete restaurant marketing imagery",
+      "templates": ["food1", "resto1", "resto2", "food3"],
+      "models": ["o1", "g1"],
+      "quantity_per_template": 3,
+      "cost_estimate": "premium"
+    },
+    "food_photography_bundle": {
+      "description": "Professional food photography collection",
+      "templates": ["food1", "food2", "food3"],
+      "models": ["o1"],
+      "quantity_per_template": 5,
+      "cost_estimate": "premium"
+    },
+    "cafe_startup_pack": {
+      "description": "Coffee shop and cafe imagery package",
+      "templates": ["cafe1", "bakery1", "barista1"],
+      "models": ["o2", "g2"],
+      "quantity_per_template": 3,
+      "cost_estimate": "standard"
+    }
+  }
+}

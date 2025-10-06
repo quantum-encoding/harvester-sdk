@@ -1,0 +1,59 @@
+{
+  "name": "cinematic_scene",
+  "description": "Generate cinematic videos with Veo 3 including dialogue and sound",
+  "provider": "genai_veo3",
+  "model": "veo-3.0-generate-preview",
+  "version": "1.0",
+  "parameters": {
+    "scene_template": "{establishing_shot}. {character_action}. {dialogue_section} {sound_effects} {ambient_audio}",
+    "generation_config": {
+      "aspect_ratio": "16:9",
+      "person_generation": "allow_all",
+      "poll_interval": 10
+    },
+    "variables": {
+      "establishing_shot": [
+        "Wide shot of a bustling city street at twilight",
+        "Aerial view of misty mountains at dawn",
+        "Close-up of rain drops on a window",
+        "Tracking shot through a dense forest"
+      ],
+      "character_action": [
+        "A person walks slowly into frame",
+        "Two figures meet in the center",
+        "Someone turns to face the camera",
+        "A hand reaches out dramatically"
+      ],
+      "dialogue_templates": [
+        "\"This changes everything,\" she whispered.",
+        "\"We need to leave, now!\" he urged.",
+        "\"I've been waiting for this moment,\" they said softly.",
+        "\"Look at that view,\" she exclaimed in wonder."
+      ],
+      "sound_effects": [
+        "SFX: Footsteps echoing, door creaking",
+        "SFX: Wind howling, leaves rustling", 
+        "SFX: Traffic noise, horns honking",
+        "SFX: Water dripping, thunder rumbling"
+      ],
+      "ambient_audio": [
+        "Ambient: City sounds fade to silence",
+        "Ambient: Nature sounds, birds chirping",
+        "Ambient: Tense orchestral music swells",
+        "Ambient: Peaceful piano melody"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "prompt": "Wide shot of a bustling city street at twilight. A person walks slowly into frame. \"This changes everything,\" she whispered. SFX: Footsteps echoing, door creaking. Ambient: City sounds fade to silence.",
+      "expected_output": "8-second cinematic video with synchronized audio"
+    }
+  ],
+  "notes": [
+    "Veo 3 generates 8-second 720p videos with native audio",
+    "Videos are stored for 2 days - download promptly",
+    "All videos include SynthID watermark",
+    "Generation takes 11 seconds to 6 minutes"
+  ]
+}

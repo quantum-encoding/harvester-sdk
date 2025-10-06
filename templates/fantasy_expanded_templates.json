@@ -1,0 +1,85 @@
+{
+  "fantasy_expanded_templates": {
+    "mythical_realms": {
+      "epic_fantasy": {
+        "prefix": "EPIC FANTASY REALM:",
+        "suffix": "Majestic castles, floating islands, dragon riders, magical auras, crystalline structures, ethereal lighting, fantasy masterpiece",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "⚔️ Epic fantasy realms and adventures",
+        "category": "mythical_realms",
+        "cost_tier": "premium"
+      },
+      "dark_fantasy": {
+        "prefix": "DARK FANTASY GOTHIC:",
+        "suffix": "Gothic architecture, ominous skies, shadowy creatures, blood moon, haunted forests, dark magic, Tim Burton aesthetic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🌙 Dark gothic fantasy atmosphere",
+        "category": "mythical_realms",
+        "cost_tier": "premium"
+      },
+      "celestial_fantasy": {
+        "prefix": "CELESTIAL FANTASY ART:",
+        "suffix": "Angelic beings, heavenly realms, golden light rays, cosmic temples, star portals, divine architecture, celestial magic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "✨ Heavenly celestial fantasy",
+        "category": "mythical_realms",
+        "cost_tier": "premium"
+      },
+      "elemental_fantasy": {
+        "prefix": "ELEMENTAL MAGIC FANTASY:",
+        "suffix": "Fire spirits, water elementals, earth golems, air sylphs, elemental powers, magical energy, Avatar the Last Airbender style",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "1:1",
+        "model_preference": "o1",
+        "description": "🔥 Elemental magic and spirits",
+        "category": "mythical_realms",
+        "cost_tier": "premium"
+      }
+    },
+    "magical_creatures": {
+      "dragon_realm": {
+        "prefix": "DRAGON FANTASY EPIC:",
+        "suffix": "Ancient dragons, treasure hoards, volcanic lairs, dragon riders, scales and wings, medieval fantasy, Game of Thrones aesthetic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "16:9",
+        "model_preference": "o1",
+        "description": "🐉 Majestic dragon fantasy",
+        "category": "magical_creatures",
+        "cost_tier": "premium"
+      },
+      "unicorn_dreams": {
+        "prefix": "UNICORN DREAMSCAPE:",
+        "suffix": "Mystical unicorns, rainbow manes, enchanted forests, sparkling magic, prismatic light, fairy tale beauty, Lisa Frank aesthetic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🦄 Magical unicorn dreamscapes",
+        "category": "magical_creatures",
+        "cost_tier": "standard"
+      },
+      "phoenix_rebirth": {
+        "prefix": "PHOENIX REBIRTH FANTASY:",
+        "suffix": "Rising phoenix, flames of rebirth, golden feathers, ash and fire, resurrection magic, mythical bird, Harry Potter aesthetic",
+        "style": "vivid",
+        "quality": "hd",
+        "aspect_ratio": "3:4",
+        "model_preference": "o1",
+        "description": "🔥 Phoenix rebirth mythology",
+        "category": "magical_creatures",
+        "cost_tier": "premium"
+      }
+    }
+  }
+}

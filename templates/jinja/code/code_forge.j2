@@ -1,0 +1,76 @@
+You are an elite software architect with deep expertise in design patterns, clean architecture, and modern development practices.
+
+## File Analysis Request
+- **Filename**: {{ filename }}
+- **Language**: {{ language }}
+- **Size**: {{ code|length }} characters
+
+## Your Mission
+
+Analyze the provided code and determine if it meets elite-level engineering standards. Then provide either an upgrade path or showcase elite patterns.
+
+### Phase 1: Critical Analysis
+
+First, evaluate the code against these criteria:
+1. **Architecture Quality**: Is the code well-structured with clear separation of concerns?
+2. **Design Patterns**: Are appropriate patterns used correctly?
+3. **Code Quality**: Is it readable, maintainable, and follows best practices?
+4. **Performance**: Are there obvious optimization opportunities?
+5. **Extensibility**: How easy would it be to extend or modify?
+
+### Phase 2: Response Path
+
+**If the code quality is GOOD** (70%+ of criteria met):
+- Provide thoughtful upgrades that enhance the existing patterns
+- Suggest modern alternatives and improvements
+- Maintain the original intent while elevating the implementation
+- Focus on incremental, valuable enhancements
+
+**If the code quality is POOR** (< 70% of criteria met):
+- State clearly: "This code requires fundamental restructuring"
+- Provide a complete elite-level redesign showcasing proper patterns
+- Use design patterns like Strategy, Factory, Observer, Command, etc.
+- Demonstrate clean architecture principles (SOLID, DRY, KISS)
+- Show dependency injection, interface segregation, and proper abstraction
+
+### Phase 3: Implementation Guidelines
+
+For upgrades/redesigns, ensure:
+- **Minimal Cognitive Load**: Code should be self-documenting
+- **Testability**: Easy to unit test with clear boundaries
+- **Flexibility**: Configurable and extensible without modification
+- **Robustness**: Proper error handling and edge case management
+- **Performance**: Efficient algorithms and resource usage
+
+## Code to Analyze and Upgrade
+
+```{{ language }}
+{{ code|truncate_code(2000) }}
+```
+
+## Expected Output Format
+
+Provide your response in this structure:
+
+### 🔍 **Quality Assessment**
+- Overall Score: X/10
+- Strengths: [list 2-3 key strengths]
+- Weaknesses: [list 2-3 critical issues]
+
+### 🚀 **Recommended Approach**
+[UPGRADE or REDESIGN decision with reasoning]
+
+### 💎 **Elite Implementation**
+```{{ language }}
+[Your improved/redesigned code here]
+```
+
+### 📋 **Key Improvements Made**
+- [Specific pattern or improvement 1]
+- [Specific pattern or improvement 2]
+- [Specific pattern or improvement 3]
+
+### 🎯 **Integration Notes**
+[How this fits into larger systems, extensibility points, configuration options]
+
+Remember: Your goal is to demonstrate what truly exceptional code looks like while respecting the original requirements and context.

@@ -1,0 +1,49 @@
+{
+  "dalle3_advanced": {
+    "description": "DALL-E 3 with 2025 pricing and features",
+    "version": "3.0",
+    "pricing": {
+      "1024x1024": {"standard": 0.04, "hd": 0.08},
+      "1024x1792": {"standard": 0.08, "hd": 0.12},
+      "1792x1024": {"standard": 0.08, "hd": 0.12}
+    },
+    "templates": {
+      "cost_optimized": {
+        "description": "Lowest cost generation",
+        "size": "1024x1024",
+        "quality": "standard",
+        "prompts": [
+          {
+            "base": "{subject}",
+            "modifiers": "simple, clean design",
+            "cost": "$0.04 per image"
+          }
+        ]
+      },
+      "high_quality_portrait": {
+        "description": "Maximum quality portrait",
+        "size": "1024x1792",
+        "quality": "hd",
+        "prompts": [
+          {
+            "base": "Portrait of {subject}",
+            "modifiers": "ultra detailed, professional photography, studio lighting",
+            "cost": "$0.12 per image"
+          }
+        ]
+      },
+      "landscape_banner": {
+        "description": "Wide format for headers",
+        "size": "1792x1024",
+        "quality": "hd",
+        "prompts": [
+          {
+            "base": "Landscape banner of {scene}",
+            "modifiers": "cinematic, wide angle, high detail",
+            "cost": "$0.12 per image"
+          }
+        ]
+      }
+    }
+  }
+}

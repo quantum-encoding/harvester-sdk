@@ -1,0 +1,67 @@
+# Harvester SDK - Package Manifest
+# Include all CLI tools and configuration files
+
+# Main CLI Conductor
+include harvester.py
+
+# CLI Scripts (Entry Points)
+include *.py
+include batch_*.py
+include ai_assistant.py
+include image_cli.py
+include csv_processor.py
+include json_processor.py
+include process_dir.py
+include test_*.py
+include license_guardian.py
+
+# SDK Packages
+recursive-include harvester_sdk *.py
+recursive-include providers *.py
+recursive-include core *.py
+recursive-include processors *.py
+recursive-include utils *.py
+recursive-include harvester_agents *.py *.c *.so
+recursive-include cli *.py
+
+# Configuration and Templates
+recursive-include config *.yaml *.json
+recursive-include templates *.j2 *.json *.csv
+recursive-include schema *.py
+
+# Documentation
+include README.md
+include LICENSE
+include INSTALL.md
+include *.md
+
+# Build configuration
+include pyproject.toml
+include requirements.txt
+include setup.sh
+
+# Diagrams and assets
+recursive-include diagrams *.svg *.png
+
+# Exclude build artifacts and temporary files
+global-exclude __pycache__/
+global-exclude *.py[co]
+global-exclude .DS_Store
+global-exclude *.egg-info/
+prune build/
+prune dist/
+prune venv/
+prune test_env/
+prune staging/
+prune harvester_sdk.egg-info/
+
+# IMPORTANT: Include safety libraries (override global-exclude)
+include harvester_agents/safe_exec.so
+include harvester_agents/safe_open.so
+include harvester_agents/safe_fork.so
+include harvester_agents/safe_exec.c
+include harvester_agents/safe_open.c
+include harvester_agents/safe_fork.c
+include harvester_agents/prompt_sanitizer.py
+include harvester_agents/test_injection_protection.py
+include harvester_agents/README_SAFE_EXEC.md
